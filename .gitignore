@@ -1,0 +1,17 @@
+# Enviroment
+.env
+venv
+
+# Pycache
+**/__pycache__
+
+# Database
+**/*.sqlite3
+
+# Migrations
+**/migrations/*.py
+!__init__.py
+
+# IDE
+.vscode
+.idea
