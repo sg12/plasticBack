@@ -5,6 +5,9 @@ venv
 # Pycache
 **/__pycache__
 
+# Idea
+**/.idea
+
 # Database
 **/*.sqlite3
 
@@ -15,3 +18,9 @@ venv
 # IDE
 .vscode
 .idea
+
+# Media files
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.webm
