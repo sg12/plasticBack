@@ -4,6 +4,9 @@ from apps.clinics.models import Metro
 from apps.clinics.serializers import MetroSerializer
 
 
+__all__ = ['MetroListView']
+
+
 class MetroListView(APIView):
     def get(self, request):
         metro = Metro.objects.all()

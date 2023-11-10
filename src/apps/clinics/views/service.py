@@ -2,7 +2,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from apps.clinics.models import Service
 from apps.clinics.serializers import ServiceSerializer
-    
+
+
+__all__ = ['ServiceListView']
+
 
 class ServiceListView(APIView):
     def get(self, request):
