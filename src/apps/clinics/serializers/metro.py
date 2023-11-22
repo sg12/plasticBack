@@ -8,4 +8,4 @@ __all__ = ['MetroSerializer']
 class MetroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Metro
-        fields = ('name',)
+        fields = ('id', 'name')

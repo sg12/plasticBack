@@ -6,11 +6,12 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'login',
+            'username',
             'email',
             'date_joined',
             'avatar',
         )
+        depth = 0
  
 class RegisterSerializer(ModelSerializer):
     class Meta:

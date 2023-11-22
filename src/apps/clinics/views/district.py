@@ -10,5 +10,5 @@ __all__ = ['DistrictListView']
 class DistrictListView(APIView):
     def get(self, request):
         metro = District.objects.all()
-        serializer = DistrictSerializer(metro)
+        serializer = DistrictSerializer(metro, many=True)
         return Response(serializer.data)

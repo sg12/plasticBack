@@ -3,14 +3,14 @@ from apps.clinics.models import Clinic
 
 
 __all__ = [
-    'ClinicDetailSerializer',
-    'ClinicCreateSerializer'
+    'ClinicSerializer',
+    'ClinicCreateSerializer',
 ]
 
 
-class ClinicDetailSerializer(serializers.ModelSerializer):
-    metro = serializers.StringRelatedField(many=True)
-    services = serializers.StringRelatedField(many=True)
+class ClinicSerializer(serializers.ModelSerializer):
+    metro = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
+    services = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
     
     class Meta:
         model = Clinic
@@ -41,4 +41,5 @@ class ClinicCreateSerializer(serializers.ModelSerializer):
             'price',
             'phone',
             'work_time',
+            'date_created',
         )

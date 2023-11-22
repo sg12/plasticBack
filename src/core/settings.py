@@ -24,8 +24,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'django_filters',
+    'apps.services.apps.ServicesConfig',
     'apps.clinics.apps.ClinicsConfig',
-    'apps.users.apps.UserConfig'
+    'apps.users.apps.UserConfig',
 ]
 
 AUTH_USER_MODEL = "users.User"

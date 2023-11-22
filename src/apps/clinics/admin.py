@@ -1,11 +1,5 @@
 from django.contrib import admin
-from .models import (
-    Clinic,
-    Metro,
-    District,
-    Service,
-    Type
-)
+from .models import *
 
 
-admin.site.register((Clinic, Metro, District, Service, Type))
+admin.site.register((Clinic, Metro, District, Surgeon))

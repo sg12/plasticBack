@@ -8,4 +8,4 @@ __all__ = ['DistrictSerializer']
 class DistrictSerializer(serializers.ModelSerializer):
     class Meta:
         model = District
-        fields = ('name',)
+        fields = ('id', 'name')

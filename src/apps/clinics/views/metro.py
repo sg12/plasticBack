@@ -10,5 +10,5 @@ __all__ = ['MetroListView']
 class MetroListView(APIView):
     def get(self, request):
         metro = Metro.objects.all()
-        serializer = MetroSerializer(metro)
+        serializer = MetroSerializer(metro, many=True)
         return Response(serializer.data)
