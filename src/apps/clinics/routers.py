@@ -1,5 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from ..views import ClinicView
+from .views import ClinicView
 
 
 clinic_router = DefaultRouter()

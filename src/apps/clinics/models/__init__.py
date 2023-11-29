@@ -1,2 +1,3 @@
-from .clinic import *
-from .surgeon import *
+from .clinic import Clinic
+from .district import District
+from .metro import Metro

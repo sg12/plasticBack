@@ -1,9 +1,9 @@
 from django.db import models
-from apps.clinics.validators.surgeon import experience_validator
+from apps.surgeons.validators import experience_validator
 
 
-class Experience(models.Model):
-    surgeon = models.ForeignKey("Surgeon", on_delete=models.CASCADE, related_name="experiences")
+class WorkPlace(models.Model):
+    surgeon = models.ForeignKey("Surgeon", on_delete=models.CASCADE, related_name="work_places")
     place = models.CharField(max_length=255)
     posts = models.JSONField(default=dict, validators=[experience_validator])
 

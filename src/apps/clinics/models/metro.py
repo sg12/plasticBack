@@ -6,6 +6,3 @@ class Metro(models.Model):
     
     class Meta:
         db_table = 'metro'
-        
-    def __str__(self) -> str:
-        return self.name

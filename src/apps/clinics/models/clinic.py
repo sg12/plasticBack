@@ -15,11 +15,9 @@ class Clinic(models.Model):
     type = models.CharField(max_length=20, choices=TYPE_OF_APPOINTMENT, default="ONLINE")
     price = models.FloatField()
     phone = models.CharField(max_length=20)
-    work_time = models.CharField(max_length=20)
     date_created = models.DateField(auto_now_add=True)
-    
+    # surgeons
+    # work_times
+     
     class Meta:
         db_table = 'clinics'
-        
-    def __str__(self) -> str:
-        return self.name

@@ -6,6 +6,3 @@ class District(models.Model):
     
     class Meta:
         db_table = 'districts'
-        
-    def __str__(self) -> str:
-        return self.name
