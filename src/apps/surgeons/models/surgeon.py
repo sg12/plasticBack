@@ -22,10 +22,10 @@ class Surgeon(models.Model):
     # services
     # ratings
     
-    @property
-    def rating(self):
-        data = self.ratings.aggregate(rating=models.Avg('star'))
-        return data['rating']
+    # @property
+    # def rating(self):
+    #     data = self.ratings.aggregate(rating=models.Avg('star'))
+    #     return data['rating']
         
     
     class Meta:

@@ -6,20 +6,14 @@ from .models import Surgeon
 
 
 class SurgeonFilter(filters.FilterSet):
-    experience = filters.NumberFilter(field_name='experience', lookup_expr='gte')
-    category = filters.NumberFilter(field_name='category', lookup_expr='exact')
+    experience = filters.NumberFilter(lookup_expr='gte')
+    category = filters.NumberFilter(lookup_expr='exact')
     academic = filters.NumberFilter(lookup_expr='exact')
     gender = filters.ChoiceFilter(choices=User.GENDERS)
     reception = filters.ChoiceFilter(choices=Surgeon.RECEPTION)
-    reviews_count = filters.NumberFilter(method='get_reviews_count')
+    reviews_count = filters.RangeFilter()
+    rating = filters.NumberFilter(lookup_expr='gte')
     
     class Meta:
         model = Surgeon
         fields = ()
-        
-    def get_reviews_count(self, queryset, name, value):
-        if value:
-            queryset = queryset.annotate(reviews_count=Count('reviews__id'))
-            return queryset.filter(reviews_count__gte=value)
-        
-        return queryset

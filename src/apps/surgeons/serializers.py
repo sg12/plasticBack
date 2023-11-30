@@ -9,6 +9,9 @@ __all__ = ['SurgeonSerializer']
 class SurgeonSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     services = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
+    educations = serializers.SlugRelatedField(slug_field='place', read_only=True, many=True)
+    rating = serializers.FloatField()
+    reviews_count = serializers.IntegerField()
     
     class Meta:
         model = Surgeon
@@ -24,9 +27,10 @@ class SurgeonSerializer(serializers.ModelSerializer):
             'experience',
             'reception',
             'educations',
-            'rating'
+            'rating',
+            'reviews_count'
         )
-        
+    
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         
