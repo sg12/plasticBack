@@ -2,6 +2,9 @@
 .env
 venv
 
+# vscode
+**/.DS_Store
+
 # Pycache
 **/__pycache__
 
