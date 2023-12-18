@@ -1,45 +1,43 @@
 from rest_framework import serializers
 from apps.clinics.models import Clinic
+from .surgeon import SurgeonSerializer
+from apps.users.serializers import UserRetrieveSerializer
+from pkg.serializer import UserUnpack
 
 
-__all__ = [
-    'ClinicSerializer',
-    'ClinicCreateSerializer',
-]
-
-
-class ClinicSerializer(serializers.ModelSerializer):
+class ClinicListSerializer(serializers.ModelSerializer):
+    user = UserRetrieveSerializer()
     metro = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
-    services = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
+    rating = serializers.FloatField()
+    reviews_count = serializers.IntegerField()
     
     class Meta:
         model = Clinic
         fields = (
-            'name',
-            'address',
-            'image',
+            'id',
+            'user',
             'metro',
-            'services',
-            'type',
-            'price',
-            'phone',
-            'work_time',
-            'date_created',
+            # 'work_times',
+            'rating',
+            'reviews_count',
         )
+        depth = 1
         
 
-class ClinicCreateSerializer(serializers.ModelSerializer):
+class ClinicRetrieveSerializer(serializers.ModelSerializer):
+    user = UserRetrieveSerializer()
+    surgeons = SurgeonSerializer(many=True)
+    rating = serializers.FloatField()
+    reviews_count = serializers.IntegerField()
+    
     class Meta:
         model = Clinic
         fields = (
-            'name',
-            'address',
-            'image',
+            'id',
+            'user',
             'metro',
-            'services',
-            'type',
-            'price',
-            'phone',
-            'work_time',
-            'date_created',
+            'surgeons',
+            'rating',
+            'reviews_count',
         )
+        depth = 2

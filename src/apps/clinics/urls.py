@@ -1,10 +1,13 @@
-from django.urls import path, include
+from django.urls import path
 from .views import *
-from .routers import *
 
 
 urlpatterns = [
-    path('clinics/', include(clinic_router.urls)),
+    path('clinics/<int:pk>/rating', RatingView.as_view()),
+    
+    path('clinics/', ClinicListView.as_view()),
+    path('clinics/<int:pk>/', ClinicRetrieveView.as_view()),
+    
     path('metro/', MetroListView.as_view()),
     path('district/', DistrictListView.as_view()),
 ]
