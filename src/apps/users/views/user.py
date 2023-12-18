@@ -1,9 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from apps.clinics.serializers import ClinicRetrieveSerializer
-from apps.surgeons.serializers import SurgeonRetrieveSerializer
 from apps.clients.serializers import ClientRetrieveSerializer
+from apps.surgeons.serializers import SurgeonRetrieveSerializer
+from apps.clinics.serializers import ClinicReadSerializer
+from apps.clients.models import Client
 from apps.surgeons.models import Surgeon
+from apps.clinics.models import Clinic
 from apps.users.yasg import doc_user_me
 from rest_framework.permissions import IsAuthenticated
 
@@ -15,10 +17,10 @@ class UserMeView(APIView):
     def get(self, request):
         match request.user.type:
             case 'client':
-                serializer = ClientRetrieveSerializer(request.user.client)
+                serializer = ClientRetrieveSerializer(Client.objects.get(user=request.user))
             case 'surgeon':
                 serializer = SurgeonRetrieveSerializer(Surgeon.objects.get(user=request.user))
             case 'clinic':
-                serializer = ClinicRetrieveSerializer(request.user.clinic)
+                serializer = ClinicReadSerializer(Clinic.objects.get(user=request.user))
 
         return Response(serializer.data)
