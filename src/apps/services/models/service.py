@@ -10,7 +10,7 @@ class Service(models.Model):
     
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=10, choices=OPERATION_TYPE)
-    slug = models.SlugField(max_length=50, unique=True, db_index=True)
+    slug = models.SlugField(max_length=50)
     
     class Meta:
         db_table = 'services'
