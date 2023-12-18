@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  app:
+    container_name: "plastic_api"
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    ports:
+      - "8050:8050"
+    environment:
+      - DJANGO_KEY=django-insecure-4^u1wl9z8eqn1*2n1mc%8)bf&nb&3mmfa9+fcaz%1u9@yhy&^-
