@@ -2,7 +2,6 @@ from rest_framework import serializers
 from apps.clinics.models import Clinic
 from .surgeon import SurgeonSerializer
 from apps.users.serializers import UserRetrieveSerializer
-from pkg.serializer import UserUnpack
 
 
 class ClinicListSerializer(serializers.ModelSerializer):
