@@ -1,0 +1,11 @@
+from rest_framework import serializers
+from apps.clients.models import Client
+from apps.users.serializers import UserRetrieveSerializer
+
+
+class ClientRetrieveSerializer(serializers.ModelSerializer):
+    user = UserRetrieveSerializer()
+
+    class Meta:
+        model = Client
+        fields = ('id', 'user', 'date_born')
