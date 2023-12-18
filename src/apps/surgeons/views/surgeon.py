@@ -21,17 +21,17 @@ class SurgeonRetrieveUpdateView(RetrieveUpdateAPIView):
     retrieve_serializer = SurgeonRetrieveSerializer
     update_serializer = SurgeonUpdateSerializer
 
-    def return_serialize_record(self):
+    def return_response(self):
         instance = self.get_object()
-        serializer = SurgeonRetrieveSerializer(instance=instance)
+        serializer = self.retrieve_serializer(instance=instance)
         return Response(serializer.data)
 
     @doc_surgeon_retrieve_update
-    def update(self, request, *args, **kwargs):
-        super().update()
-        self.return_serialize_record()
+    def put(self, request, *args, **kwargs):
+        super().put(request, *args, **kwargs)
+        return self.return_response()
 
     @doc_surgeon_retrieve_update
-    def partial_update(self, request, *args, **kwargs):
-        super().partial_update()
-        self.return_serialize_record()
+    def patch(self, request, *args, **kwargs):
+        super().patch(request, *args, **kwargs)
+        return self.return_response()
