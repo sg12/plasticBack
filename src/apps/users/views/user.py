@@ -6,14 +6,12 @@ from apps.clinics.serializers import ClinicReadSerializer
 from apps.clients.models import Client
 from apps.surgeons.models import Surgeon
 from apps.clinics.models import Clinic
-from apps.users.yasg import doc_user_me
 from rest_framework.permissions import IsAuthenticated
 
 
 class UserMeView(APIView):
     permission_classes = [IsAuthenticated]
 
-    @doc_user_me
     def get(self, request):
         match request.user.type:
             case 'client':
