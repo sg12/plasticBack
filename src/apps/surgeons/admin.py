@@ -4,7 +4,7 @@ from .models import *
 
 admin.site.register((
     Education,
-    WorkPlace,
+    Workplace,
     Review,
     Service,
     Surgeon,

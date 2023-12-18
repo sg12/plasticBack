@@ -1,5 +1,5 @@
 from cerberus import Validator
-from django.core.exceptions import ValidationError
+from rest_framework.validators import ValidationError
 
 
 POST_SCHEMA = {
@@ -17,7 +17,7 @@ POST_SCHEMA = {
 }
 
 
-def experience_validator(value):
+def workplace_validator(value):
     json_data = {
         'data': value
     }

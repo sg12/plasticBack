@@ -1,4 +1,5 @@
 from django.db import models
+from apps.surgeons.managers import SurgeonManager
 
 
 class Surgeon(models.Model):
@@ -6,27 +7,24 @@ class Surgeon(models.Model):
         ('CLINIC', 'clinic'),
         ('PRIVATE', 'private')
     )
-    
+
     user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='surgeon')
+    site = models.URLField(null=True, blank=True)
     clinic = models.ForeignKey('clinics.Clinic', on_delete=models.SET_NULL, related_name='surgeons', null=True, blank=True)
-    specialtie = models.ForeignKey('Specialtie', on_delete=models.PROTECT, related_name='surgeons')
-    description = models.TextField()
-    license = models.ImageField(upload_to='doctors/licenses/')
-    experience = models.IntegerField() # стаж
-    category = models.IntegerField()
-    academic = models.IntegerField() # ученая степень
-    reception = models.CharField(max_length=20, choices=RECEPTION)
+    specialtie = models.ForeignKey('Specialtie', on_delete=models.PROTECT, related_name='surgeons', null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    experience = models.PositiveSmallIntegerField(null=True, blank=True)  # стаж
+    category = models.PositiveSmallIntegerField(null=True, blank=True)
+    academic = models.PositiveSmallIntegerField(null=True, blank=True)  # ученая степень
+    reception = models.CharField(max_length=20, choices=RECEPTION, default='PRIVATE')
+
+    objects = SurgeonManager()
+
     # educations
-    # reviews
-    # work_places
+    # workplaces
     # services
+    # reviews
     # ratings
-    
-    # @property
-    # def rating(self):
-    #     data = self.ratings.aggregate(rating=models.Avg('star'))
-    #     return data['rating']
-        
-    
+
     class Meta:
         db_table = 'surgeons'

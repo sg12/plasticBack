@@ -1,8 +1,9 @@
-from django.urls import path, include
+from django.urls import path
 from .views import *
-from .routers import *
 
 
 urlpatterns = [
-    path('surgeons/', include(surgeon_router.urls)),
+    path('surgeons/', SurgeonListView.as_view()),
+    path('surgeons/<int:pk>/', SurgeonRetrieveUpdateView.as_view()),
+    path('surgeons/<int:pk>/rating', SurgeonAddRatingView.as_view()),
 ]
