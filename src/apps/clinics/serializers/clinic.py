@@ -12,20 +12,14 @@ class ClinicListSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Clinic
-        fields = (
-            'id',
-            'user',
-            'metro',
-            # 'work_times',
-            'rating',
-            'reviews_count',
-        )
+        fields = '__all__'
         depth = 1
         
 
-class ClinicRetrieveSerializer(serializers.ModelSerializer):
+class ClinicReadSerializer(serializers.ModelSerializer):
     user = UserRetrieveSerializer()
     surgeons = SurgeonSerializer(many=True)
+    metro = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
     rating = serializers.FloatField()
     reviews_count = serializers.IntegerField()
     
@@ -34,9 +28,27 @@ class ClinicRetrieveSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'user',
+            'director',
+            'open_time',
+            'close_time',
+            'description',
+            'specialization',
             'metro',
             'surgeons',
             'rating',
             'reviews_count',
         )
         depth = 2
+
+
+class ClinicUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Clinic
+        fields = (
+            'id',
+            'director',
+            'open_time',
+            'close_time',
+            'description',
+            'specialization',
+        )

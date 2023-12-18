@@ -34,6 +34,13 @@ doc_clinic_list = swagger_auto_schema(
 
 doc_clinic_retrieve = swagger_auto_schema(
     responses={
-        200: openapi.Response(description='', schema=ClinicRetrieveSerializer)
+        200: openapi.Response(description='', schema=ClinicReadSerializer)
+    }
+)
+
+
+doc_clinic_update = swagger_auto_schema(
+    responses={
+        200: openapi.Response(description='', schema=ClinicReadSerializer)
     }
 )
