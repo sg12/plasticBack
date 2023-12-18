@@ -1,2 +1,1 @@
-from .articles import ArticleReadView
-from .category import CategoryReadView
+from .article import *
