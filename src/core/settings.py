@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 
+import corsheaders.middleware
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,7 +23,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'drf_yasg',
-    
+
     'apps.authentication',
     'apps.services',
     'apps.users',
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'apps.surgeons',
     'apps.clinics',
     'apps.articles',
+    'corsheaders',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -42,6 +44,7 @@ AUTHENTICATION_BACKENDS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'middleware.disable_csrf.DisableCSRFMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -50,6 +53,8 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     # 'middleware.jsend_exception.JsendException'
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'core.urls'
 
