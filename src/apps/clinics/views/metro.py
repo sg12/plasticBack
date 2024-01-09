@@ -12,4 +12,7 @@ class MetroListView(APIView):
     def get(self, request):
         metro = Metro.objects.all()
         serializer = MetroListSerializer(metro, many=True)
-        return Response(serializer.data)
+
+        response = Response(serializer.data)
+        response.headers['X-Total-Count'] = len(serializer.data)
+        return response

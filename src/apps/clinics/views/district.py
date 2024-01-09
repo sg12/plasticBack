@@ -12,4 +12,7 @@ class DistrictListView(APIView):
     def get(self, request):
         metro = District.objects.all()
         serializer = DistrictListSerializer(metro, many=True)
-        return Response(serializer.data)
+
+        response = Response(serializer.data)
+        response.headers['X-Total-Count'] = len(serializer.data)
+        return response

@@ -13,7 +13,10 @@ class SurgeonListView(APIView):
         queryset = Surgeon.objects.all()
         filter = SurgeonFilter(request.GET, queryset=queryset)
         serializer = SurgeonListSerializer(filter.qs, many=True)
-        return Response(serializer.data)
+
+        response = Response(serializer.data)
+        response.headers['X-Total-Count'] = len(serializer.data)
+        return response
     
 
 class SurgeonRetrieveUpdateView(RetrieveUpdateAPIView):

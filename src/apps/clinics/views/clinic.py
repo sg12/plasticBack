@@ -12,8 +12,11 @@ class ClinicListView(APIView):
     def get(self, request):
         queryset = Clinic.objects.all()
         filter = ClinicFilter(request.GET, queryset=queryset)
-        serializer = ClinicReadSerializer(filter.qs, many=True)
-        return Response(serializer.data)
+        serializer = ClinicListSerializer(filter.qs, many=True)
+
+        response = Response(serializer.data)
+        response.headers['X-Total-Count'] = len(serializer.data)
+        return response
 
 
 class ClinicRetrieveUpdateView(RetrieveUpdateAPIView):
