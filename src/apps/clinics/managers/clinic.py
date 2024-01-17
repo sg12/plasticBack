@@ -9,7 +9,7 @@ class ClinicManager(models.Manager):
 
         queryset = queryset.select_related('user')
 
-        queryset = queryset.prefetch_related('surgeons', 'metro')
+        queryset = queryset.prefetch_related('surgeons', 'metro', 'services')
 
         queryset = queryset.annotate(
             rating=Coalesce(

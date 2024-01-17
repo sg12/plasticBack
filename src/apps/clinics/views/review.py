@@ -2,7 +2,6 @@ from rest_framework.response import Response
 from apps.clinics.models import Review, Clinic
 from apps.clinics.serializers import ReviewCreateSerializer, ReviewUpdateSerializer
 from rest_framework.views import APIView
-from django.shortcuts import get_object_or_404
 from apps.clinics.yasg import doc_review, doc_review_update
 
 
@@ -17,7 +16,7 @@ class ReviewView(APIView):
             }
             return Response(status=404, data=data)
 
-        instance = Review.objects.filter(clinic_id=pk, author=request.user).first()
+        instance = Review.objects.filter(clinic_id=pk, user=request.user).first()
 
         request.data.update({'clinic_id': pk})
 
@@ -28,7 +27,7 @@ class ReviewView(APIView):
         return Response(status=204)
 
     def update(self, request, pk):
-        instance = Review.objects.filter(clinic_id=pk, author=request.user).first()
+        instance = Review.objects.filter(clinic_id=pk, user=request.user).first()
 
         if instance is None:
             data = {

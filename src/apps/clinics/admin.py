@@ -3,9 +3,9 @@ from .models import *
 
 
 admin.site.register((
-    Clinic, 
-    Metro, 
+    Clinic,
+    Metro,
     District,
     Review,
-    Service
+    ClinicService
 ))

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from apps.clinics.models import Review
+from apps.users.serializers import UserRetrieveSerializer
 
 
 def star_validator(value):
@@ -7,14 +8,22 @@ def star_validator(value):
         raise serializers.ValidationError('value is incorrect')
 
 
-class ReviewCreateSerializer(serializers.ModelSerializer):
-    clinic_id = serializers.IntegerField()
-    author = serializers.PrimaryKeyRelatedField(default=serializers.CurrentUserDefault(), read_only=True)
-    star = serializers.IntegerField(validators=(star_validator, ))
-    
+class ReviewReadSerializer(serializers.ModelSerializer):
+    user = UserRetrieveSerializer(default=serializers.CurrentUserDefault(), read_only=True)
+
     class Meta:
         model = Review
-        fields = ('clinic_id', 'author', 'text', 'star')
+        fields = ('user', 'text', 'star')
+
+
+class ReviewCreateSerializer(serializers.ModelSerializer):
+    clinic_id = serializers.IntegerField()
+    user = serializers.IntegerField(default=serializers.CurrentUserDefault())
+    star = serializers.IntegerField(validators=(star_validator, ))
+
+    class Meta:
+        model = Review
+        fields = ('clinic_id', 'user', 'text', 'star')
 
 
 class ReviewUpdateSerializer(ReviewCreateSerializer):

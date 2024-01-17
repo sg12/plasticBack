@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from apps.clinics.models import Service
+from apps.clinics.models import ClinicService
 
 
 class ClinicServiceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Service
-        fields = '__all__'
+        model = ClinicService
+        fields = ('id', 'price')

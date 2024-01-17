@@ -1,9 +1,9 @@
 from django.db import models
 
 
-class Service(models.Model):
+class ClinicService(models.Model):
     clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE, related_name='services')
-    service = models.ForeignKey('services.Service', on_delete=models.PROTECT, related_name='clinic_services')
+    service = models.ForeignKey('services.Service', on_delete=models.PROTECT, related_name='clinics')
     price = models.FloatField()
 
     class Meta:
