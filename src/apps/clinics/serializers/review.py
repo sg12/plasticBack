@@ -15,3 +15,7 @@ class ReviewCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('clinic_id', 'author', 'text', 'star')
+
+
+class ReviewUpdateSerializer(ReviewCreateSerializer):
+    pass
