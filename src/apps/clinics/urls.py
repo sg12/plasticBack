@@ -3,7 +3,7 @@ from .views import *
 
 
 urlpatterns = [
-    path('clinics/<int:pk>/rating', RatingView.as_view()),
+    path('clinics/<int:pk>/review', ReviewView.as_view()),
     
     path('clinics/', ClinicListView.as_view()),
     path('clinics/<int:pk>/', ClinicRetrieveUpdateView.as_view()),

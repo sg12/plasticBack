@@ -11,13 +11,13 @@ doc_clinic_list = swagger_auto_schema(
             name='service',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            enum=[el.slug for el in Service.objects.all()]
+            # enum=[el.slug for el in Service.objects.all()]
         ),
         openapi.Parameter(
             name='spec',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            enum=[el.slug for el in Specialtie.objects.all()]
+            # enum=[el.slug for el in Specialtie.objects.all()]
         ),
         openapi.Parameter(
             name='sort',

@@ -5,4 +5,4 @@ from .clinic import (
 )
 from .district import DistrictListSerializer
 from .metro import MetroListSerializer
-from .rating import RatingSerializer
+from .review import ReviewCreateSerializer

@@ -5,3 +5,4 @@ from .clinic import (
 )
 from .metro import doc_metro_list
 from .district import doc_district_list
+from .review import doc_review

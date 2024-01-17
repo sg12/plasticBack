@@ -7,6 +7,5 @@ admin.site.register((
     Metro, 
     District,
     Review,
-    Rating,
     Service
 ))
