@@ -8,6 +8,5 @@ admin.site.register((
     Review,
     Service,
     Surgeon,
-    Specialtie,
-    Rating
+    Specialtie
 ))

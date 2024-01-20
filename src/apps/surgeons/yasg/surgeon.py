@@ -4,6 +4,55 @@ from apps.surgeons.serializers import SurgeonListSerializer, SurgeonRetrieveSeri
 
 
 doc_surgeon_list = swagger_auto_schema(
+    manual_parameters=[
+        openapi.Parameter(
+            name='experience_min',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_NUMBER,
+        ),
+        openapi.Parameter(
+            name='experience_max',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_NUMBER,
+        ),
+        openapi.Parameter(
+            name='category',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_NUMBER,
+        ),
+        openapi.Parameter(
+            name='academic',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_NUMBER,
+        ),
+        openapi.Parameter(
+            name='gender',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_STRING,
+            enum=('male', 'female'),
+        ),
+        openapi.Parameter(
+            name='reception',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_STRING,
+            enum=('private', 'clinic'),
+        ),
+        openapi.Parameter(
+            name='reviews_min',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_STRING,
+        ),
+        openapi.Parameter(
+            name='reviews_max',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_STRING,
+        ),
+        openapi.Parameter(
+            name='rating',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_STRING,
+        ),
+    ],
     responses={
         200: openapi.Response('', SurgeonListSerializer(many=True)),
     }

@@ -11,7 +11,7 @@ class SurgeonManager(models.Manager):
 
         queryset = queryset.annotate(
             rating=Coalesce(
-                Avg('ratings__star'),
+                Avg('reviews__star'),
                 0,
                 output_field=FloatField()
             )

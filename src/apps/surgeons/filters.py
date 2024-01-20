@@ -6,12 +6,12 @@ from .models import Surgeon
 
 
 class SurgeonFilter(filters.FilterSet):
-    experience = filters.NumberFilter(lookup_expr='gte')
+    experience = filters.RangeFilter()
     category = filters.NumberFilter(lookup_expr='exact')
     academic = filters.NumberFilter(lookup_expr='exact')
-    gender = filters.ChoiceFilter(choices=User.GENDERS)
+    gender = filters.ChoiceFilter(field_name='user__gender', choices=User.GENDERS)
     reception = filters.ChoiceFilter(choices=Surgeon.RECEPTION)
-    reviews_count = filters.RangeFilter()
+    reviews = filters.RangeFilter()
     rating = filters.NumberFilter(lookup_expr='gte')
     
     class Meta:

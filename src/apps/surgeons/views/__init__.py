@@ -1,2 +1,2 @@
 from .surgeon import SurgeonListView, SurgeonRetrieveUpdateView
-from .rating import SurgeonAddRatingView
+from .review import SurgeonAddReviewView

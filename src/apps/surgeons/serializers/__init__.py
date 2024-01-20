@@ -3,4 +3,8 @@ from .surgeon import (
     SurgeonListSerializer,
     SurgeonUpdateSerializer
 )
-from .rating import RatingSerializer
+from .review import (
+    ReviewCreateSerializer,
+    ReviewReadSerializer,
+    ReviewUpdateSerializer
+)

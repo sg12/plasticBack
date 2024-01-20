@@ -4,8 +4,8 @@ from apps.surgeons.managers import SurgeonManager
 
 class Surgeon(models.Model):
     RECEPTION = (
-        ('CLINIC', 'clinic'),
-        ('PRIVATE', 'private')
+        ('private', 'private'),
+        ('clinic', 'clinic'),
     )
 
     user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='surgeon')
@@ -16,7 +16,7 @@ class Surgeon(models.Model):
     experience = models.PositiveSmallIntegerField(null=True, blank=True)  # стаж
     category = models.PositiveSmallIntegerField(null=True, blank=True)
     academic = models.PositiveSmallIntegerField(null=True, blank=True)  # ученая степень
-    reception = models.CharField(max_length=20, choices=RECEPTION, default='PRIVATE')
+    reception = models.CharField(max_length=20, choices=RECEPTION, default=RECEPTION[0][0])
 
     objects = SurgeonManager()
 
