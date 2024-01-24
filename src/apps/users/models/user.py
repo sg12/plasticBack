@@ -6,8 +6,8 @@ from apps.users.managers import CustomUserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
     GENDERS = (
-        ('MALE', 'male'),
-        ('FEMALE', 'female'),
+        ('male', 'male'),
+        ('female', 'female'),
     )
 
     email = models.EmailField(max_length=50, unique=True)
