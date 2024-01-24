@@ -3,6 +3,6 @@ from .views import *
 
 
 urlpatterns = [
-    path('services/', ServiceListView.as_view()),
-    path('services/<slug:slug>/', ServiceSlugView.as_view()),
+    path('services/', ServiceInfoListView.as_view()),
+    # path('services/<slug:slug>/', SearchClinicByServiceSlugView.as_view()), # Refactor
 ]

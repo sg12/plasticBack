@@ -1,1 +1,5 @@
-from .service import ServiceListView, ServiceSlugView
+from .service import (
+    ServiceInfoListView,
+
+    SearchClinicByServiceSlugView,
+)
