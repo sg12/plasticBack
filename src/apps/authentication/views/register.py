@@ -21,7 +21,7 @@ class RegisterView(APIView):
         serializer.is_valid(raise_exception=True)
 
         if serializer.data['password'] != serializer.data['re_password']:
-            return Response({'detail': {'re_password': "It doesn't match in password"}})
+            return Response({'detail': {'re_password': "Пароли не совпадают"}})
 
         user = User(
             email=serializer.data['email'],
