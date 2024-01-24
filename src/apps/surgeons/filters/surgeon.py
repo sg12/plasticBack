@@ -1,8 +1,6 @@
 from django_filters import rest_framework as filters
-from apps.surgeons.models import Surgeon
 from apps.users.models import User
-from django.db.models import Count
-from .models import Surgeon
+from apps.surgeons.models import Surgeon
 
 
 class SurgeonFilter(filters.FilterSet):

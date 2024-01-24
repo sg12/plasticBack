@@ -1,20 +1,34 @@
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from apps.surgeons.serializers import SurgeonListSerializer, SurgeonRetrieveSerializer
+from apps.surgeons.models import Specialtie
 
 
 doc_surgeon_list = swagger_auto_schema(
     manual_parameters=[
         openapi.Parameter(
+            name='limit',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_NUMBER,
+            default=10,
+        ),
+        openapi.Parameter(
+            name='offset',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_NUMBER,
+            default=0,
+        ),
+        openapi.Parameter(
             name='specialtie',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
+            enum=[el.slug for el in Specialtie.objects.all()]
         ),
         openapi.Parameter(
             name='experience',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_NUMBER,
-            description='experience >= value'
+            description='value >= experience'
         ),
         openapi.Parameter(
             name='category',
@@ -42,13 +56,19 @@ doc_surgeon_list = swagger_auto_schema(
             name='reviews',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            description='reviews >= value'
+            description='value >= reviews'
         ),
         openapi.Parameter(
             name='rating',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            description='rating >= value'
+            description='value >= rating'
+        ),
+        openapi.Parameter(
+            name='sort',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_STRING,
+            enum=('rating', 'reviews'),
         ),
     ],
     responses={

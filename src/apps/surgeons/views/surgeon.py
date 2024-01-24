@@ -1,18 +1,25 @@
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from pkg.api_view.generics import RetrieveUpdateAPIView
 from apps.surgeons.models import Surgeon
 from apps.surgeons.serializers import *
 from apps.surgeons.filters import SurgeonFilter
-from rest_framework.views import APIView
-from pkg.api_view.generics import RetrieveUpdateAPIView
+from rest_framework.pagination import LimitOffsetPagination
 from apps.surgeons.yasg import *
 
 
 class SurgeonListView(APIView):
     @doc_surgeon_list
     def get(self, request):
-        queryset = Surgeon.objects.all()
+        queryset = Surgeon.objects.all().order_by('-id')
+
         filter = SurgeonFilter(request.GET, queryset=queryset)
-        serializer = SurgeonListSerializer(filter.qs, many=True)
+
+        paginator = LimitOffsetPagination()
+        paginator.default_limit = 10
+        queryset = paginator.paginate_queryset(filter.qs, request)
+
+        serializer = SurgeonListSerializer(queryset, many=True)
 
         response = Response(serializer.data)
         response.headers['X-Total-Count'] = len(serializer.data)
