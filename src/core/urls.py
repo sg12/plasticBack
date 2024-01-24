@@ -11,6 +11,8 @@ api_v1 = [
     path('', include('apps.services.urls')),
     path('', include('apps.articles.urls')),
     path('', include('apps.authentication.urls')),
+    path('', include('apps.accounts.urls')),
+    path('', include('apps.faq.urls')),
 ]
 
 urlpatterns = [
