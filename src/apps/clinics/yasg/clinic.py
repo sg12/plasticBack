@@ -1,33 +1,29 @@
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from apps.clinics.serializers import *
+from apps.services.models import ServiceInfo
+from apps.clinics.models import Metro, District
 
 
 doc_clinic_list = swagger_auto_schema(
     manual_parameters=[
         openapi.Parameter(
-            name='sort',
+            name='limit',
             in_=openapi.IN_QUERY,
-            type=openapi.TYPE_STRING,
-            enum=['rating', '-rating', 'reviews', '-reviews']
+            type=openapi.TYPE_NUMBER,
+            default=10,
         ),
         openapi.Parameter(
             name='offset',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_NUMBER,
             default=0,
-            in_=openapi.IN_QUERY,
-            type=openapi.TYPE_NUMBER,
-        ),
-        openapi.Parameter(
-            name='limit',
-            default=10,
-            in_=openapi.IN_QUERY,
-            type=openapi.TYPE_NUMBER,
         ),
         openapi.Parameter(
             name='service',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            # enum=[el.slug for el in Service.objects.all()]
+            enum=[el.slug for el in ServiceInfo.objects.all()]
         ),
         openapi.Parameter(
             name='reception',
@@ -49,11 +45,19 @@ doc_clinic_list = swagger_auto_schema(
             name='metro',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
+            enum=[el.slug for el in Metro.objects.all()],
         ),
         openapi.Parameter(
             name='district',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
+            enum=[el.slug for el in District.objects.all()]
+        ),
+        openapi.Parameter(
+            name='sort',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_STRING,
+            enum=['rating', 'reviews']
         ),
     ],
     responses={

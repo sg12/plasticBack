@@ -13,10 +13,10 @@ class ClinicListView(APIView):
     def get(self, request):
         queryset = Clinic.objects.all().order_by('-id')
 
-        paginator = LimitOffsetPagination()
-
         filter = ClinicFilter(request.GET, queryset=queryset)
 
+        paginator = LimitOffsetPagination()
+        paginator.default_limit = 10
         queryset = paginator.paginate_queryset(filter.qs, request)
 
         serializer = ClinicListSerializer(queryset, many=True)

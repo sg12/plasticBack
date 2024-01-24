@@ -15,10 +15,10 @@ class ClinicFilter(filters.FilterSet):
         fields = ()
         
     def get_sort(self, queryset, name, value):
-        if value == 'rating' or value == '-rating':
-            queryset = queryset.order_by(value)
-        elif value == 'reviews' or value == '-reviews':
-            queryset = queryset.order_by(value+'_count', 'name')
+        if value == 'rating':
+            queryset = queryset.order_by('-rating')
+        elif value == 'reviews':
+            queryset = queryset.order_by('-reviews_count')
         
         return queryset
 

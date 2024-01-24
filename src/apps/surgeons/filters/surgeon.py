@@ -14,6 +14,15 @@ class SurgeonFilter(filters.FilterSet):
     reception = filters.ChoiceFilter(choices=Surgeon.RECEPTION)
     reviews = filters.NumberFilter(lookup_expr='gte')
     rating = filters.NumberFilter(lookup_expr='gte')
+    sort = filters.CharFilter(method='get_sort')
+
+    def get_sort(self, queryset, name, value):
+        if value == 'rating':
+            queryset = queryset.order_by('-rating')
+        elif value == 'reviews':
+            queryset = queryset.order_by('-reviews_count')
+
+        return queryset
     
     class Meta:
         model = Surgeon
