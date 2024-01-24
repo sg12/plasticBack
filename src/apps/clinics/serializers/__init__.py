@@ -1,5 +1,5 @@
 from .clinic import (
-    ClinicReadSerializer,
+    ClinicRetrieveSerializer,
     ClinicListSerializer,
     ClinicUpdateSerializer
 )

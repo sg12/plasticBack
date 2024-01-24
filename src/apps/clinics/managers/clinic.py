@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Avg, Count, IntegerField, FloatField, Prefetch
+from django.db.models import Avg, Count, IntegerField, FloatField, F, CharField
 from django.db.models.functions import Coalesce
 
 
@@ -9,8 +9,6 @@ class ClinicManager(models.Manager):
 
         queryset = queryset.select_related('user')
 
-        queryset = queryset.prefetch_related('surgeons', 'metro', 'services')
-
         queryset = queryset.annotate(
             rating=Coalesce(
                 Avg('reviews__star'),
@@ -18,6 +16,8 @@ class ClinicManager(models.Manager):
                 output_field=FloatField()
             )
         )
+
+        queryset = queryset.prefetch_related('metro')
 
         queryset = queryset.annotate(
             reviews_count=Coalesce(

@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from pkg.api_view.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
+from rest_framework.pagination import LimitOffsetPagination
 from apps.clinics.models import Clinic
 from apps.clinics.serializers import *
 from apps.clinics.filters import ClinicFilter
@@ -10,9 +11,15 @@ from apps.clinics.yasg import *
 class ClinicListView(APIView):
     @doc_clinic_list
     def get(self, request):
-        queryset = Clinic.objects.all()
+        queryset = Clinic.objects.all().order_by('-id')
+
+        paginator = LimitOffsetPagination()
+
         filter = ClinicFilter(request.GET, queryset=queryset)
-        serializer = ClinicListSerializer(filter.qs, many=True)
+
+        queryset = paginator.paginate_queryset(filter.qs, request)
+
+        serializer = ClinicListSerializer(queryset, many=True)
 
         response = Response(serializer.data)
         response.headers['X-Total-Count'] = len(serializer.data)
@@ -21,7 +28,7 @@ class ClinicListView(APIView):
 
 class ClinicRetrieveUpdateView(RetrieveUpdateAPIView):
     queryset = Clinic.objects.all()
-    retrieve_serializer = ClinicReadSerializer
+    retrieve_serializer = ClinicRetrieveSerializer
     update_serializer = ClinicUpdateSerializer
 
     def return_response(self):

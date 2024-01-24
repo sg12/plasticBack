@@ -1,33 +1,41 @@
 from rest_framework import serializers
 from apps.clinics.models import Clinic
-from apps.users.serializers import UserRetrieveSerializer
-from apps.services.serializers import ServiceUpdateSerializer
-from .review import ReviewReadSerializer
 
 
 class ClinicListSerializer(serializers.ModelSerializer):
-    user = UserRetrieveSerializer()
-    services = ServiceUpdateSerializer(many=True)
-    metro = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
+    name = serializers.CharField(source='user.username')
+    avatar = serializers.CharField(source='user.avatar')
+    address = serializers.CharField(source='user.address')
+    phone = serializers.CharField(source='user.phone')
     rating = serializers.FloatField()
     reviews_count = serializers.IntegerField()
 
     
     class Meta:
         model = Clinic
-        fields = '__all__'
+        fields = (
+            'id',
+            'name',
+            'avatar',
+            'address',
+            'phone',
+            'description',
+            'metro',
+            'district',
+            'open_time',
+            'close_time',
+            'rating',
+            'reviews_count',
+        )
+        depth = 1
         
 
-class ClinicReadSerializer(serializers.ModelSerializer):
-    user = UserRetrieveSerializer()
-    metro = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
-    rating = serializers.FloatField()
-    reviews_count = serializers.IntegerField()
-    reviews = ReviewReadSerializer(many=True)
-    
+class ClinicRetrieveSerializer(ClinicListSerializer):
+    email = serializers.CharField(source='user.email')
+
     class Meta:
         model = Clinic
-        fields = '__all__'
+        exclude = ('user', )
 
 
 class ClinicUpdateSerializer(serializers.ModelSerializer):
@@ -39,5 +47,4 @@ class ClinicUpdateSerializer(serializers.ModelSerializer):
             'open_time',
             'close_time',
             'description',
-            'specialization',
         )
