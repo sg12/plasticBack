@@ -6,14 +6,15 @@ from apps.surgeons.serializers import SurgeonListSerializer, SurgeonRetrieveSeri
 doc_surgeon_list = swagger_auto_schema(
     manual_parameters=[
         openapi.Parameter(
-            name='experience_min',
+            name='specialtie',
             in_=openapi.IN_QUERY,
-            type=openapi.TYPE_NUMBER,
+            type=openapi.TYPE_STRING,
         ),
         openapi.Parameter(
-            name='experience_max',
+            name='experience',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_NUMBER,
+            description='experience >= value'
         ),
         openapi.Parameter(
             name='category',
@@ -38,19 +39,16 @@ doc_surgeon_list = swagger_auto_schema(
             enum=('private', 'clinic'),
         ),
         openapi.Parameter(
-            name='reviews_min',
+            name='reviews',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-        ),
-        openapi.Parameter(
-            name='reviews_max',
-            in_=openapi.IN_QUERY,
-            type=openapi.TYPE_STRING,
+            description='reviews >= value'
         ),
         openapi.Parameter(
             name='rating',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
+            description='rating >= value'
         ),
     ],
     responses={

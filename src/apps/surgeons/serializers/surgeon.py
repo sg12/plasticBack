@@ -4,30 +4,23 @@ from apps.users.serializers import UserRetrieveSerializer
 from .clinic import SurgeonClinicSerializer
 
 
-class SurgeonListSerializer(serializers.ModelSerializer):
-    user = UserRetrieveSerializer()
-    clinic = SurgeonClinicSerializer()
-    rating = serializers.FloatField()
-    reviews_count = serializers.IntegerField()
-    
-    class Meta:
-        model = Surgeon
-        exclude = ()
-        
-
 class SurgeonRetrieveSerializer(serializers.ModelSerializer):
     user = UserRetrieveSerializer()
-    clinic = SurgeonClinicSerializer()
+    clinic_name = serializers.CharField(source='clinic.user.username', read_only=True, default="")
     rating = serializers.FloatField()
     reviews_count = serializers.IntegerField()
-    
+
     class Meta:
         model = Surgeon
-        exclude = ()
+        exclude = ('clinic', )
         depth = 1
-    
 
-class SurgeonUpdateSerializer(serializers.ModelSerializer):    
+
+class SurgeonListSerializer(SurgeonRetrieveSerializer):
+    pass
+
+
+class SurgeonUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Surgeon
         fields = (
