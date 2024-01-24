@@ -1,13 +1,13 @@
 from rest_framework import serializers
 from apps.clinics.models import Clinic
 from apps.users.serializers import UserRetrieveSerializer
-from .service import ClinicServiceSerializer
+from apps.services.serializers import ServiceUpdateSerializer
 from .review import ReviewReadSerializer
 
 
 class ClinicListSerializer(serializers.ModelSerializer):
     user = UserRetrieveSerializer()
-    services = ClinicServiceSerializer(many=True)
+    services = ServiceUpdateSerializer(many=True)
     metro = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
     rating = serializers.FloatField()
     reviews_count = serializers.IntegerField()

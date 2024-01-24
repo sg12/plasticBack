@@ -1,12 +1,15 @@
 from rest_framework.response import Response
 from apps.clinics.models import Review, Clinic
-from apps.clinics.serializers import ReviewCreateSerializer, ReviewUpdateSerializer
+from apps.clinics.serializers import (
+    ReviewCreateSerializer,
+    ReviewUpdateSerializer
+)
 from rest_framework.views import APIView
-from apps.clinics.yasg import doc_review, doc_review_update
+from apps.surgeons.yasg import doc_review_create, doc_review_update
 
 
 class ReviewView(APIView):
-    @doc_review
+    @doc_review_create
     def post(self, request, pk):
         clinic = Clinic.objects.filter(pk=pk).first()
 

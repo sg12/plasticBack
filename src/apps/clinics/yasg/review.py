@@ -10,7 +10,7 @@ request_body = openapi.Schema(
     required=['text', 'star']
 )
 
-doc_review = swagger_auto_schema(
+doc_review_create = swagger_auto_schema(
     request_body=request_body,
     responses={
         204: openapi.Response(description=''),
