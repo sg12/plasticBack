@@ -5,12 +5,16 @@ from apps.services.serializers import (
     ServiceUpdateSerializer,
     ServiceListSerializer,
 )
-from django.http.response import Http404
+from . import utils
 
 
 class AccountServiceListView(ListAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceListSerializer
+
+    def get(self, request, *args, **kwargs):
+        utils.check_service(request, kwargs.get('pk'))
+        return super().get(request, *args, **kwargs)
 
 
 class AccountServiceRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -25,28 +29,18 @@ class AccountServiceRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
 
         return None
 
-    def check_service(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-
-        instance = Service.objects.filter(pk=pk).first()
-
-        if instance is None:
-            raise Http404
-        elif request.user.id != instance.user.id:
-            raise Http404
-
     def get(self, request, *args, **kwargs):
-        self.check_service(request, *args, **kwargs)
+        utils.check_service(request, kwargs.get('pk'))
         return super().get(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
-        self.check_service(request, *args, **kwargs)
+        utils.check_service(request, kwargs.get('pk'))
         return super().put(request, *args, **kwargs)
 
     def patch(self, request, *args, **kwargs):
-        self.check_service(request, *args, **kwargs)
+        utils.check_service(request, kwargs.get('pk'))
         return super().patch(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
-        self.check_service(request, *args, **kwargs)
+        utils.check_service(request, kwargs.get('pk'))
         return super().delete(request, *args, **kwargs)
