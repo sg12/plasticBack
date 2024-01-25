@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Client(models.Model):
-    user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='client')
+    user = models.OneToOneField('accounts.User', on_delete=models.CASCADE, related_name='client')
     date_born = models.DateField(null=True, blank=True)
 
     class Meta:

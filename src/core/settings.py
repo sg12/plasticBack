@@ -26,7 +26,6 @@ INSTALLED_APPS = [
 
     'apps.authentication',
     'apps.services',
-    'apps.users',
     'apps.clients',
     'apps.surgeons',
     'apps.clinics',
@@ -36,7 +35,7 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 AUTHENTICATION_BACKENDS = [
     # 'auth.CustomAuth',

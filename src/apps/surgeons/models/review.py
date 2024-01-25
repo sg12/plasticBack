@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Review(models.Model):
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="surgeons_reviews")
+    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE, related_name="surgeons_reviews")
     surgeon = models.ForeignKey("Surgeon", on_delete=models.CASCADE, related_name="reviews")
     star = models.PositiveSmallIntegerField(default=0)
     text = models.TextField()

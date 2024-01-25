@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.clients.models import Client
-from apps.users.serializers import UserRetrieveSerializer
+from apps.accounts.serializers import UserRetrieveSerializer
 
 
 class ClientRetrieveSerializer(serializers.ModelSerializer):

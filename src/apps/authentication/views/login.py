@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from apps.users.models import User
+from apps.accounts.models import User
 from rest_framework.authtoken.models import Token
 from apps.authentication.serializers import AuthSerializer
 from django.contrib.auth.hashers import check_password

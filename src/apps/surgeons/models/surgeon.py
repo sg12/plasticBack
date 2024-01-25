@@ -8,7 +8,7 @@ class Surgeon(models.Model):
         ('clinic', 'clinic'),
     )
 
-    user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='surgeon')
+    user = models.OneToOneField('accounts.User', on_delete=models.CASCADE, related_name='surgeon')
     site = models.URLField(null=True, blank=True)
     clinic = models.ForeignKey('clinics.Clinic', on_delete=models.SET_NULL, related_name='surgeons', null=True, blank=True)
     specialtie = models.ForeignKey('Specialtie', on_delete=models.PROTECT, related_name='surgeons', null=True, blank=True)

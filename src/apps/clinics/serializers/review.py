@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.clinics.models import Review
-from apps.users.serializers import UserRetrieveSerializer
+from apps.accounts.serializers import UserRetrieveSerializer
 
 
 def star_validator(value):

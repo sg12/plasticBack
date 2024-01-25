@@ -8,7 +8,7 @@ class Clinic(models.Model):
         ("private", "private"),
     )
 
-    user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='clinic')
+    user = models.OneToOneField('accounts.User', on_delete=models.CASCADE, related_name='clinic')
     reception = models.CharField(max_length=50, choices=RECEPTION, default="clinic")
     official_name = models.CharField(max_length=50, null=True, blank=True)
     director = models.CharField(max_length=50, null=True, blank=True)

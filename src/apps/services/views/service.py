@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from apps.services.models import ServiceInfo
-from apps.users.models import User
+from apps.accounts.models import User
 from apps.services.serializers import ServiceInfoListSerializer
 from apps.clinics.serializers import ClinicListSerializer
 from apps.services.yasg import doc_service_slug_get

@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from apps.users.models import User
+from apps.accounts.models import User
 from apps.clients.models import Client
 from apps.surgeons.models import Surgeon
 from apps.clinics.models import Clinic

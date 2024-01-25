@@ -1,3 +1,0 @@
-from .jsend import (
-    Jsend
-)

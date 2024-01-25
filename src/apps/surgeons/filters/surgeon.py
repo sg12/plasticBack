@@ -1,5 +1,5 @@
 from django_filters import rest_framework as filters
-from apps.users.models import User
+from apps.accounts.models import User
 from apps.surgeons.models import Surgeon
 
 
