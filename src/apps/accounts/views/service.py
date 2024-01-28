@@ -1,46 +1,40 @@
-from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from apps.services.models import Service
 from apps.services.serializers import (
     ServiceRetrieveSerializer,
+    ServiceCreateSerializer,
     ServiceUpdateSerializer,
     ServiceListSerializer,
 )
-from . import utils
+from .utils import check_account_service_access
+from django.utils.decorators import method_decorator
+from rest_framework.permissions import IsAuthenticated
 
 
-class AccountServiceListView(ListAPIView):
-    queryset = Service.objects.all()
-    serializer_class = ServiceListSerializer
+@method_decorator(check_account_service_access, name="dispatch")
+class AccountServiceListCreateView(ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)
 
-    def get(self, request, *args, **kwargs):
-        utils.check_service(request, kwargs.get('pk'))
-        return super().get(request, *args, **kwargs)
+    def get_queryset(self):
+        return Service.objects.filter(user_id=self.request.user.id)
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ServiceListSerializer
+        elif self.request.method == 'POST':
+            return ServiceCreateSerializer
 
 
+@method_decorator(check_account_service_access, name="dispatch")
 class AccountServiceRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
-    queryset = Service.objects.all()
     serializer_class = ServiceUpdateSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return Service.objects.filter(user_id=self.request.user.id)
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return ServiceRetrieveSerializer
         elif self.request.method in ['PUT', 'PATCH']:
             return ServiceUpdateSerializer
-
-        return None
-
-    def get(self, request, *args, **kwargs):
-        utils.check_service(request, kwargs.get('pk'))
-        return super().get(request, *args, **kwargs)
-
-    def put(self, request, *args, **kwargs):
-        utils.check_service(request, kwargs.get('pk'))
-        return super().put(request, *args, **kwargs)
-
-    def patch(self, request, *args, **kwargs):
-        utils.check_service(request, kwargs.get('pk'))
-        return super().patch(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        utils.check_service(request, kwargs.get('pk'))
-        return super().delete(request, *args, **kwargs)
