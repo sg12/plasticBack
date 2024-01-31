@@ -24,6 +24,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     address = models.CharField(max_length=255, null=True, blank=True)
     avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
 
+    confidentiality_policy = models.BooleanField(default=True, blank=True)
+    data_agreement = models.BooleanField(default=True, blank=True)
+
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'

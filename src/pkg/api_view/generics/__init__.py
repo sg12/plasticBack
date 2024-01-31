@@ -1,1 +1,0 @@
-from .retrive_update import RetrieveUpdateAPIView

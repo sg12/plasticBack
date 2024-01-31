@@ -5,7 +5,6 @@ from .models import *
 admin.site.register((
     Education,
     Workplace,
-    Review,
     Surgeon,
     Specialtie
 ))

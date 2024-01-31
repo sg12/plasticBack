@@ -1,4 +1,4 @@
-from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
+from pkg.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from apps.services.models import Service
 from apps.services.serializers import (
     ServiceRetrieveSerializer,
@@ -8,33 +8,39 @@ from apps.services.serializers import (
 )
 from .utils import check_account_service_access
 from django.utils.decorators import method_decorator
+from apps.services.yasg import *
 from rest_framework.permissions import IsAuthenticated
 
 
 @method_decorator(check_account_service_access, name="dispatch")
-class AccountServiceListCreateView(ListCreateAPIView):
+class ServiceListCreateView(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
+
+    list_serializer_class = ServiceListSerializer
+    create_serializer_class = ServiceCreateSerializer
 
     def get_queryset(self):
         return Service.objects.filter(user_id=self.request.user.id)
 
-    def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return ServiceListSerializer
-        elif self.request.method == 'POST':
-            return ServiceCreateSerializer
+    @doc_service_create
+    def post(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
 
 
 @method_decorator(check_account_service_access, name="dispatch")
-class AccountServiceRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
-    serializer_class = ServiceUpdateSerializer
+class ServiceRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
+
+    retrieve_serializer_class = ServiceRetrieveSerializer
+    update_serializer_class = ServiceUpdateSerializer
 
     def get_queryset(self):
         return Service.objects.filter(user_id=self.request.user.id)
 
-    def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return ServiceRetrieveSerializer
-        elif self.request.method in ['PUT', 'PATCH']:
-            return ServiceUpdateSerializer
+    @doc_service_update
+    def put(self, request, *args, **kwargs):
+        return self.put(request, *args, **kwargs)
+
+    @doc_service_update
+    def patch(self, request, *args, **kwargs):
+        return self.patch(request, *args, **kwargs)

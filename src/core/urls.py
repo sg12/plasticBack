@@ -14,6 +14,7 @@ api_v1 = [
     path('', include('apps.faq.urls')),
 ]
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path("__debug__/", include("debug_toolbar.urls")),
@@ -21,3 +22,5 @@ urlpatterns = [
 ]
 
 urlpatterns += doc_urls
+
+handler404 = 'core.views.custom_handler_404'

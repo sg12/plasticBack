@@ -17,6 +17,6 @@ class ServiceInfoListView(ListAPIView):
 class SearchClinicByServiceSlugView(APIView):
     @doc_service_slug_get
     def get(self, request, slug):
-        queryset = User.objects.filter(user__type='clinic', services__service__slug=slug)
+        queryset = User.objects.filter(type='clinic', services__service__slug=slug)
         serializer = ClinicListSerializer(instance=queryset, many=True)
         return Response(serializer.data)

@@ -1,4 +1,6 @@
 from django.contrib.auth.models import UserManager
+from django.db.models import Avg, Count, IntegerField, FloatField
+from django.db.models.functions import Coalesce
 
 
 class CustomUserManager(UserManager):
@@ -18,4 +20,23 @@ class CustomUserManager(UserManager):
         extra_fields.setdefault('is_superuser', True)
         self._create_user(email, password, **extra_fields)
         
-    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        queryset = queryset.annotate(
+            rating=Coalesce(
+                Avg('reviews_about_me__rating'),
+                0,
+                output_field=FloatField()
+            )
+        )
+
+        queryset = queryset.annotate(
+            reviews_count=Coalesce(
+                Count('reviews_about_me'),
+                0,
+                output_field=IntegerField()
+            )
+        )
+
+        return queryset

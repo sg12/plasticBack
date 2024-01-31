@@ -10,7 +10,7 @@ class SurgeonClinicSerializer(serializers.ModelSerializer):
         model = Clinic
         fields = (
             'id',
-            'user',
+            'account',
             'metro',
         )
         depth = 1

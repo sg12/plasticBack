@@ -11,7 +11,7 @@ class ClinicManager(models.Manager):
 
         queryset = queryset.annotate(
             rating=Coalesce(
-                Avg('reviews__star'),
+                Avg('user__reviews_about_me__rating'),
                 0,
                 output_field=FloatField()
             )
@@ -21,7 +21,7 @@ class ClinicManager(models.Manager):
 
         queryset = queryset.annotate(
             reviews_count=Coalesce(
-                Count('reviews'),
+                Count('user__reviews_about_me'),
                 0,
                 output_field=IntegerField()
             )

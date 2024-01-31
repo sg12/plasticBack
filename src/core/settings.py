@@ -9,7 +9,7 @@ SECRET_KEY = os.getenv('DJANGO_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
 
+    'core',
     'apps.authentication',
     'apps.services',
     'apps.clients',
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'accounts.User'
 
 AUTHENTICATION_BACKENDS = [
-    # 'auth.CustomAuth',
     'django.contrib.auth.backends.ModelBackend'
 ]
 
@@ -92,7 +92,19 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_FILTER_BACKEND': (
         'django_filters.rest_framework.DjangoFilterBackend',
-    )
+    ),
+    'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler'
+}
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
 }
 
 # Database

@@ -3,6 +3,19 @@ from drf_yasg.utils import swagger_auto_schema
 from apps.clinics.serializers import *
 from apps.services.models import ServiceInfo
 from apps.clinics.models import Metro, District
+from django.db.utils import OperationalError
+
+
+service_info = []
+metro = []
+district = []
+
+try:
+    service_info = [el.slug for el in ServiceInfo.objects.all()]
+    metro = [el.slug for el in Metro.objects.all()]
+    district = [el.slug for el in District.objects.all()]
+except OperationalError:
+    pass
 
 
 doc_clinic_list = swagger_auto_schema(
@@ -23,7 +36,7 @@ doc_clinic_list = swagger_auto_schema(
             name='service',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            enum=[el.slug for el in ServiceInfo.objects.all()]
+            enum=service_info,
         ),
         openapi.Parameter(
             name='reception',
@@ -45,13 +58,13 @@ doc_clinic_list = swagger_auto_schema(
             name='metro',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            enum=[el.slug for el in Metro.objects.all()],
+            enum=metro,
         ),
         openapi.Parameter(
             name='district',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            enum=[el.slug for el in District.objects.all()]
+            enum=district
         ),
         openapi.Parameter(
             name='sort',

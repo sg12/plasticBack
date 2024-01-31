@@ -2,6 +2,15 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from apps.surgeons.serializers import SurgeonListSerializer, SurgeonRetrieveSerializer
 from apps.surgeons.models import Specialtie
+from django.db.utils import OperationalError
+
+
+specialtie = []
+
+try:
+    specialtie = [el.slug for el in Specialtie.objects.all()]
+except OperationalError:
+    pass
 
 
 doc_surgeon_list = swagger_auto_schema(
@@ -22,7 +31,7 @@ doc_surgeon_list = swagger_auto_schema(
             name='specialtie',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            enum=[el.slug for el in Specialtie.objects.all()]
+            enum=specialtie,
         ),
         openapi.Parameter(
             name='experience',

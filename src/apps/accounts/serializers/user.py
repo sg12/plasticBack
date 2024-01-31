@@ -1,8 +1,8 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from apps.accounts.models import User
 
 
-class UserRetrieveSerializer(ModelSerializer):
+class UserRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
@@ -15,4 +15,18 @@ class UserRetrieveSerializer(ModelSerializer):
             'phone',
             'date_created',
         )
- 
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'email',
+            'username',
+            'gender',
+            'address',
+            'phone',
+        )

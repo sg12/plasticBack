@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from pkg.api_view.generics import RetrieveUpdateAPIView
+from pkg.generics import RetrieveUpdateAPIView
 from apps.surgeons.models import Surgeon
 from apps.surgeons.serializers import *
 from apps.surgeons.filters import SurgeonFilter

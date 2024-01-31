@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from pkg.api_view.generics import RetrieveUpdateAPIView
+from pkg.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 from rest_framework.pagination import LimitOffsetPagination
 from apps.clinics.models import Clinic

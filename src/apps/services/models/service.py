@@ -23,7 +23,7 @@ class Service(models.Model):
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='services')
     service_info = models.ForeignKey('ServiceInfo', on_delete=models.PROTECT, related_name='users')
     price = models.FloatField()
-    active = models.BooleanField(default=False)
+    status = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'services'

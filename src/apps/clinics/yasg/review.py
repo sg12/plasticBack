@@ -5,9 +5,9 @@ request_body = openapi.Schema(
     type=openapi.TYPE_OBJECT,
     properties={
         'text': openapi.Schema(type=openapi.TYPE_STRING),
-        'star': openapi.Schema(type=openapi.TYPE_NUMBER),
+        'rating': openapi.Schema(type=openapi.TYPE_NUMBER),
     },
-    required=['text', 'star']
+    required=['text', 'rating']
 )
 
 doc_review_create = swagger_auto_schema(

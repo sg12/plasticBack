@@ -1,50 +1,27 @@
 from rest_framework import serializers
 from apps.clinics.models import Clinic
+from apps.accounts.serializers import UserRetrieveSerializer
 
 
-class ClinicListSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(source='user.username')
-    avatar = serializers.CharField(source='user.avatar')
-    address = serializers.CharField(source='user.address')
-    phone = serializers.CharField(source='user.phone')
+class ClinicRetrieveSerializer(serializers.ModelSerializer):
+    user = UserRetrieveSerializer()
     rating = serializers.FloatField()
     reviews_count = serializers.IntegerField()
 
-    
     class Meta:
         model = Clinic
-        fields = (
-            'id',
-            'name',
-            'avatar',
-            'address',
-            'phone',
-            'description',
-            'metro',
-            'district',
-            'open_time',
-            'close_time',
-            'rating',
-            'reviews_count',
-        )
+        fields = '__all__'
         depth = 1
-        
 
-class ClinicRetrieveSerializer(ClinicListSerializer):
-    email = serializers.CharField(source='user.email')
 
-    class Meta:
-        model = Clinic
-        exclude = ('user', )
+class ClinicListSerializer(ClinicRetrieveSerializer):
+    pass
 
 
 class ClinicUpdateSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    user = serializers.RelatedField(read_only=True)
+
     class Meta:
         model = Clinic
-        fields = (
-            'id',
-            'director',
-            'open_time',
-            'close_time',
-            'description',
-        )
+        fields = '__all__'

@@ -6,5 +6,4 @@ admin.site.register((
     Clinic,
     Metro,
     District,
-    Review,
 ))

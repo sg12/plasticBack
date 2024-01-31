@@ -1,5 +1,6 @@
 from .account import AccountView
 from .service import (
-    AccountServiceListCreateView,
-    AccountServiceRetrieveUpdateDeleteView,
+    ServiceListCreateView,
+    ServiceRetrieveUpdateDeleteView,
 )
+from .review import ReviewListView
