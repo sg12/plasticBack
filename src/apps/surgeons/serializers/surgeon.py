@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from apps.surgeons.models import Surgeon
 from apps.accounts.serializers import UserRetrieveSerializer
-from .clinic import SurgeonClinicSerializer
 
 
 class SurgeonRetrieveSerializer(serializers.ModelSerializer):
@@ -13,7 +12,6 @@ class SurgeonRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Surgeon
         exclude = ('clinic', )
-        depth = 1
 
 
 class SurgeonListSerializer(SurgeonRetrieveSerializer):

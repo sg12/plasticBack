@@ -16,6 +16,7 @@ from rest_framework.permissions import IsAuthenticated
 class ServiceListCreateView(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
+    result_serializer = ServiceRetrieveSerializer
     list_serializer_class = ServiceListSerializer
     create_serializer_class = ServiceCreateSerializer
 
@@ -24,13 +25,14 @@ class ServiceListCreateView(ListCreateAPIView):
 
     @doc_service_create
     def post(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
 
 @method_decorator(check_account_service_access, name="dispatch")
 class ServiceRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
 
+    result_serializer = ServiceRetrieveSerializer
     retrieve_serializer_class = ServiceRetrieveSerializer
     update_serializer_class = ServiceUpdateSerializer
 
@@ -39,8 +41,8 @@ class ServiceRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
 
     @doc_service_update
     def put(self, request, *args, **kwargs):
-        return self.put(request, *args, **kwargs)
+        return super().put(request, *args, **kwargs)
 
     @doc_service_update
     def patch(self, request, *args, **kwargs):
-        return self.patch(request, *args, **kwargs)
+        return super().patch(request, *args, **kwargs)

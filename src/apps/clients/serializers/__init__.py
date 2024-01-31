@@ -1,1 +1,2 @@
-from .client import ClientRetrieveSerializer
+from .client import ClientRetrieveSerializer, ClientUpdateSerializer
+

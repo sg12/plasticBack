@@ -23,4 +23,4 @@ class ClinicFilter(filters.FilterSet):
         return queryset
 
     def get_services(self, queryset, name, value):
-        return queryset.filter(user__services__service_info__slug=value, user__services__active=True)
+        return queryset.filter(user__services__service_info__slug=value, user__services__status=True)

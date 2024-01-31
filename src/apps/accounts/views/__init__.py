@@ -3,4 +3,4 @@ from .service import (
     ServiceListCreateView,
     ServiceRetrieveUpdateDeleteView,
 )
-from .review import ReviewListView
+from .review import ReviewListView, ReviewCreateView, ReviewUpdateView

@@ -9,3 +9,11 @@ class ClientRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
         fields = ('id', 'user', 'date_born')
+
+
+class ClientUpdateSerializer(serializers.ModelSerializer):
+    user = UserRetrieveSerializer()
+
+    class Meta:
+        model = Client
+        fields = ('date_born',)

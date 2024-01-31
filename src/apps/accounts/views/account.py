@@ -4,45 +4,86 @@ from apps.clients.serializers import *
 from apps.surgeons.serializers import *
 from apps.clinics.serializers import *
 from apps.accounts.serializers import *
+from apps.accounts.models import User
 from apps.clients.models import Client
 from apps.surgeons.models import Surgeon
 from apps.clinics.models import Clinic
 from rest_framework.permissions import IsAuthenticated
 from apps.accounts.yasg import *
+from django.shortcuts import get_object_or_404
 
 
 class AccountView(APIView):
     permission_classes = (IsAuthenticated,)
 
     @doc_account_retrieve
-    def get(self, request):
-        match request.user.type:
+    def get(self, request, **kwargs):
+        user_id = kwargs.get('user_id')
+
+        if user_id is None:
+            user = request.user
+        else:
+            user = get_object_or_404(User, pk=user_id)
+
+        match user.type:
             case 'client':
-                serializer = ClientRetrieveSerializer(Client.objects.get(user=request.user))
+                serializer = ClientRetrieveSerializer(Client.objects.get(user=user))
             case 'surgeon':
-                serializer = SurgeonRetrieveSerializer(Surgeon.objects.get(user=request.user))
+                serializer = SurgeonRetrieveSerializer(Surgeon.objects.get(user=user))
             case 'clinic':
-                serializer = ClinicRetrieveSerializer(Clinic.objects.get(user=request.user))
+                serializer = ClinicRetrieveSerializer(Clinic.objects.get(user=user))
             case _:
                 serializer = UserRetrieveSerializer(request.user)
 
         return Response(serializer.data)
 
-    def update(self, request, *args, **kwargs):
+    def update(self, request, **kwargs):
+        pk = kwargs.get('pk')
+
+        if pk is None:
+            user = request.user
+        else:
+            user = get_object_or_404(User, pk=pk)
+
         partial = kwargs.pop('partial', False)
         user_data = request.data.pop('user', {})
+        type = request.user.type
 
-        user_serializer = UserUpdateSerializer(instance=request.user, data=user_data, partial=partial)
+        user_serializer = UserUpdateSerializer(instance=user, data=user_data, partial=partial)
         user_serializer.is_valid(raise_exception=True)
 
-        clinic_serializer = ClinicUpdateSerializer(instance=request.user.clinic, data=request.data, **kwargs)
-        clinic_serializer.is_valid(raise_exception=True)
+        if type in ['client', 'surgeon', 'clinic']:
+            match type:
+                case 'client':
+                    serializer = ClientUpdateSerializer(instance=user.client, data=request.data, **kwargs)
+                case 'surgeon':
+                    serializer = SurgeonUpdateSerializer(instance=user.surgeon, data=request.data, **kwargs)
+                case 'clinic':
+                    serializer = ClinicUpdateSerializer(instance=user.clinic, data=request.data, **kwargs)
+
+            serializer.is_valid(raise_exception=True)
+            instance = serializer.save()
 
         user_serializer.save()
-        clinic_serializer.save()
 
-        clinic = Clinic.objects.get(pk=request.user.clinic.pk)
-        serializer = ClinicRetrieveSerializer(clinic)
+        pk = instance.pk
+        instance = None
+
+        match type:
+            case 'client':
+                instance = Client.objects.get(pk=pk)
+            case 'surgeon':
+                instance = Surgeon.objects.get(pk=pk)
+            case'clinic':
+                instance = Clinic.objects.get(pk=pk)
+
+        match type:
+            case 'client':
+                serializer = ClientRetrieveSerializer(instance=instance)
+            case 'surgeon':
+                serializer = SurgeonRetrieveSerializer(instance=instance)
+            case 'clinic':
+                serializer = ClinicRetrieveSerializer(instance=instance)
 
         return Response(serializer.data)
 

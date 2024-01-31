@@ -17,8 +17,6 @@ class SurgeonManager(models.Manager):
             )
         )
 
-        queryset = queryset.prefetch_related('metro')
-
         queryset = queryset.annotate(
             reviews_count=Coalesce(
                 Count('user__reviews_about_me'),

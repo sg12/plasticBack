@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from pkg.generics import RetrieveUpdateAPIView
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.pagination import LimitOffsetPagination
 from apps.clinics.models import Clinic
@@ -26,22 +26,6 @@ class ClinicListView(APIView):
         return response
 
 
-class ClinicRetrieveUpdateView(RetrieveUpdateAPIView):
+class ClinicRetrieveUpdateView(RetrieveAPIView):
     queryset = Clinic.objects.all()
-    retrieve_serializer = ClinicRetrieveSerializer
-    update_serializer = ClinicUpdateSerializer
-
-    def return_response(self):
-        instance = self.get_object()
-        serializer = self.retrieve_serializer(instance=instance)
-        return Response(serializer.data)
-
-    @doc_clinic_update
-    def put(self, request, *args, **kwargs):
-        super().put(request, *args, **kwargs)
-        return self.return_response()
-
-    @doc_clinic_update
-    def patch(self, request, *args, **kwargs):
-        super().patch(request, *args, **kwargs)
-        return self.return_response()
+    serializer_class = ClinicRetrieveSerializer
