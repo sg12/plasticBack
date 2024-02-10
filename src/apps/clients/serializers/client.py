@@ -12,8 +12,6 @@ class ClientRetrieveSerializer(serializers.ModelSerializer):
 
 
 class ClientUpdateSerializer(serializers.ModelSerializer):
-    user = UserRetrieveSerializer()
-
     class Meta:
         model = Client
         fields = ('date_born',)
