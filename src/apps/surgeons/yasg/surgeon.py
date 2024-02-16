@@ -28,6 +28,11 @@ doc_surgeon_list = swagger_auto_schema(
             default=0,
         ),
         openapi.Parameter(
+            name='search',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_STRING,
+        ),
+        openapi.Parameter(
             name='specialtie',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,

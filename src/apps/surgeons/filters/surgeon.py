@@ -4,6 +4,7 @@ from apps.surgeons.models import Surgeon
 
 
 class SurgeonFilter(filters.FilterSet):
+    search = filters.CharFilter(method='get_search')
     specialtie = filters.CharFilter(field_name='specialtie__slug', lookup_expr='exact')
     experience = filters.NumberFilter(lookup_expr='gte')
     category = filters.NumberFilter(lookup_expr='exact')
@@ -21,6 +22,9 @@ class SurgeonFilter(filters.FilterSet):
             queryset = queryset.order_by('-reviews_count')
 
         return queryset
+
+    def get_search(self, queryset, name, value):
+        return queryset.filter(user__username__contains=value)
     
     class Meta:
         model = Surgeon

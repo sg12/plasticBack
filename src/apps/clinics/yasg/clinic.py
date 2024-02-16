@@ -6,18 +6,6 @@ from apps.clinics.models import Metro, District
 from django.db.utils import OperationalError
 
 
-service_info = []
-metro = []
-district = []
-
-try:
-    service_info = [el.slug for el in ServiceInfo.objects.all()]
-    metro = [el.slug for el in Metro.objects.all()]
-    district = [el.slug for el in District.objects.all()]
-except OperationalError:
-    pass
-
-
 doc_clinic_list = swagger_auto_schema(
     manual_parameters=[
         openapi.Parameter(
@@ -33,10 +21,15 @@ doc_clinic_list = swagger_auto_schema(
             default=0,
         ),
         openapi.Parameter(
+            name='search',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_STRING
+        ),
+        openapi.Parameter(
             name='service',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            enum=service_info,
+            enum=[el.slug for el in ServiceInfo.objects.all()],
         ),
         openapi.Parameter(
             name='reception',
@@ -58,13 +51,13 @@ doc_clinic_list = swagger_auto_schema(
             name='metro',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            enum=metro,
+            enum=[el.slug for el in Metro.objects.all()],
         ),
         openapi.Parameter(
             name='district',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_STRING,
-            enum=district
+            enum=[el.slug for el in District.objects.all()]
         ),
         openapi.Parameter(
             name='sort',
