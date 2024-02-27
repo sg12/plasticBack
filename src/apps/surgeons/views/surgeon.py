@@ -22,7 +22,7 @@ class SurgeonListView(APIView):
         serializer = SurgeonListSerializer(queryset, many=True)
 
         response = Response(serializer.data)
-        response.headers['X-Total-Count'] = len(serializer.data)
+        response.headers['X-Total-Count'] = Surgeon.objects.all().count()
         return response
     
 

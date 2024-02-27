@@ -29,7 +29,7 @@ class ArticleListView(ListAPIView):
         serializer = ArticleReadSerializer(queryset, many=True)
 
         response = Response(data=serializer.data)
-        response.headers['X-Total-Count'] = len(serializer.data)
+        response.headers['X-Total-Count'] = Article.objects.all().count()
         return response
 
 

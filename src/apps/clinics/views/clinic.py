@@ -22,7 +22,7 @@ class ClinicListView(APIView):
         serializer = ClinicListSerializer(queryset, many=True)
 
         response = Response(serializer.data)
-        response.headers['X-Total-Count'] = len(serializer.data)
+        response.headers['X-Total-Count'] = Clinic.objects.all().count()
         return response
 
 
