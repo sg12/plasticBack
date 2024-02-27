@@ -23,6 +23,7 @@ class SurgeonListView(APIView):
 
         response = Response(serializer.data)
         response.headers['X-Total-Count'] = Surgeon.objects.all().count()
+        response.headers['Access-Control-Expose-Headers'] = 'X-Total-Count'
         return response
     
 

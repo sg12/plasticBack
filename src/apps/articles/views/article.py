@@ -30,6 +30,7 @@ class ArticleListView(ListAPIView):
 
         response = Response(data=serializer.data)
         response.headers['X-Total-Count'] = Article.objects.all().count()
+        response.headers['Access-Control-Expose-Headers'] = 'X-Total-Count'
         return response
 
 
