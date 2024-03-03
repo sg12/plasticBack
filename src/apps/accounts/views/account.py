@@ -1,4 +1,4 @@
-from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from apps.clients.serializers import *
 from apps.surgeons.serializers import *
@@ -13,10 +13,9 @@ from apps.accounts.yasg import *
 from django.shortcuts import get_object_or_404
 
 
-class AccountView(APIView):
+class AccountView(GenericAPIView):
     permission_classes = (IsAuthenticated,)
 
-    @doc_account_retrieve
     def get(self, request, **kwargs):
         user_id = kwargs.get('user_id')
 
