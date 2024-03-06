@@ -9,6 +9,7 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
             'id',
             'email',
             'username',
+            'type',
             'gender',
             'avatar',
             'address',
