@@ -19,13 +19,11 @@ doc_surgeon_list = swagger_auto_schema(
             name='limit',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_NUMBER,
-            default=10,
         ),
         openapi.Parameter(
-            name='offset',
+            name='page',
             in_=openapi.IN_QUERY,
             type=openapi.TYPE_NUMBER,
-            default=0,
         ),
         openapi.Parameter(
             name='search',

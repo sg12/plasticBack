@@ -4,7 +4,7 @@ from rest_framework.generics import RetrieveAPIView
 from apps.surgeons.models import Surgeon
 from apps.surgeons.serializers import *
 from apps.surgeons.filters import SurgeonFilter
-from rest_framework.pagination import LimitOffsetPagination
+from pkg.pagination import PagePagination
 from apps.surgeons.yasg import *
 
 
@@ -15,9 +15,7 @@ class SurgeonListView(APIView):
 
         filter = SurgeonFilter(request.GET, queryset=queryset)
 
-        paginator = LimitOffsetPagination()
-        paginator.default_limit = 10
-        queryset = paginator.paginate_queryset(filter.qs, request)
+        queryset = PagePagination().paginate_queryset(filter.qs, request)
 
         serializer = SurgeonListSerializer(queryset, many=True)
 

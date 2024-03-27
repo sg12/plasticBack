@@ -3,7 +3,7 @@ from apps.articles.models import Article
 from apps.articles.serializers import ArticleReadSerializer
 from rest_framework.response import Response
 from apps.articles.filters import ArticleFilter
-from rest_framework.pagination import LimitOffsetPagination
+from pkg.pagination import PagePagination
 from apps.articles.yasg import doc_articles_list
 
 
@@ -22,9 +22,7 @@ class ArticleListView(ListAPIView):
         queryset = self.get_queryset()
         filter = ArticleFilter(request.GET, queryset=queryset)
 
-        paginator = LimitOffsetPagination()
-        paginator.default_limit = 10
-        queryset = paginator.paginate_queryset(filter.qs, request)
+        queryset = PagePagination().paginate_queryset(filter.qs, request)
 
         serializer = ArticleReadSerializer(queryset, many=True)
 

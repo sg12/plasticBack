@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
-from rest_framework.pagination import LimitOffsetPagination
+from pkg.pagination import PagePagination
 from apps.clinics.models import Clinic
 from apps.clinics.serializers import *
 from apps.clinics.filters import ClinicFilter
@@ -15,9 +15,7 @@ class ClinicListView(APIView):
 
         filter = ClinicFilter(request.GET, queryset=queryset)
 
-        paginator = LimitOffsetPagination()
-        paginator.default_limit = 10
-        queryset = paginator.paginate_queryset(filter.qs, request)
+        queryset = PagePagination().paginate_queryset(filter.qs, request)
 
         serializer = ClinicListSerializer(queryset, many=True)
 
