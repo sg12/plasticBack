@@ -27,7 +27,7 @@ class ArticleListView(ListAPIView):
         serializer = ArticleReadSerializer(queryset, many=True)
 
         response = Response(data=serializer.data)
-        response.headers['X-Total-Count'] = Article.objects.all().count()
+        response.headers['X-Total-Count'] = filter.qs.count()
         response.headers['Access-Control-Expose-Headers'] = 'X-Total-Count'
         return response
 
