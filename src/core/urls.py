@@ -14,6 +14,8 @@ api_v1 = [
     path('', include('apps.authentication.urls')),
     path('', include('apps.accounts.urls')),
     path('', include('apps.faq.urls')),
+    path('', include('apps.testapi.urls')),
+    path('', include('apps.notification.urls')),
 ]
 
 

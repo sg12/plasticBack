@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.faq',
     'corsheaders',
+    'apps.testapi',
+    'apps.notification',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
