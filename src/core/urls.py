@@ -10,10 +10,11 @@ api_v1 = [
     path('', include('apps.surgeons.urls')),
     path('', include('apps.clinics.urls')),
     path('', include('apps.services.urls')),
-    path('', include('apps.articles.urls')),
     path('', include('apps.authentication.urls')),
     path('', include('apps.accounts.urls')),
     path('', include('apps.faq.urls')),
+    path('', include('apps.testapi.urls')),
+    path('', include('apps.article.urls'))
 ]
 
 

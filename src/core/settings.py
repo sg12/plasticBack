@@ -30,9 +30,12 @@ INSTALLED_APPS = [
     'apps.clients',
     'apps.surgeons',
     'apps.clinics',
-    'apps.articles',
     'apps.accounts',
     'apps.faq',
+
+    'apps.testapi',
+    'apps.article',
+
     'corsheaders',
 ]
 
