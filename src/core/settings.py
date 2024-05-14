@@ -22,25 +22,41 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
-    'drf_yasg',
+    'drf_spectacular',
 
     'core',
     'apps.authentication',
-    'apps.services',
-    'apps.clients',
-    'apps.surgeons',
-    'apps.clinics',
-    'apps.articles',
-    'apps.accounts',
+    'apps.service',
+    'apps.doctor',
+    'apps.client',
+    'apps.clinic',
+    'apps.article',
+    'apps.user',
     'apps.faq',
+    'apps.review',
+    'apps.favorite',
+    'apps.reception',
+    'apps.schedule',
+    'apps.location',
+    'apps.support',
+    'apps.license',
+    'apps.option',
+
     'corsheaders',
 ]
 
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'user.User'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend'
 ]
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Plastic',
+    'DESCRIPTION': 'Документация серверной части проекта Plastic',
+    'VERSION': '1.0.0',
+    'COMPONENT_SPLIT_REQUEST': True
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +65,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'middleware.disable_csrf.DisableCSRFMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -93,18 +110,8 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKEND': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
-    'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler'
-}
-
-SWAGGER_SETTINGS = {
-    'USE_SESSION_AUTH': False,
-    'SECURITY_DEFINITIONS': {
-        'Bearer': {
-            'type': 'apiKey',
-            'name': 'Authorization',
-            'in': 'header'
-        }
-    }
+    'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 # Database
@@ -149,6 +156,12 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Путь к каталогу с переводами
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
@@ -164,7 +177,6 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # Debug
 

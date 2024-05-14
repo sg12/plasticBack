@@ -1,29 +1,39 @@
 from django.contrib import admin
 from django.urls import path, include
-from .yasg import urlpatterns as doc_urls
 from django.conf import settings
 from django.conf.urls.static import static
+from drf_spectacular.views import SpectacularRedocView, SpectacularSwaggerView, SpectacularAPIView
 
 
 api_v1 = [
-    path('', include('apps.clients.urls')),
-    path('', include('apps.surgeons.urls')),
-    path('', include('apps.clinics.urls')),
-    path('', include('apps.services.urls')),
-    path('', include('apps.articles.urls')),
+    # path('', include('apps.client.urls')),
+    path('', include('apps.doctor.urls')),
+    path('', include('apps.clinic.urls')),
+    path('', include('apps.license.urls')),
+    path('', include('apps.service.urls')),
+    path('', include('apps.article.urls')),
     path('', include('apps.authentication.urls')),
-    path('', include('apps.accounts.urls')),
+    path('', include('apps.location.urls')),
+    path('', include('apps.user.urls')),
     path('', include('apps.faq.urls')),
+    path('', include('apps.review.urls')),
+    path('', include('apps.favorite.urls')),
 ]
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path("__debug__/", include("debug_toolbar.urls")),
-    path('api/v1/', include(api_v1)),
-]
+    path('api/', include(api_v1)),
 
-urlpatterns += doc_urls
+    # Debug tool
+    # path("__debug__/", include("debug_toolbar.urls")),
+
+    # Swagger
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Optional UI:
+    path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+]
 
 handler404 = 'core.views.custom_handler_404'
 

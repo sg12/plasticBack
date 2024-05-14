@@ -1,14 +1,12 @@
-from rest_framework.generics import RetrieveUpdateAPIView
+from .base import BaseAPIView
+from rest_framework.mixins import RetrieveModelMixin
+from pkg.mixins import UpdateModelMixin
 
 
-class RetrieveUpdateAPIView(RetrieveUpdateAPIView):
-    retrieve_serializer = None
-    update_serializer = None
+class RetrieveUpdateAPIView(RetrieveModelMixin, UpdateModelMixin, BaseAPIView):    
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
-    def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return self.retrieve_serializer
-        elif self.request.method == 'PUT' or self.request.method == 'PATCH':
-            return self.update_serializer
-
-        return None
+    def patch(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return self.partial_update(request, *args, **kwargs)

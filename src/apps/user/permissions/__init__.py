@@ -1,0 +1,2 @@
+from .is_author_or_authenticated import IsAuthorOrAuthenticated
+from .is_admin_or_authenticated import IsAdminOrAuthenticated

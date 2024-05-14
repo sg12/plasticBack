@@ -2,8 +2,8 @@ from django.db import models
 
 
 class FAQ(models.Model):
-    name = models.CharField(max_length=255)
-    answer = models.CharField(max_length=255)
+    question = models.TextField()
+    answer = models.TextField()
 
     class Meta:
         db_table = 'faq'

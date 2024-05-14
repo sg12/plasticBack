@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 
 
-class CustomUpdateMixin:
+class UpdateModelMixin:
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()

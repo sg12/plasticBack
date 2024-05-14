@@ -1,2 +1,2 @@
-from .update import CustomUpdateMixin
-from .create import CustomCreateMixin
+from .update import UpdateModelMixin
+from .create import CreateModelMixin
