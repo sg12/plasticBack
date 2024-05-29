@@ -3,8 +3,8 @@ from .ticket import (
     TicketCreateSerializer,
     TicketUpdateSerializer
 )
-from .comment import (
-    CommentSerializer,
-    CommentCreateSerializer,
-    CommentUpdateSerializer
+from .answer import (
+    AnswerSerializer,
+    AnswerCreateSerializer,
+    AnswerUpdateSerializer
 )

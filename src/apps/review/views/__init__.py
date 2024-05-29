@@ -1,4 +1,9 @@
 from .review import (
     ReviewView,
-    ReviewDetailView
+    ReviewDetailView,
+    ProfileReviewView
+)
+from .reply import (
+    ReplyView,
+    ReplyDetailView
 )

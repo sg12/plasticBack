@@ -27,9 +27,7 @@ class DoctorUpdateSerializer(BaseUserFields):
             'clinic',
             'description',
             'category',
-            'academic',
+            'degree',
             'specialty',
             'experience',
-            'reception',
-            'metro',
         )

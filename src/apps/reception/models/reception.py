@@ -3,8 +3,8 @@ from django.db import models
 
 class Reception(models.Model):
     service = models.ForeignKey('service.Service', on_delete=models.CASCADE)
-    client = models.ForeignKey('client.Client', on_delete=models.CASCADE, related_name='receptions')
-    doctor = models.ForeignKey('doctor.Doctor', on_delete=models.CASCADE, related_name='receptions')
+    client = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='receptions')
+    user = models.ForeignKey('user.User', on_delete=models.CASCADE)
     datetime = models.DateTimeField()
     status = models.BooleanField(default=False)
     
@@ -12,4 +12,4 @@ class Reception(models.Model):
         db_table = 'receptions'
         
     def __str__(self) -> str:
-        return f'{self.client.fio} - {self.service}'
+        return f'{self.user.client.fio} - {self.service}'

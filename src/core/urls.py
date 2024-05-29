@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularRedocView, SpectacularSwaggerView, SpectacularAPIView
 
 
-api_v1 = [
+api = [
     # path('', include('apps.client.urls')),
     path('', include('apps.doctor.urls')),
     path('', include('apps.clinic.urls')),
@@ -14,16 +14,18 @@ api_v1 = [
     path('', include('apps.article.urls')),
     path('', include('apps.authentication.urls')),
     path('', include('apps.location.urls')),
+    path('', include('apps.reception.urls')),
     path('', include('apps.user.urls')),
     path('', include('apps.faq.urls')),
     path('', include('apps.review.urls')),
     path('', include('apps.favorite.urls')),
+    path('', include('apps.support.urls'))
 ]
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(api_v1)),
+    path('api/', include(api)),
 
     # Debug tool
     # path("__debug__/", include("debug_toolbar.urls")),

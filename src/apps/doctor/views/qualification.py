@@ -7,7 +7,7 @@ from apps.doctor.permissions import IsDoctor
 from django.shortcuts import get_object_or_404
 
 
-class GuestQualificationView(ListAPIView):
+class QualificationView(ListAPIView):
     queryset = Qualification.objects.all()
     serializer_class = QualificationSerializer
     

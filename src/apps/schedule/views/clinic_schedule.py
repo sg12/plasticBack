@@ -5,11 +5,12 @@ from pkg.generics import (
 )
 from apps.schedule.models import ClinicSchedule
 from apps.schedule.serializers import *
+from apps.clinic.permissions import IsClinic
 
 
 class ClinicScheduleView(ListAPIView):
     queryset = ClinicSchedule.objects.all()
-    serializer_class = DoctorScheduleSerializer
+    serializer_class = ClinicScheduleSerializer
     
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -19,18 +20,20 @@ class ClinicScheduleView(ListAPIView):
 
 class ProfileClinicScheduleView(ListCreateAPIView):
     queryset = ClinicSchedule.objects.all()
-    serializer_class = DoctorScheduleCreateSerializer
-    result_class = DoctorScheduleSerializer
+    permission_classes = (IsClinic,)
+    serializer_class = ClinicScheduleCreateSerializer
+    result_class = ClinicScheduleSerializer
     
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(user=self.request.user)
 
 
-class ProfileClinicScheduleView(UpdateDestroyAPIView):
+class ProfileClinicScheduleDetailView(UpdateDestroyAPIView):
     queryset = ClinicSchedule.objects.all()
-    serializer_class = DoctorScheduleUpdateSerializer
-    result_class = DoctorScheduleSerializer
+    permission_classes = (IsClinic,)
+    serializer_class = ClinicScheduleUpdateSerializer
+    result_class = ClinicScheduleSerializer
     
     def get_queryset(self):
         queryset = super().get_queryset()

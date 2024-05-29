@@ -2,8 +2,12 @@ from rest_framework import permissions
 from apps.user.models import Role
 
 
-class IsDoctorOrClinic(permissions.BasePermission):
+class IsDoctorOrClinic(permissions.BasePermission):    
     def has_object_permission(self, request, view, obj):
+        if request.method == permissions.SAFE_METHODS:
+            return True
+        
         is_doctor = request.user.name == Role.DOCTOR
         is_clinic = request.user.type == Role.CLINIC
+        
         return is_doctor or is_clinic

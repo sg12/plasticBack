@@ -3,7 +3,7 @@ from pkg.generics import ListCreateAPIView
 from apps.license.models import License
 from apps.license.serializers import *
 from rest_framework.permissions import IsAuthenticated
-from apps.license.permissions import IsDoctorOrClinic
+from pkg.permissions import IsDoctorOrClinic
 from pkg.decorators import is_doctor_or_clinic
 from apps.license.schemas import *
 from rest_framework.parsers import MultiPartParser

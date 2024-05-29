@@ -1,5 +1,5 @@
 from .service import (
-    GuestServiceView,
+    ServiceView,
     ProfileServiceView,
     ProfileServiceDetailView
 )

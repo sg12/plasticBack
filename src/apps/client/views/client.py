@@ -3,12 +3,11 @@ from apps.client.permissions import IsClient
 from pkg.generics import RetrieveUpdateAPIView
 from rest_framework.generics import RetrieveAPIView
 from apps.client.serializers import *
-from apps.user.models import User, Role
-from django.utils.decorators import method_decorator
-from apps.user.decorators import compare_role
+from apps.user.models import User
+from pkg.decorators import is_client
 
 
-@method_decorator(compare_role(Role.CLIENT), name='dispatch')
+@is_client
 class GuestClientView(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = ClientSerializer

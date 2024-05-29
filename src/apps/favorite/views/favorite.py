@@ -7,10 +7,10 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class FavoriteView(ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = Favorite.objects.all()
     serializer_class = FavoriteCreateSerializer
     result_class = FavoriteSerializer
-    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         queryset = super().get_queryset()

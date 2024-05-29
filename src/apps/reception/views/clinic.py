@@ -5,7 +5,7 @@ from apps.doctor.permissions import IsDoctor
 from rest_framework.permissions import IsAuthenticated
 
 
-class ReceptionClinicView(ListAPIView):
+class ProfileReceptionClinicView(ListAPIView):
     permission_classes = (IsAuthenticated, IsDoctor)
     queryset = Reception.objects.all()
     serializer_class = ReceptionClientSerializer
@@ -15,7 +15,7 @@ class ReceptionClinicView(ListAPIView):
         return queryset.filter(doctor__clinic=self.request.user.clinic)
 
 
-class ReceptionClinicDetailView(DestroyAPIView):
+class ProfileReceptionClinicDetailView(DestroyAPIView):
     permission_classes = (IsAuthenticated, IsDoctor)
     queryset = Reception.objects.all()
 

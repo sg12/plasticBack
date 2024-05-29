@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from apps.doctor.models import Workplace
+from apps.doctor.serializers.utils import CurrentDoctorDefault
 
 
 class WorkplaceSerializer(serializers.ModelSerializer):
@@ -9,6 +10,8 @@ class WorkplaceSerializer(serializers.ModelSerializer):
 
    
 class WorkplaceCreateSerializer(serializers.ModelSerializer):
+    doctor = serializers.HiddenField(default=CurrentDoctorDefault())
+    
     class Meta:
         model = Workplace
         exclude = ()

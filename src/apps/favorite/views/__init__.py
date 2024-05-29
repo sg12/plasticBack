@@ -1,1 +1,4 @@
-from .favorite import FavoriteDetailView
+from .favorite import (
+    FavoriteView,
+    FavoriteDetailView
+)

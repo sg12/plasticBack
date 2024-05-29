@@ -9,7 +9,7 @@ class UpdateModelMixin:
         serializer.is_valid(raise_exception=True)
         instance = serializer.save()
 
-        serializer = self.result_serializer(instance)
+        serializer = self.result_class(instance)
         return Response(serializer.data)
 
     def partial_update(self, request, *args, **kwargs):

@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from apps.client.permissions import IsClient
 
 
-class ReceptionClientView(ListCreateAPIView):
+class ProfileReceptionClientView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, IsClient)
     queryset = Reception.objects.all()
     serializer_class = ReceptionCreateSerializer
@@ -16,7 +16,7 @@ class ReceptionClientView(ListCreateAPIView):
         return queryset.filter(client=self.request.user.client)
 
 
-class ReceptionClientDetailView(UpdateDestroyAPIView):
+class ProfileReceptionClientDetailView(UpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, IsClient)
     queryset = Reception.objects.all()
     serializer_class = ReceptionUpdateSerializer

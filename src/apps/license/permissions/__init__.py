@@ -1,1 +1,0 @@
-from .is_doctor_or_client import IsDoctorOrClinic

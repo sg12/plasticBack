@@ -29,7 +29,7 @@ class ClinicSerializer(BaseClinicFields):
         )
 
 
-class ClinicRetrieveSerializer(BaseClinicFields):    
+class ClinicRetrieveSerializer(BaseClinicFields):
     class Meta:
         model = Clinic
         exclude = ('user',)

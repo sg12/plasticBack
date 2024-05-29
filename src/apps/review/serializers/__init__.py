@@ -3,3 +3,8 @@ from .review import (
     ReviewCreateSerializer,
     ReviewUpdateSerializer,
 )
+from .reply import (
+    ReplySerializer,
+    ReplyCreateSerializer,
+    ReplyUpdateSerializer,
+)

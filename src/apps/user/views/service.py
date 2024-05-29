@@ -1,12 +1,12 @@
 from apps.service.models import Service
-from .utils import service_access
+from apps.service.decorators import service_access
 from django.utils.decorators import method_decorator
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import (
     IsAuthenticated,
     IsAuthenticatedOrReadOnly
 )
-from apps.user.permissions import IsDoctorOrClinic
+from pkg.permissions import IsDoctorOrClinic
 from pkg.generics import (
     ListCreateAPIView,
     UpdateDestroyAPIView

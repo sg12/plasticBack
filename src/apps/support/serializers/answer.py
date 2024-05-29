@@ -1,22 +1,22 @@
 from rest_framework import serializers
-from apps.support.models import Comment
+from apps.support.models import Answer
 from apps.user.serializers import UserSerializer
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class AnswerSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     
     class Meta:
-        model = Comment
+        model = Answer
         exclude = ()
 
 
-class CommentCreateSerializer(serializers.ModelSerializer):
+class AnswerCreateSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     
     class Meta:
-        model = Comment
+        model = Answer
         exclude = ()
 
-class CommentUpdateSerializer(CommentCreateSerializer):
+class AnswerUpdateSerializer(AnswerCreateSerializer):
     pass

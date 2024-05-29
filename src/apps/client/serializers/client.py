@@ -15,7 +15,7 @@ class ClientSerializer(BaseClientFields):
     
     class Meta:
         model = Client
-        exclude = ('user',)
+        exclude = ('id', 'user')
 
 
 class ClientUpdateSerializer(ClientSerializer):

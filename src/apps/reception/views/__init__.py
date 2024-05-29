@@ -1,12 +1,12 @@
 from .client import (
-    ReceptionClientView,
-    ReceptionClientDetailView
+    ProfileReceptionClientView,
+    ProfileReceptionClientDetailView
 )
 from .doctor import (
-    ReceptionDoctorView,
-    ReceptionDoctorDetailView
+    ProfileReceptionDoctorView,
+    ProfileReceptionDoctorDetailView
 )
 from .clinic import (
-    ReceptionClinicView,
-    ReceptionClinicDetailView
+    ProfileReceptionClinicView,
+    ProfileReceptionClinicDetailView
 )

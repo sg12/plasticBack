@@ -8,3 +8,8 @@ from .clinic_schedule import (
     ClinicScheduleCreateSerializer,
     ClinicScheduleUpdateSerializer
 )
+from .schedule import (
+    ScheduleSerializer,
+    ScheduleCreateSerializer,
+    ScheduleUpdateSerializer
+)

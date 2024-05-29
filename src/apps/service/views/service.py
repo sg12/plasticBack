@@ -7,7 +7,7 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAuthenticatedOrReadOnly
 )
-from apps.service.permissions import IsDoctorOrClinic
+from pkg.permissions import IsDoctorOrClinic
 from pkg.generics import (
     ListCreateAPIView,
     UpdateDestroyAPIView
@@ -15,13 +15,14 @@ from pkg.generics import (
 
 
 @method_decorator(service_access, name='dispatch')
-class GuestServiceView(ListAPIView):
+class ServiceView(ListAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(user__pk=self.kwargs.get('pk'))
+        user_pk = self.kwargs.get('pk')
+        return queryset.filter(user__pk=user_pk)
     
 
 class ProfileServiceView(ListCreateAPIView):

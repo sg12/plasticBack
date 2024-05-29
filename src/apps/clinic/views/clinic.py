@@ -1,4 +1,5 @@
-from rest_framework.generics import RetrieveAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import RetrieveAPIView
+from pkg.generics import RetrieveUpdateAPIView
 from apps.clinic.models import Clinic
 from apps.user.models import User
 from apps.clinic.serializers import *

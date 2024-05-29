@@ -28,7 +28,7 @@ class DoctorDetailView(RetrieveAPIView):
         return user.doctor
 
 
-class ProfileDoctorDetailView(RetrieveUpdateAPIView):
+class ProfileDoctorView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated, IsDoctor)
     serializer_class = DoctorUpdateSerializer
     result_class = DoctorSerializer

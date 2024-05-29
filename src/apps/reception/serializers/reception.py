@@ -2,11 +2,11 @@ from rest_framework import serializers
 from apps.reception.models import Reception
 from apps.doctor.serializers import DoctorSerializer
 from apps.client.serializers import ClientSerializer
-from apps.clinic.serializers import ClinicSerializer
 from apps.service.serializers import ServiceSerializer
+from apps.client.serializers.utils import CurrentClientDefault
 
         
-class ReceptionSerializer(serializers.ModelSerializer):    
+class ReceptionSerializer(serializers.ModelSerializer):
     service = ServiceSerializer()
     client = ClientSerializer()
     doctor = DoctorSerializer()
@@ -16,7 +16,7 @@ class ReceptionSerializer(serializers.ModelSerializer):
         exclude = ()
 
 class ReceptionCreateSerializer(serializers.ModelSerializer):
-    client = serializers.HiddenField(default=serializers.CurrentUserDefault().client)
+    client = serializers.HiddenField(default=CurrentClientDefault())
     
     class Meta:
         model = Reception
@@ -30,14 +30,14 @@ class ReceptionUpdateSerializer(serializers.ModelSerializer):
 
 
 class ReceptionClientSerializer(serializers.ModelSerializer):
-    clinic_name = serializers.CharField(source='doctor.clinic.name')
-    doctor_fio = serializers.CharField(source='doctor.fio')
+    clinic_name = serializers.CharField(source='user.doctor.clinic.name')
+    doctor_fio = serializers.CharField(source='user.username')
     
     class Meta:
         model = Reception
         exclude = (
             'client',
-            'doctor',
+            'user',
             'service'
         )
 
@@ -49,7 +49,7 @@ class ReceptionDoctorSerializer(serializers.ModelSerializer):
         model = Reception
         exclude = (
             'client',
-            'doctor',
+            'user',
             'service'
         )
 
@@ -62,6 +62,6 @@ class ReceptionClinicSerializer(serializers.ModelSerializer):
         model = Reception
         exclude = (
             'client',
-            'doctor',
+            'user',
             'service'
         )

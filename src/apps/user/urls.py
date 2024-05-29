@@ -2,12 +2,10 @@ from django.urls import path, include
 from apps.client import *
 from .views import *
 
+PROFILE_URL = 'profile'
+PROFILE_PK_URL = PROFILE_URL + '/<int:user_pk>'
 
-BASE_PROFILE_URL = 'profile'
-BASE_USER_URL = 'user/<int:pk>'
 
 urlpatterns = [
-    path(BASE_PROFILE_URL, MeView.as_view())
-    # path('user', ),
-    # path('user/<int:pk>', )
+    path(PROFILE_URL, MeView.as_view())
 ]

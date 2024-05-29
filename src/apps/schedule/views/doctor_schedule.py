@@ -5,6 +5,7 @@ from pkg.generics import (
 )
 from apps.schedule.models import DoctorSchedule
 from apps.schedule.serializers import *
+from apps.doctor.permissions import IsDoctor
 
 
 class DoctorScheduleView(ListAPIView):
@@ -19,6 +20,7 @@ class DoctorScheduleView(ListAPIView):
 
 class ProfileDoctorScheduleView(ListCreateAPIView):
     queryset = DoctorSchedule.objects.all()
+    permission_classes = (IsDoctor,)
     serializer_class = DoctorScheduleCreateSerializer
     result_class = DoctorScheduleSerializer
     
@@ -27,8 +29,9 @@ class ProfileDoctorScheduleView(ListCreateAPIView):
         return queryset.filter(user=self.request.user)
 
 
-class ProfileDoctorScheduleView(UpdateDestroyAPIView):
+class ProfileDoctorScheduleDetailView(UpdateDestroyAPIView):
     queryset = DoctorSchedule.objects.all()
+    permission_classes = (IsDoctor,)
     serializer_class = DoctorScheduleUpdateSerializer
     result_class = DoctorScheduleSerializer
     

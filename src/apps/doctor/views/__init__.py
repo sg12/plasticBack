@@ -1,24 +1,24 @@
 from .doctor import (
     DoctorView,
     DoctorDetailView,
-    ProfileDoctorDetailView
+    ProfileDoctorView
 )
 from .education import (
-    GuestEducationView,
+    EducationView,
     ProfileEducationView,
     ProfileEducationDetailView
 )
 from .qualification import (
-    GuestQualificationView,
+    QualificationView,
     ProfileQualificationView,
     ProfileQualificationDetailView
 )
 from .workplace import (
-    GuestWorkplaceView,
+    WorkplaceView,
     ProfileWorkplaceView,
     ProfileWorkplaceDetailView
 )
 from .service import DoctorServiceView
 from .degree import DegreeView
-from .category import Category
+from .category import CategoryView
 from .speciality import SpecialityView

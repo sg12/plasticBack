@@ -1,1 +1,1 @@
-from .is_client import IsClient
+from .client import IsClient, IsClientOrReadOnly

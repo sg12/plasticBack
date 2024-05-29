@@ -1,2 +1,2 @@
-from .comment import Comment
+from .answer import Answer
 from .ticket import Ticket
