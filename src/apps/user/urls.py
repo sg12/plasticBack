@@ -7,5 +7,6 @@ PROFILE_PK_URL = PROFILE_URL + '/<int:user_pk>'
 
 
 urlpatterns = [
-    path(PROFILE_URL, MeView.as_view())
+    path(PROFILE_URL, MeView.as_view()),
+    path(PROFILE_PK_URL, UserView.as_view())
 ]
