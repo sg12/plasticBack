@@ -5,7 +5,8 @@ import corsheaders.middleware
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('DJANGO_KEY')
+SECRET_KEY = "django-insecure-4^u1wl9z8eqn1*2n1mc%8)bf&nb&3mmfa9+fcaz%1u9@yhy&^-"  
+#os.getenv('DJANGO_KEY') 
 
 DEBUG = True
 

@@ -1,0 +1,1 @@
+from .favorite import doc_delete_favorite

@@ -10,7 +10,8 @@ from apps.doctor.serializers import (
 tags = ['doctor']
 
 doc_doctor = extend_schema_view(
-    get=extend_schema(
+    get=extend_schema( 
+        summary='Список докторов',
         tags=tags,
         responses=DoctorSerializer(many=True),
     )
@@ -19,6 +20,7 @@ doc_doctor = extend_schema_view(
 
 doc_doctor_detail = extend_schema_view(
     get=extend_schema(
+        summary='Данные конкретного доктора',
         tags=tags,
         responses=DoctorSerializer,
     ),

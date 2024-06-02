@@ -5,8 +5,9 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     IsAuthenticated
 )
+from apps.review.schemas import doc_review, doc_detail_review
 
-
+@doc_review
 class ReviewView(ListCreateAPIView):
     queryset = Review.objects.all()
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -17,7 +18,7 @@ class ReviewView(ListCreateAPIView):
         pk = self.kwargs.get('pk', self.request.user.pk)
         return Review.objects.filter(user__pk=pk)
 
-
+@doc_detail_review
 class ReviewDetailView(ListCreateAPIView):
     queryset = Review.objects.all()
     permission_classes = (IsAuthenticated,)

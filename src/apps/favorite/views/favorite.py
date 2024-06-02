@@ -4,7 +4,7 @@ from apps.favorite.serializers import *
 from apps.favorite.serializers import FavoriteSerializer
 from apps.favorite.models import Favorite
 from rest_framework.permissions import IsAuthenticated
-
+from apps.favorite.schemas import doc_delete_favorite
 
 class FavoriteView(ListCreateAPIView):
     queryset = Favorite.objects.all()
@@ -16,6 +16,6 @@ class FavoriteView(ListCreateAPIView):
         queryset = super().get_queryset()
         return queryset.filter(author=self.request.user)
 
-
+@doc_delete_favorite
 class FavoriteDetailView(DestroyAPIView):
     queryset = Favorite.objects.all()

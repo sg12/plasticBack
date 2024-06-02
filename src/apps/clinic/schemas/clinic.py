@@ -44,5 +44,10 @@ doc_profile_clinic_detail = extend_schema_view(
         tags=['profile'],
         request=ClinicUpdateSerializer,
         responses=ClinicRetrieveSerializer
+    ),
+    put=extend_schema(
+        summary='Обновляет клинику',
+        tags=['profile'],
     )
+        
 )
