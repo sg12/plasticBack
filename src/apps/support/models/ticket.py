@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Ticket(models.Model):
+    author = models.ForeignKey('user.User', on_delete=models.CASCADE)
     theme = models.CharField(max_length=150)
     description = models.TextField()
     url = models.URLField()
