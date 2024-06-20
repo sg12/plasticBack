@@ -3,8 +3,10 @@ from apps.reception.models import Reception
 from apps.reception.serializers import *
 from rest_framework.permissions import IsAuthenticated
 from apps.client.permissions import IsClient
+from apps.reception.schemas import *
 
 
+@doc_profile_reception_client
 class ProfileReceptionClientView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, IsClient)
     queryset = Reception.objects.all()
@@ -16,6 +18,7 @@ class ProfileReceptionClientView(ListCreateAPIView):
         return queryset.filter(client=self.request.user.client)
 
 
+@doc_profile_reception_client_detail
 class ProfileReceptionClientDetailView(UpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, IsClient)
     queryset = Reception.objects.all()

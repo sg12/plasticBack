@@ -1,0 +1,1 @@
+clinic_tag = ['clinic']

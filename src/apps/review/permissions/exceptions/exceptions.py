@@ -7,6 +7,12 @@ class UserDoesNotExist(exceptions.APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = _('Нет такого пользователя')
     default_code = 'bad_request'
+    
+
+class IsNotAuthorReview(exceptions.APIException):
+    status_code = status.HTTP_403_FORBIDDEN
+    default_detail = _('Вы не являетесь автором данного отзыва')
+    default_code = 'permission_denied'
 
 
 class IsNotAuthorProfile(exceptions.APIException):

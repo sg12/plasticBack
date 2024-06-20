@@ -5,10 +5,12 @@ from rest_framework.generics import RetrieveAPIView
 from apps.client.serializers import *
 from apps.user.models import User
 from pkg.decorators import is_client
+from apps.client.schemas import *
 
 
+@doc_client
 @is_client
-class GuestClientView(RetrieveAPIView):
+class ClientView(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = ClientSerializer
 
@@ -17,6 +19,7 @@ class GuestClientView(RetrieveAPIView):
         return user.client
 
 
+@doc_profile_client
 class ProfileClientView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated, IsClient)
     serializer_class = ClientUpdateSerializer

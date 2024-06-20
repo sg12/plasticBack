@@ -1,2 +1,2 @@
-from .answer import Answer
 from .ticket import Ticket
+from .message import Message

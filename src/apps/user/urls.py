@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from apps.client import *
 from .views import *
 
@@ -8,5 +8,4 @@ PROFILE_PK_URL = PROFILE_URL + '/<int:user_pk>'
 
 urlpatterns = [
     path(PROFILE_URL, MeView.as_view()),
-    path(PROFILE_PK_URL, UserView.as_view())
 ]

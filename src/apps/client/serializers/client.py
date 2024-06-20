@@ -4,21 +4,17 @@ from apps.user.serializers import BaseUserFields
 
 
 class BaseClientFields(BaseUserFields):
-    fio = serializers.CharField(source='user.username')
+    gender = serializers.CharField(source='gender.name')
+    qrcode = serializers.CharField(source='qrcode.image')
 
 
-class ClientSerializer(BaseClientFields):
-    confidentiality_consent = serializers.BooleanField(source='user.confidentiality_consent')
-    personal_data_consent = serializers.BooleanField(source='user.personal_data_consent')
-    review_consent = serializers.BooleanField(source='user.review_consent')
-    news_consent = serializers.BooleanField(source='user.news_consent')
-    
+class ClientSerializer(BaseClientFields):    
     class Meta:
         model = Client
-        exclude = ('id', 'user')
+        exclude = ('user',)
 
 
-class ClientUpdateSerializer(ClientSerializer):
+class ClientUpdateSerializer(BaseUserFields):
     class Meta:
         model = Client
         fields = (
@@ -26,9 +22,5 @@ class ClientUpdateSerializer(ClientSerializer):
             'avatar',
             'phone',
             'gender', 
-            'date_born',
-            'confidentiality_consent',
-            'personal_data_consent',
-            'review_consent',
-            'news_consent'
+            'date_born'
         )

@@ -30,11 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'email',
-            'username',
             'role',
-            'avatar',
-            'created_at',
             'confidentiality_consent',
             'personal_data_consent',
             'review_consent',

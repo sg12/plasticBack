@@ -9,16 +9,25 @@ from apps.license.schemas import *
 from rest_framework.parsers import MultiPartParser
 
 
-@doc_license
 @is_doctor_or_clinic
-class LicenseView(ListAPIView):
+class BaseLicenseView(ListAPIView):
     queryset = License.objects.all()
     serializer_class = LicenseSerializer
     
     def get_queryset(self):
         queryset = super().get_queryset()
-        pk = self.kwargs.get('pk')
-        return queryset.filter(user__pk=pk)
+        user_pk = self.kwargs.get('user_pk')
+        return queryset.filter(user__pk=user_pk)
+
+
+@doc_license_doctor
+class LicenseDoctorView(BaseLicenseView):
+    pass
+
+
+@doc_license_clinic
+class LicenseClinicView(BaseLicenseView):
+    pass
 
 
 @doc_profile_license
@@ -38,6 +47,7 @@ class ProfileLicenseView(ListCreateAPIView):
 class ProfileLicenseDetailView(DestroyAPIView):
     queryset = License.objects.all()
     permission_classes = (IsAuthenticated, IsDoctorOrClinic)
+    serializer_class = None
     
     def get_queryset(self):
         queryset = super().get_queryset()

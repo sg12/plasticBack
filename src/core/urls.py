@@ -6,7 +6,7 @@ from drf_spectacular.views import SpectacularRedocView, SpectacularSwaggerView, 
 
 
 api = [
-    # path('', include('apps.client.urls')),
+    path('', include('apps.client.urls')),
     path('', include('apps.doctor.urls')),
     path('', include('apps.clinic.urls')),
     path('', include('apps.license.urls')),
@@ -24,17 +24,17 @@ api = [
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
     path('api/', include(api)),
 
     # Debug tool
     # path("__debug__/", include("debug_toolbar.urls")),
 
     # Swagger
-    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('schema', SpectacularAPIView.as_view(), name='schema'),
     # Optional UI:
-    path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('docs', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('redoc', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
 
 handler404 = 'core.views.custom_handler_404'

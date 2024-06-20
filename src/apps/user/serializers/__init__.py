@@ -4,3 +4,4 @@ from .user import (
     UserSerializer,
     UserUpdateSerializer
 )
+from .author import GeneralAuthorSerializer

@@ -1,4 +1,5 @@
 from .favorite import (
-    FavoriteSerializer,
+    FavoriteDoctorSerializer,
+    FavoriteClinicSerializer,
     FavoriteCreateSerializer
 )

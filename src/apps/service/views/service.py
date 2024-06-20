@@ -12,19 +12,32 @@ from pkg.generics import (
     ListCreateAPIView,
     UpdateDestroyAPIView
 )
+from apps.service.schemas import *
 
 
 @method_decorator(service_access, name='dispatch')
-class ServiceView(ListAPIView):
+class BaseServiceView(ListAPIView):
+    permission_classes = (IsDoctorOrClinic,)
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        user_pk = self.kwargs.get('pk')
+        user_pk = self.kwargs.get('user_pk')
         return queryset.filter(user__pk=user_pk)
+
+
+@doc_doctor_service
+class DoctorServiceView(BaseServiceView):
+    pass    
+
+
+@doc_clinic_service
+class ClinicServiceView(BaseServiceView):
+    pass
     
 
+@doc_profile_service
 class ProfileServiceView(ListCreateAPIView):
     queryset = Service.objects.all()
     permission_classes = (IsAuthenticatedOrReadOnly, IsDoctorOrClinic)
@@ -36,6 +49,7 @@ class ProfileServiceView(ListCreateAPIView):
         return queryset.filter(user=self.request.user)
 
 
+@doc_profile_service_detail
 class ProfileServiceDetailView(UpdateDestroyAPIView):
     queryset = Service.objects.all()
     permission_classes = (IsAuthenticated, IsDoctorOrClinic)

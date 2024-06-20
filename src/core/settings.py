@@ -9,6 +9,8 @@ SECRET_KEY = os.getenv('DJANGO_KEY')
 
 DEBUG = True
 
+APPEND_SLASH = False
+
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
@@ -55,7 +57,8 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'Plastic',
     'DESCRIPTION': 'Документация серверной части проекта Plastic',
     'VERSION': '1.0.0',
-    'COMPONENT_SPLIT_REQUEST': True
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SORT_OPERATION_PARAMETERS': False,
 }
 
 MIDDLEWARE = [

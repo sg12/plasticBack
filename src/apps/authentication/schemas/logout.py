@@ -2,16 +2,13 @@ from drf_spectacular.utils import (
     extend_schema_view,
     extend_schema,
 )
-from apps.authentication.serializers import (
-    TokenSerializer,
-    RegisterSerializer,
-)
+from apps.common.schemas.tags import auth_tag
 
-tags = ['auth']
 
 doc_logout = extend_schema_view(
     get=extend_schema(
-        tags=tags,
+        summary='Выход из аккаунта',
+        tags=auth_tag,
         responses={204: None},
     )
 )

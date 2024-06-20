@@ -1,9 +1,15 @@
-from .base import BaseAPIView
+from .base_detail import BaseDetailAPIView
 from rest_framework.mixins import RetrieveModelMixin, DestroyModelMixin
 from pkg.mixins import UpdateModelMixin
 
 
-class RetrieveUpdateDestroyAPIView(RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, BaseAPIView):
+class RetrieveUpdateDestroyAPIView(
+        RetrieveModelMixin, 
+        UpdateModelMixin, 
+        DestroyModelMixin, 
+        BaseDetailAPIView
+    ):
+    
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 

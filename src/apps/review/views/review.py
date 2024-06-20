@@ -3,12 +3,13 @@ from apps.review.serializers import *
 from rest_framework.generics import ListAPIView
 from pkg.generics import ListCreateAPIView, UpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
-from apps.review.permissions import HasReceptionOrReadOnly, IsAuthorReply
+from apps.review.permissions import IsAuthorReview
 from apps.client.permissions import IsClientOrReadOnly
 from pkg.permissions import IsDoctorOrClinic
+from apps.review.schemas import *
 
 
-class ReviewView(ListCreateAPIView):
+class BaseReviewView(ListCreateAPIView):
     queryset = Review.objects.all()
     permission_classes = (IsAuthenticated, IsClientOrReadOnly)
     serializer_class = ReviewCreateSerializer
@@ -18,15 +19,27 @@ class ReviewView(ListCreateAPIView):
         queryset = super().get_queryset()
         user_pk = self.kwargs.get('user_pk')
         return queryset.filter(user__pk=user_pk)
+    
+
+@doc_review_doctor
+class ReviewDoctorView(BaseReviewView):
+    pass
 
 
-class ReviewDetailView(UpdateDestroyAPIView):
+@doc_review_clinic
+class ReviewClinicView(BaseReviewView):
+    pass
+
+
+@doc_review_detail
+class ReviewDetailView(UpdateDestroyAPIView):    
     queryset = Review.objects.all()
-    permission_classes = (IsAuthenticated, IsClientOrReadOnly)
+    permission_classes = (IsAuthenticated, IsAuthorReview)
     serializer_class = ReviewUpdateSerializer
     result_class = ReviewSerializer
 
 
+@doc_profile_review
 class ProfileReviewView(ListAPIView):
     queryset = Review.objects.all()
     permission_classes = (IsAuthenticated, IsDoctorOrClinic)

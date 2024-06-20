@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from apps.user.models import User
 from rest_framework.authtoken.models import Token
-from apps.authentication.serializers import LoginSerializer
+from apps.authentication.serializers import LoginSerializer, TokenSerializer
 from django.contrib.auth.hashers import check_password
 from apps.authentication.schemas import doc_login
 
@@ -31,5 +31,6 @@ class LoginView(APIView):
             return Response(FAIL_AUTH, status=400)
 
         token, _ = Token.objects.get_or_create(user=user)
+        # serializer = TokenSerializer(instane=token)
         
-        return Response({'token': token.key})
+        return Response(status=201, data=serializer.data)

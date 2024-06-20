@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from apps.article.models import Article
-from .author import AuthorSerializer
+from .author import ArticleAuthorSerializer
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-    author = AuthorSerializer()
+    author = ArticleAuthorSerializer()
     rubric = serializers.CharField(source='rubric.name')
 
     class Meta:
@@ -13,7 +13,7 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class ArticleRetrieveSerializer(serializers.ModelSerializer):
-    author = AuthorSerializer()
+    author = ArticleAuthorSerializer()
     rubric = serializers.CharField(source='rubric.name')
 
     class Meta:

@@ -1,9 +1,9 @@
-from .base import BaseAPIView
+from .base_detail import BaseDetailAPIView
 from rest_framework.mixins import RetrieveModelMixin
 from pkg.mixins import UpdateModelMixin
 
 
-class RetrieveUpdateAPIView(RetrieveModelMixin, UpdateModelMixin, BaseAPIView):    
+class RetrieveUpdateAPIView(RetrieveModelMixin, UpdateModelMixin, BaseDetailAPIView):
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 

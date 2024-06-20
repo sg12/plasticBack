@@ -5,27 +5,36 @@ from apps.reception.models import ReceptionType
 
 
 class DoctorFilter(filters.FilterSet):
-    search = filters.CharFilter(method='get_search')
-    specialtie = filters.CharFilter(field_name='specialtie__slug', lookup_expr='exact')
+    search = filters.CharFilter(field_name='user__username', lookup_expr='contains')
+    specialtie = filters.NumberFilter()
     experience = filters.NumberFilter(lookup_expr='gte')
-    category = filters.NumberFilter(lookup_expr='exact')
-    degree = filters.NumberFilter(lookup_expr='exact')
-    gender = filters.ModelChoiceFilter(field_name='gender__slug', queryset=Gender.objects.all())
-    reception_type = filters.ModelChoiceFilter(field_name='reception_type__slug', queryst=ReceptionType.objects.all())
-    reviews = filters.NumberFilter(lookup_expr='gte')
-    rating = filters.NumberFilter(lookup_expr='gte')
-    sort = filters.CharFilter(method='get_sort')
+    category = filters.NumberFilter()
+    degree = filters.NumberFilter()
+    gender = filters.ModelChoiceFilter(queryset=Gender.objects.all())
+    reception_type = filters.ModelChoiceFilter(queryset=ReceptionType.objects.all())
+    ordering = filters.CharFilter(method='get_ordering')
 
-    def get_sort(self, queryset, name, value):
-        if value == 'rating':
+    def get_ordering(self, queryset, name, value):
+        rating = False
+        reviews = False
+        
+        if ',' in value:
+            if 'rating' in value:
+                rating = True
+            if 'reviews' in value:
+                reviews = True
+        else:
+            if 'rating' in value:
+                rating = True
+            elif 'reviews' in value:
+                reviews = True
+        
+        if rating:
             queryset = queryset.order_by('-rating')
-        elif value == 'reviews':
+        if reviews:
             queryset = queryset.order_by('-reviews_count')
 
         return queryset
-
-    def get_search(self, queryset, name, value):
-        return queryset.filter(user__username__contains=value)
     
     class Meta:
         model = Doctor

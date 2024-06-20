@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from apps.support.models import Ticket
-from .author import AuthorSerializer
+from apps.user.serializers import GeneralAuthorSerializer
 
 
 class TicketSerializer(serializers.ModelSerializer):
-    author = AuthorSerializer()
+    author = GeneralAuthorSerializer()
     
     class Meta:
         model = Ticket
@@ -16,12 +16,17 @@ class TicketCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Ticket
-        exclude = ()
-
+        fields = (
+            'title',
+            'author',
+            'text'
+        )
+        
 
 class TicketUpdateSerializer(serializers.ModelSerializer):
-    author = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    
     class Meta:
         model = Ticket
-        exclude = ()
+        fields = (
+            'title',
+            'text'
+        )

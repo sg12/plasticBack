@@ -5,8 +5,10 @@ from apps.doctor.models import Education
 from rest_framework.permissions import IsAuthenticated
 from apps.doctor.permissions import IsDoctor
 from django.shortcuts import get_object_or_404
+from apps.doctor.schemas import *
 
 
+@doc_education
 class EducationView(ListAPIView):
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
@@ -17,6 +19,7 @@ class EducationView(ListAPIView):
         return queryset.filter(doctor__pk=pk)
     
 
+@doc_profile_education
 class ProfileEducationView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, IsDoctor)
     queryset = Education.objects.all()
@@ -28,6 +31,7 @@ class ProfileEducationView(ListCreateAPIView):
         return queryset.filter(doctor=self.request.user.doctor)
     
 
+@doc_profile_education_detail
 class ProfileEducationDetailView(UpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, IsDoctor)
     queryset = Education.objects.all()

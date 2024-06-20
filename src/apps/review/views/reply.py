@@ -6,8 +6,13 @@ from rest_framework.permissions import (
     IsAuthenticated
 )
 from apps.review.permissions import *
+from apps.review.schemas import (
+    doc_reply, 
+    doc_profile_review
+)
 
 
+@doc_reply
 class ReplyView(ListCreateAPIView):
     queryset = Reply.objects.all()
     permission_classes = (IsAuthenticatedOrReadOnly, IsAuthorProfile)
@@ -16,10 +21,11 @@ class ReplyView(ListCreateAPIView):
     
     def get_queryset(self):
         queryset = super().get_queryset()
-        review_id = self.kwargs.get('review_id')
+        review_id = self.kwargs.get('pk')
         return queryset.filter(review_id=review_id)
 
 
+@doc_profile_review
 class ReplyDetailView(UpdateDestroyAPIView):
     queryset = Reply.objects.all()
     permission_classes = (IsAuthenticated, IsAuthorReply)

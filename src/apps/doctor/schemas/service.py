@@ -3,12 +3,13 @@ from drf_spectacular.utils import (
     extend_schema,
 )
 from apps.service.serializers import ServiceSerializer
+from apps.common.schemas.tags import doctor_tag
 
-tags = ['doctor service']
 
 doc_doctor_service = extend_schema_view(
     get=extend_schema(
-        tags=tags,
+        tags=doctor_tag,
+        summary='Список услуг',
         responses=ServiceSerializer(many=True),
     )
 )

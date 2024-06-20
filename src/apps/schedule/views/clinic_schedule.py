@@ -10,12 +10,13 @@ from apps.clinic.permissions import IsClinic
 
 class ClinicScheduleView(ListAPIView):
     queryset = ClinicSchedule.objects.all()
+    permission_classes = (IsClinic,)
     serializer_class = ClinicScheduleSerializer
     
     def get_queryset(self):
         queryset = super().get_queryset()
-        pk = self.kwargs.get('pk')
-        return queryset.filter(user__pk=pk)
+        user_pk = self.kwargs.get('user_pk')
+        return queryset.filter(user__pk=user_pk)
     
 
 class ProfileClinicScheduleView(ListCreateAPIView):

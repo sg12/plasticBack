@@ -1,8 +1,8 @@
-from .answer import (
-    AnswerView,
-    AnswerDetailView
-)
 from .ticket import (
     TicketView,
     TicketDetailView
+)
+from .message import (
+    MessageView,
+    MessageDetailView,
 )

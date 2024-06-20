@@ -5,8 +5,10 @@ from apps.doctor.models import Workplace
 from rest_framework.permissions import IsAuthenticated
 from apps.doctor.permissions import IsDoctor
 from django.shortcuts import get_object_or_404
+from apps.doctor.schemas import *
 
 
+@doc_workplace
 class WorkplaceView(ListAPIView):
     queryset = Workplace.objects.all()
     serializer_class = WorkplaceSerializer
@@ -16,7 +18,7 @@ class WorkplaceView(ListAPIView):
         pk = self.kwargs.get('pk')
         return queryset.filter(doctor__pk=pk)
     
-
+@doc_profile_workplace
 class ProfileWorkplaceView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, IsDoctor)
     queryset = Workplace.objects.all()
@@ -28,6 +30,7 @@ class ProfileWorkplaceView(ListCreateAPIView):
         return queryset.filter(doctor=self.request.user.doctor)
     
 
+@doc_profile_workplace_detail
 class ProfileWorkplaceDetailView(UpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, IsDoctor)
     queryset = Workplace.objects.all()

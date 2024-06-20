@@ -1,11 +1,13 @@
 from rest_framework import serializers
 from apps.review.models import Review
 from apps.user.serializers import UserPkFromUrl
-from .author import AuthorSerializer
+from apps.user.models import User
+from pkg.serializers.entity import EntityFromURL
+from .author import ReviewAuthorSerializer
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    author = AuthorSerializer()
+    author = ReviewAuthorSerializer()
 
     class Meta:
         model = Review
@@ -18,9 +20,8 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class ReviewCreateSerializer(serializers.ModelSerializer):
     author = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    user = serializers.HiddenField(default=UserPkFromUrl())
+    user = serializers.HiddenField(default=EntityFromURL(name='user_pk', model=User))
     
-
     class Meta:
         model = Review
         exclude = ()

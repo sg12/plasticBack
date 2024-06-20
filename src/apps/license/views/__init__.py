@@ -1,5 +1,6 @@
 from .license import (
-    LicenseView,
+    LicenseDoctorView,
+    LicenseClinicView,
     ProfileLicenseView,
     ProfileLicenseDetailView
 )

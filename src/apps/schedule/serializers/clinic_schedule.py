@@ -7,7 +7,7 @@ class ClinicScheduleSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = ClinicSchedule
-        exclude = ()
+        exclude = ('user',)
 
 
 class ClinicScheduleCreateSerializer(serializers.ModelSerializer):

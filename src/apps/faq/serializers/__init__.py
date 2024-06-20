@@ -1,1 +1,1 @@
-from .faq import FAQListSerializer
+from .faq import FAQSerializer

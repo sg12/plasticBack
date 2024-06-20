@@ -9,12 +9,11 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 
 @doc_article_list
 class ArticleListView(ListAPIView):
-    queryset = Article.objects.all()
+    queryset = Article.objects.order_by('created_at')
     serializer_class = ArticleSerializer
     pagination_class = PagePagination
-    filter_backends = (SearchFilter, OrderingFilter)
+    filter_backends = (SearchFilter,)
     search_fields = ('title', 'author_name')
-    ordering_fields = ('created_at',)
 
 
 @doc_article_retrieve

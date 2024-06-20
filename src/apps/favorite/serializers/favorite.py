@@ -1,16 +1,24 @@
 from rest_framework import serializers
 from apps.user.models import User
-from apps.user.serializers import UserSerializer
 from apps.favorite.models import Favorite
+from .doctor import DoctorInfoSerializer
+from .clinic import ClinicInfoSerializer
 
 
-class FavoriteSerializer(serializers.ModelSerializer):
-    author = UserSerializer()
-    account = UserSerializer()
+class FavoriteDoctorSerializer(serializers.ModelSerializer):
+    user = DoctorInfoSerializer()
     
     class Meta:
         model = Favorite
-        exclude = ()
+        fields = ('user',)
+        
+
+class FavoriteClinicSerializer(serializers.ModelSerializer):
+    clinic = ClinicInfoSerializer(source='user')
+    
+    class Meta:
+        model = Favorite
+        fields = ('clinic',)
 
 
 class FavoriteCreateSerializer(serializers.ModelSerializer):

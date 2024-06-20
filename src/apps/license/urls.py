@@ -7,8 +7,8 @@ from apps.clinic.urls import CLINIC_PK_URL
 
 urlpatterns = [
     # Guest
-    path(DOCTOR_PK_URL + '/licenses', LicenseView.as_view()),
-    path(CLINIC_PK_URL + '/licenses', LicenseView.as_view()),
+    path(DOCTOR_PK_URL + '/licenses', LicenseDoctorView.as_view()),
+    path(CLINIC_PK_URL + '/licenses', LicenseDoctorView.as_view()),
     
     # Profile
     path(PROFILE_URL + '/licenses', ProfileLicenseView.as_view()),

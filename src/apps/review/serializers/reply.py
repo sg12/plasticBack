@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.review.models import Reply
-from .author import AuthorSerializer
+from .author import ReviewAuthorSerializer
 
 
 class CurrentReply:
@@ -12,7 +12,7 @@ class CurrentReply:
 
 
 class ReplySerializer(serializers.ModelSerializer):
-    author = AuthorSerializer()
+    author = ReviewAuthorSerializer()
 
     class Meta:
         model = Reply

@@ -1,10 +1,10 @@
+from .message import (
+    MessageSerializer,
+    MessageCreateSerializer,
+    MessageUpdateSerializer
+)
 from .ticket import (
     TicketSerializer,
     TicketCreateSerializer,
     TicketUpdateSerializer
-)
-from .answer import (
-    AnswerSerializer,
-    AnswerCreateSerializer,
-    AnswerUpdateSerializer
 )

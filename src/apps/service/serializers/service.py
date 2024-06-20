@@ -6,12 +6,11 @@ from django.utils.translation import gettext as _
 
 
 class ServiceSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
     specialization = Specialization()
 
     class Meta:
         model = Service
-        exclude = ()
+        exclude = ('user',)
 
 
 class ServiceCreateSerializer(serializers.ModelSerializer):

@@ -1,7 +1,15 @@
 from rest_framework import permissions
-from apps.user.models import Role
+from apps.user.models import User, Role
 
 
 class IsDoctor(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user.role.name == Role.DOCTOR
+        user = None
+        user_pk = view.kwargs.get('user_pk')
+        
+        if user_pk:
+            user = User.objects.get(pk=user_pk)
+        else:
+            user = request.user
+        
+        return user.role.name == Role.DOCTOR

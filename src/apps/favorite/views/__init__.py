@@ -1,4 +1,6 @@
 from .favorite import (
-    FavoriteView,
+    FavoriteDoctorView,
+    FavoriteClinicView,
+    AddFavoriteView,
     FavoriteDetailView
 )

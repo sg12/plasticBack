@@ -5,8 +5,10 @@ from apps.doctor.models import Qualification
 from rest_framework.permissions import IsAuthenticated
 from apps.doctor.permissions import IsDoctor
 from django.shortcuts import get_object_or_404
+from apps.doctor.schemas import *
 
 
+@doc_qualification
 class QualificationView(ListAPIView):
     queryset = Qualification.objects.all()
     serializer_class = QualificationSerializer
@@ -17,6 +19,7 @@ class QualificationView(ListAPIView):
         return queryset.filter(doctor__pk=pk)
     
 
+@doc_profile_qualification
 class ProfileQualificationView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, IsDoctor)
     queryset = Qualification.objects.all()
@@ -28,6 +31,7 @@ class ProfileQualificationView(ListCreateAPIView):
         return queryset.filter(doctor=self.request.user.doctor)
     
 
+@doc_profile_qualification_detail
 class ProfileQualificationDetailView(UpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, IsDoctor)
     queryset = Qualification.objects.all()

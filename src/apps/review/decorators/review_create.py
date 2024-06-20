@@ -1,4 +1,4 @@
-from pkg.response import ErrorResponse
+from pkg.responses import ErrorResponse
 from apps.review.models import Review
 
 
@@ -7,7 +7,7 @@ def self_review_prevention(func):
         account_id = request.data.get('account_id')
 
         if request.user.id == account_id:
-            return ErrorResponse(data="Ошибка операции", status=400)
+            return ErrorResponse(data="Ошибка операции")
 
         return func(cls, request, *args, **kwargs)
 
@@ -19,7 +19,7 @@ def has_review(func):
         account_id = request.data.get('account_id')
 
         if Review.objects.filter(account_id=account_id).first():
-            return ErrorResponse(data='Вы уже оставили отзыв', status=400)
+            return ErrorResponse(data='Вы уже оставили отзыв')
 
         return func(cls, request, *args, **kwargs)
 

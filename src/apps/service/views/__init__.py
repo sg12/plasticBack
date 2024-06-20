@@ -1,5 +1,6 @@
 from .service import (
-    ServiceView,
+    DoctorServiceView,
+    ClinicServiceView,
     ProfileServiceView,
     ProfileServiceDetailView
 )

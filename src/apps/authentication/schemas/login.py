@@ -6,12 +6,13 @@ from apps.authentication.serializers import (
     TokenSerializer,
     LoginSerializer,
 )
+from apps.common.schemas.tags import auth_tag
 
-tags = ['auth']
 
 doc_login = extend_schema_view(
     post=extend_schema(
-        tags=tags,
+        summary='Авторизация',
+        tags=auth_tag,
         request=LoginSerializer,
         responses=TokenSerializer,
     )

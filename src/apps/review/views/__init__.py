@@ -1,5 +1,6 @@
 from .review import (
-    ReviewView,
+    ReviewDoctorView,
+    ReviewClinicView,
     ReviewDetailView,
     ProfileReviewView
 )

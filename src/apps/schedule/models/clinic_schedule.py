@@ -2,7 +2,7 @@ from django.db import models
 
 
 class ClinicSchedule(models.Model):
-    clinic = models.ForeignKey('clinic.Clinic', on_delete=models.CASCADE, related_name='schedules')
+    user = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='schedules')
     weekday = models.ForeignKey('Weekday', on_delete=models.PROTECT)
     time_start = models.TimeField()
     time_end = models.TimeField()

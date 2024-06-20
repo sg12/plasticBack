@@ -7,9 +7,6 @@ from django.apps import apps
 class CustomUserManager(UserManager):
     def create_user(self, email: str, password: str, **extra_fields):
         Role = apps.get_model('user', 'Role')
-        Client = apps.get_model('client', 'Client')
-        Doctor = apps.get_model('doctor', 'Doctor')
-        Clinic = apps.get_model('clinic', 'Clinic')
         
         role_name = extra_fields.pop('role_name').upper()
         role = Role.objects.get(name=role_name)
@@ -18,6 +15,25 @@ class CustomUserManager(UserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
+        
+        self.create_role_model(user, role_name)
+
+        return user
+        
+    def create_superuser(self, email, password, **extra_fields):
+        Role = apps.get_model('user', 'Role')
+        
+        extra_fields.setdefault('role_name', Role.ADMIN)
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        
+        return self.create_user(email, password, **extra_fields)
+    
+    def create_role_model(self, user, role_name):
+        Role = apps.get_model('user', 'Role')
+        Client = apps.get_model('client', 'Client')
+        Doctor = apps.get_model('doctor', 'Doctor')
+        Clinic = apps.get_model('clinic', 'Clinic')
         
         model = None
         match role_name:
@@ -29,17 +45,14 @@ class CustomUserManager(UserManager):
                 model = Clinic
         
         if model:
-            model(user=user).save()
-
-        return user
+            return model(user=user).save()
         
-    def create_superuser(self, email: str, password: str, **extra_fields):
-        Role = apps.get_model('user', 'Role')
-        
-        extra_fields.setdefault('role_name', Role.ADMIN)
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        return self.create_user(email, password, **extra_fields)
+        raise ValueError('wrong role')
+    
+    
+    # TODO реализовать создание QRCode
+    def create_qrcode(self):
+        pass
         
     def get_queryset(self):
         queryset = super().get_queryset()

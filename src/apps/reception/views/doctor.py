@@ -3,8 +3,10 @@ from apps.reception.models import Reception
 from apps.reception.serializers import *
 from apps.clinic.permissions import IsClinic
 from rest_framework.permissions import IsAuthenticated
+from apps.reception.schemas import *
 
 
+@doc_profile_reception_doctor
 class ProfileReceptionDoctorView(ListAPIView):
     permission_classes = (IsAuthenticated, IsClinic)
     queryset = Reception.objects.all()
@@ -15,6 +17,7 @@ class ProfileReceptionDoctorView(ListAPIView):
         return queryset.filter(doctor=self.request.user.doctor)
 
 
+@doc_profile_reception_doctor_detail
 class ProfileReceptionDoctorDetailView(DestroyAPIView):
     permission_classes = (IsAuthenticated, IsClinic)
     queryset = Reception.objects.all()

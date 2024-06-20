@@ -1,10 +1,20 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
 from apps.user.urls import PROFILE_URL
 
 
 DOCTOR_URL = 'doctors'
 DOCTOR_PK_URL = DOCTOR_URL + '/<int:pk>'
+
+doctor_urls = [
+    path('', ProfileDoctorView.as_view()),
+    path('/educations', ProfileEducationView.as_view()),
+    path('/educations/<int:pk>', ProfileEducationDetailView.as_view()),
+    path('/qualifications', ProfileQualificationView.as_view()),
+    path('/qualifications/<int:pk>', ProfileQualificationDetailView.as_view()),
+    path('/workplaces', ProfileWorkplaceView.as_view()),
+    path('/workplaces/<int:pk>', ProfileWorkplaceDetailView.as_view()),
+]
 
 urlpatterns = [
     # Guest
@@ -20,11 +30,5 @@ urlpatterns = [
     path(DOCTOR_PK_URL + '/workplaces', WorkplaceView.as_view()),
     
     # Profile
-    path(PROFILE_URL + '/doctor', ProfileDoctorView.as_view()),
-    path(PROFILE_URL + '/educations', ProfileEducationView.as_view()),
-    path(PROFILE_URL + '/educations/<int:pk>', ProfileEducationDetailView.as_view()),
-    path(PROFILE_URL + '/qualifications', ProfileQualificationView.as_view()),
-    path(PROFILE_URL + '/qualifications/<int:pk>', ProfileQualificationDetailView.as_view()),
-    path(PROFILE_URL + '/workplaces', ProfileWorkplaceView.as_view()),
-    path(PROFILE_URL + '/workplaces/<int:pk>', ProfileWorkplaceDetailView.as_view()),
+    path(PROFILE_URL + '/doctor', include(doctor_urls))
 ]
