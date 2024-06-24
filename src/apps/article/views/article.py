@@ -1,10 +1,10 @@
 from rest_framework.generics import RetrieveAPIView
 from pkg.generics import ListAPIView
 from apps.article.models import Article
-from apps.article.serializers import ArticleSerializer
+from apps.article.serializers import *
 from pkg.pagination import PagePagination
 from apps.article.schemas import *
-from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.filters import SearchFilter
 
 
 @doc_article_list
@@ -13,10 +13,10 @@ class ArticleListView(ListAPIView):
     serializer_class = ArticleSerializer
     pagination_class = PagePagination
     filter_backends = (SearchFilter,)
-    search_fields = ('title', 'author_name')
+    search_fields = ('title', 'author__username')
 
 
 @doc_article_retrieve
 class ArticleRetrieveView(RetrieveAPIView):
     queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+    serializer_class = ArticleRetrieveSerializer

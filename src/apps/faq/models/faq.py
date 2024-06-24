@@ -9,4 +9,4 @@ class FAQ(models.Model):
         db_table = 'faq'
 
     def __str__(self):
-        return self.name
+        return str(self.question)[:20]

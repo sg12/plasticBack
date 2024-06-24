@@ -13,4 +13,4 @@ class Client(models.Model):
         db_table = 'clients'
         
     def __str__(self) -> str:
-        return self.fio
+        return str(self.user.email)

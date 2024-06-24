@@ -21,6 +21,6 @@ class RegisterView(APIView):
         user = User.objects.create_user(**data, role_name=role)
 
         token, _ = Token.objects.get_or_create(user=user)
-        serializer = TokenSerializer(instane=token)
+        serializer = TokenSerializer(instance=token)
         
         return Response(status=201, data=serializer.data)

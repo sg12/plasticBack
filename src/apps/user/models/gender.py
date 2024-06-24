@@ -2,7 +2,12 @@ from django.db import models
 
 
 class Gender(models.Model):
-    name = models.CharField(max_length=7)
+    MALE = 'male'
+    FEMALE = 'female'
+    
+    ALL_GENDERS = [MALE, FEMALE]
+    
+    name = models.CharField(max_length=6)
     
     class Meta:
         db_table = 'genders'

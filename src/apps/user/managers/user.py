@@ -8,7 +8,7 @@ class CustomUserManager(UserManager):
     def create_user(self, email: str, password: str, **extra_fields):
         Role = apps.get_model('user', 'Role')
         
-        role_name = extra_fields.pop('role_name').upper()
+        role_name = extra_fields.pop('role_name')
         role = Role.objects.get(name=role_name)
         extra_fields.setdefault('role', role)
 
@@ -43,6 +43,8 @@ class CustomUserManager(UserManager):
                 model = Doctor
             case Role.CLINIC:
                 model = Clinic
+            case Role.ADMIN:
+                return
         
         if model:
             return model(user=user).save()

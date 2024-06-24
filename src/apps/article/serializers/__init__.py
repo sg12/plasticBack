@@ -1,4 +1,4 @@
 from .article import (
     ArticleSerializer,
-    ArticleRetrieveSerializer,
+    ArticleRetrieveSerializer
 )

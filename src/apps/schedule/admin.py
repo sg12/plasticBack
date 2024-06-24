@@ -1,3 +1,14 @@
 from django.contrib import admin
+from apps.schedule.models import (
+    ClinicSchedule,
+    DoctorSchedule,
+    Schedule,
+    Weekday
+)
 
-# Register your models here.
+admin.site.register([
+    ClinicSchedule, 
+    DoctorSchedule,
+    Schedule,
+    Weekday
+])

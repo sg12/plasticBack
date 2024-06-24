@@ -6,6 +6,7 @@ from apps.client.serializers import *
 from apps.user.models import User
 from pkg.decorators import is_client
 from apps.client.schemas import *
+from django.http import Http404
 
 
 @doc_client

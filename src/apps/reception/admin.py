@@ -1,3 +1,4 @@
 from django.contrib import admin
+from apps.reception.models import Reception, ReceptionType
 
-# Register your models here.
+admin.site.register([Reception, ReceptionType])
