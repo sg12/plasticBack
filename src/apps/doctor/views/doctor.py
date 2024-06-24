@@ -28,7 +28,7 @@ class DoctorDetailView(RetrieveAPIView):
 
     def get_object(self):
         user = super().get_object()
-        return user.doctor
+        return Doctor.objects.get(user=user)
 
 
 @doc_profile_doctor
@@ -38,4 +38,4 @@ class ProfileDoctorView(RetrieveUpdateAPIView):
     result_class = DoctorSerializer
 
     def get_object(self):
-        return self.request.user.doctor
+        return Doctor.objects.get(user=self.request.user)
