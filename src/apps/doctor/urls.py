@@ -6,7 +6,7 @@ from apps.user.urls import PROFILE_URL
 DOCTOR_URL = 'doctors'
 DOCTOR_PK_URL = DOCTOR_URL + '/<int:pk>'
 
-doctor_urls = [
+profile_doctor_urls = [
     path('', ProfileDoctorView.as_view()),
     path('/educations', ProfileEducationView.as_view()),
     path('/educations/<int:pk>', ProfileEducationDetailView.as_view()),
@@ -30,5 +30,5 @@ urlpatterns = [
     path(DOCTOR_PK_URL + '/workplaces', WorkplaceView.as_view()),
     
     # Profile
-    path(PROFILE_URL + '/doctor', include(doctor_urls))
+    path(PROFILE_URL + '/doctor', include(profile_doctor_urls))
 ]

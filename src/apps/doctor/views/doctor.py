@@ -8,7 +8,6 @@ from pkg.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from apps.doctor.permissions import IsDoctor
 from apps.user.models import User
-from django_filters.rest_framework import DjangoFilterBackend
 from pkg.decorators import is_doctor
 from apps.doctor.schemas import *
 
