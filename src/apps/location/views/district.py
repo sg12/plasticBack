@@ -6,5 +6,5 @@ from apps.location.schemas import doc_district
 
 @doc_district
 class DistrictView(ListAPIView):
-    queryset = District
+    queryset = District.objects.all()
     serializer_class = DistrictSerializer

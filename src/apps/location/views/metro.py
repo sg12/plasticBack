@@ -6,5 +6,5 @@ from apps.location.schemas import doc_metro
 
 @doc_metro
 class MetroView(ListAPIView):
-    queryset = Metro
+    queryset = Metro.objects.all()
     serializer_class = MetroSerializer
