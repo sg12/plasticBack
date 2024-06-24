@@ -24,7 +24,7 @@ api = [
 
 
 urlpatterns = [
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('api/', include(api)),
 
     # Debug tool
@@ -36,8 +36,6 @@ urlpatterns = [
     path('docs', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('redoc', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
-
-handler404 = 'core.views.custom_handler_404'
 
 # if settings.DEBUG:
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
