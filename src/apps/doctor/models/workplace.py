@@ -12,4 +12,4 @@ class Workplace(models.Model):
         db_table = 'doctor_workplaces'
         
     def __str__(self) -> str:
-        return f'{self.doctor.fio}: {self.organization}'
+        return f'{self.doctor.user.username}: {self.organization}'
