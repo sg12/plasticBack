@@ -35,7 +35,7 @@ doc_doctor = extend_schema_view(
                 type=str,
                 location=OpenApiParameter.QUERY,
                 description='''Сортировка, по рейтингу `rating`, по кол-ву отзывов `reviews`, 
-                можно использовать их вместе, через запятую `rating,reviews`
+                можно использовать их вместе `rating+reviews`
                 - последовательность не имеет значение'''
             ),
             OpenApiParameter(
@@ -63,10 +63,11 @@ doc_doctor = extend_schema_view(
                 description='ID ученной степени доктора'
             ),
             OpenApiParameter(
-                name='reception_type',
-                type=int,
+                name='reception',
+                type=str,
                 location=OpenApiParameter.QUERY,
-                description='ID типа приема'
+                description='''Тип приема, частная практика `private`, в клинике `clinic`, 
+                можно использовать их вместе `private+clinic`'''
             ),
             OpenApiParameter(
                 name='specialtie',
@@ -76,9 +77,10 @@ doc_doctor = extend_schema_view(
             ),
             OpenApiParameter(
                 name='gender',
-                type=int,
+                type=str,
                 location=OpenApiParameter.QUERY,
-                description='ID гендера'
+                description='Пол доктора',
+                enum=['male', 'female']
             )
         ]
     )
