@@ -4,6 +4,8 @@ from rest_framework.response import Response
 
 class PagePagination(PageNumberPagination):
     page_size_query_param = 'limit'
+    page_size = 10
+    max_page_size = 20
     
     page_query_description = 'Номер страницы'
     page_size_query_description = 'Количество результатов, возвращаемых на страницу'
