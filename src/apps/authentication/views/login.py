@@ -31,6 +31,6 @@ class LoginView(APIView):
             return Response(FAIL_AUTH, status=400)
 
         token, _ = Token.objects.get_or_create(user=user)
-        # serializer = TokenSerializer(instane=token)
+        serializer = TokenSerializer(instance=token)
         
         return Response(status=201, data=serializer.data)
