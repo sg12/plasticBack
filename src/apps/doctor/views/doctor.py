@@ -8,16 +8,21 @@ from pkg.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from apps.doctor.permissions import IsDoctor
 from apps.user.models import User
+from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
 from pkg.decorators import is_doctor
 from apps.doctor.schemas import *
 
 
+
 @doc_doctor
 class DoctorView(ListAPIView):
-    queryset = Doctor.objects.all()
+    queryset = Doctor.objects.order_by('-user__created_at')
     serializer_class = DoctorSerializer
     filterset_class = DoctorFilter
     pagination_class = PagePagination
+    filter_backends = (SearchFilter, DjangoFilterBackend)
+    search_fields = ('user__username',)
 
 
 @doc_doctor_detail
