@@ -18,6 +18,7 @@ class WorkplaceView(ListAPIView):
         pk = self.kwargs.get('pk')
         return queryset.filter(doctor__pk=pk)
     
+
 @doc_profile_workplace
 class ProfileWorkplaceView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, IsDoctor)
