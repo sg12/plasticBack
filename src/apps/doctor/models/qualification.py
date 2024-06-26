@@ -10,4 +10,4 @@ class Qualification(models.Model):
         db_table = 'doctor_qualifications'
     
     def __str__(self) -> str:
-        return f' {self.doctor.fio}: {self.retraining}'
+        return f' {self.doctor.user.email}: {self.retraining}'
