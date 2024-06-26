@@ -5,29 +5,57 @@ from apps.reception.models import ReceptionType
 
 
 class DoctorFilter(filters.FilterSet):
-    search = filters.CharFilter(field_name='user__username', lookup_expr='contains')
     specialtie = filters.NumberFilter()
     experience = filters.NumberFilter(lookup_expr='gte')
     category = filters.NumberFilter()
     degree = filters.NumberFilter()
-    gender = filters.ModelChoiceFilter(queryset=Gender.objects.all())
-    reception_type = filters.ModelChoiceFilter(queryset=ReceptionType.objects.all())
+    reception = filters.CharFilter(method='get_reception')
     ordering = filters.CharFilter(method='get_ordering')
+    gender = filters.ModelChoiceFilter(
+        queryset=Gender.objects.all(),
+        to_field_name='name'
+    )
+    
+    def get_reception(self, queryset, name, value):
+        private = False
+        clinic = False
+        
+        if '+' in value:
+            values = value.split('+')
+            if 'private' in values:
+                private = True
+            if 'clinic' in values:
+                clinic = True
+        else:
+            match value:
+                case 'private':
+                    private = True
+                case 'clinic':
+                    clinic = True
+        
+        if private:
+            queryset = queryset.filter(private_reception=True)
+        if clinic:
+            queryset = queryset.filter(clinic_reception=True)
+
+        return queryset
 
     def get_ordering(self, queryset, name, value):
         rating = False
         reviews = False
         
-        if ',' in value:
-            if 'rating' in value:
+        if '+' in value:
+            values = value.split('+')
+            if 'rating' in values:
                 rating = True
-            if 'reviews' in value:
+            if 'reviews' in values:
                 reviews = True
         else:
-            if 'rating' in value:
-                rating = True
-            elif 'reviews' in value:
-                reviews = True
+            match value:
+                case 'rating':
+                    rating = True
+                case 'reviews':
+                    reviews = True
         
         if rating:
             queryset = queryset.order_by('-rating')
