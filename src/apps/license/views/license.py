@@ -16,7 +16,7 @@ class BaseLicenseView(ListAPIView):
     
     def get_queryset(self):
         queryset = super().get_queryset()
-        user_pk = self.kwargs.get('user_pk')
+        user_pk = self.kwargs.get('pk')
         return queryset.filter(user__pk=user_pk)
 
 
