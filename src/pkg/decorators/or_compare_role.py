@@ -16,8 +16,8 @@ def or_compare_role(role_name: str, other: str):
         @wraps(func)
         def inner_wrap(*args, **kwargs):
             user = get_object_or_404(User, pk=kwargs.get('pk'))
-            if user.role != role_name or user.role != other:
+            if user.role.name != role_name and user.role.name != other:
                 raise Http404
-            return func(*args, *kwargs)
+            return func(*args, **kwargs)
         return inner_wrap
     return wrap
