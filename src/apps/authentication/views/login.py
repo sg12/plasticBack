@@ -33,4 +33,4 @@ class LoginView(APIView):
         token, _ = Token.objects.get_or_create(user=user)
         serializer = TokenSerializer(instance=token)
         
-        return Response(status=201, data=serializer.data)
+        return Response(status=200, data=serializer.data)
