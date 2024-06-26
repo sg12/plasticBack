@@ -70,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'middleware.page_not_found.PageNotFoundMiddleware',
     # 'middleware.jsend_exception.JsendException'
 ]
 
