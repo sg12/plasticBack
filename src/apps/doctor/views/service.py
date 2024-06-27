@@ -1,6 +1,6 @@
+from rest_framework.generics import ListAPIView
 from apps.service.models import Service
 from apps.service.serializers import ServiceSerializer
-from pkg.generics import ListAPIView
 from apps.doctor.schemas import doc_doctor_service
 from apps.doctor.permissions import IsDoctor
 
