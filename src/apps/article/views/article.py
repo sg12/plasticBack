@@ -1,5 +1,4 @@
-from rest_framework.generics import RetrieveAPIView
-from pkg.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from apps.article.models import Article
 from apps.article.serializers import *
 from pkg.pagination import PagePagination
