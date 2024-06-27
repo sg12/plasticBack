@@ -4,23 +4,29 @@ from apps.user.serializers import UserPkFromUrl
 from apps.user.models import User
 from pkg.serializers.entity import EntityFromURL
 from .author import ReviewAuthorSerializer
+from .reply import ReplySerializer
 
 
 class ReviewSerializer(serializers.ModelSerializer):
     author = ReviewAuthorSerializer()
+    reply = ReplySerializer()
 
     class Meta:
         model = Review
-        exclude = (
-            'user',
+        fields = (
+            'id',
+            'author',
+            'text',
+            'rating',
             'created_at',
-            'updated_at'
+            'updated_at',
+            'reply'
         )
 
 
 class ReviewCreateSerializer(serializers.ModelSerializer):
     author = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    user = serializers.HiddenField(default=EntityFromURL(name='user_pk', model=User))
+    user = serializers.HiddenField(default=EntityFromURL(name='pk', model=User))
     
     class Meta:
         model = Review

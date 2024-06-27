@@ -1,4 +1,7 @@
-from .review import IsAuthorReview
+from .review import (
+    IsAuthorReview,
+    OnlyOneReview
+)
 from .reply import (
     IsAuthorReply,
     IsAuthorProfile,

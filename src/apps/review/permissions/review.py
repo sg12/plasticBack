@@ -6,37 +6,47 @@ from .exceptions import *
 
 
 class IsAuthorReview(permissions.BasePermission):
+    '''
+    Является ли пользовтель автором отзыва.
+    Рабочие методы: `PATCH`, `DELETE`.
+    '''
+    
     def has_permission(self, request, view):
-        if request.method in permissions.SAFE_METHODS:
+        if request.method != 'PATCH' and request.method != 'DELETE':
             return True
         
-        review_pk = request.data.get('pk')
+        user_pk = view.kwargs.get('pk')
         
-        review = Review.objects.filter(pk=review_pk, author=request.user).first()
+        review = Review.objects.filter(
+            user__pk=user_pk, 
+            author=request.user
+        ).first()
+        
         if review:
             return True
         
         raise IsNotAuthorReview
 
 
-class HasReceptionOrReadOnly(permissions.BasePermission):
+class OnlyOneReview(permissions.BasePermission):
+    '''
+    Если еще нет отзыва, пользователь имеет право его оставить.
+    Рабочий метод: `POST`.
+    '''
+    
     def has_permission(self, request, view):
-        if request.method in permissions.SAFE_METHODS:
+        if request.method != 'POST':
             return True
-
-        user_pk = request.data.get('user')
         
-        try:
-            user = User.objects.get(pk=user_pk)
-        except User.DoesNotExist:
-            raise UserDoesNotExist
+        pk = view.kwargs.get('pk')
+        user = User.objects.get(pk=pk)
         
-        reception = Reception.objects.filter(
-            doctor__pk=doctor_pk, 
-            client=self.request.user
-        ).first()
+        count = Review.objects.filter(
+            author=request.user,
+            user=user,
+        ).count()
         
-        if not reception:
-            raise NoReception
+        if count > 0:
+            raise YouHaveReview
         
         return True

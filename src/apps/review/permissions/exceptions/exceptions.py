@@ -25,3 +25,9 @@ class IsNotAuthorReply(exceptions.APIException):
     status_code = status.HTTP_403_FORBIDDEN
     default_detail = _('Вы не являетесь автором комментария')
     default_code = 'permission_denied'
+
+
+class YouHaveReview(exceptions.APIException):
+    status_code = status.HTTP_403_FORBIDDEN
+    default_detail = _('Вы не можете создать больше одного отзыва на этот аккаунт')
+    default_code = 'permission_denied'

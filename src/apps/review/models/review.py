@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from apps.review.managers import ReviewManager
 
 
 class Review(models.Model):
@@ -9,6 +10,8 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField(default=0, validators=(MinValueValidator(0), MaxValueValidator(5)))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    objects = ReviewManager()
     
     class Meta:
         db_table = 'reviews'

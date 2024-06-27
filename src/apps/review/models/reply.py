@@ -3,7 +3,7 @@ from django.db import models
 
 class Reply(models.Model):
     author = models.ForeignKey("user.User", on_delete=models.CASCADE)
-    review = models.ForeignKey("Review", on_delete=models.CASCADE, related_name='replies')
+    review = models.OneToOneField("Review", on_delete=models.CASCADE, related_name='reply')
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

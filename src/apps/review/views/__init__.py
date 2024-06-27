@@ -1,7 +1,8 @@
 from .review import (
+    BaseReviewView,
+    BaseReviewView,
     ReviewDoctorView,
     ReviewClinicView,
-    ReviewDetailView,
     ProfileReviewView
 )
 from .reply import (
