@@ -1,8 +1,6 @@
 from rest_framework.generics import ListAPIView
 from apps.service.models import Service
 from apps.service.serializers import *
-from apps.service.decorators import service_access
-from django.utils.decorators import method_decorator
 from rest_framework.permissions import (
     IsAuthenticated,
     IsAuthenticatedOrReadOnly
@@ -13,18 +11,18 @@ from pkg.generics import (
     UpdateDestroyAPIView
 )
 from apps.service.schemas import *
+from pkg.decorators import is_doctor_or_clinic
 
 
-@method_decorator(service_access, name='dispatch')
+@is_doctor_or_clinic
 class BaseServiceView(ListAPIView):
-    permission_classes = (IsDoctorOrClinic,)
-    queryset = Service.objects.all()
+    queryset = Service.objects.order_by('-id')
     serializer_class = ServiceSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        user_pk = self.kwargs.get('user_pk')
-        return queryset.filter(user__pk=user_pk)
+        pk = self.kwargs.get('pk')
+        return queryset.filter(user_id=pk)
 
 
 @doc_doctor_service

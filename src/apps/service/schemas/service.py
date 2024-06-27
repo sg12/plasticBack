@@ -11,7 +11,6 @@ from apps.common.schemas.description import doctor_or_clinic_alert
 doc_doctor_service = extend_schema_view(
     get=extend_schema(
         summary='Список услуг',
-        description=doctor_or_clinic_alert,
         tags=doctor_tag,
         responses=ServiceSerializer(True)
     )
@@ -20,7 +19,6 @@ doc_doctor_service = extend_schema_view(
 doc_clinic_service = extend_schema_view(
     get=extend_schema(
         summary='Список услуг',
-        description=doctor_or_clinic_alert,
         tags=clinic_tag,
         responses=ServiceSerializer(True)
     )

@@ -1,12 +1,11 @@
 from rest_framework import serializers
 from apps.service.models import Service, Specialization
-from apps.user.serializers import UserSerializer
-from .specialization import Specialization
+from .specialization import SpecializationSerializer
 from django.utils.translation import gettext as _
 
 
 class ServiceSerializer(serializers.ModelSerializer):
-    specialization = Specialization()
+    specialization = SpecializationSerializer()
 
     class Meta:
         model = Service
@@ -15,18 +14,11 @@ class ServiceSerializer(serializers.ModelSerializer):
 
 class ServiceCreateSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    specialization = serializers.IntegerField(write_only=True)
+    specialization = serializers.PrimaryKeyRelatedField(queryset=Specialization.objects.all())
 
     class Meta:
         model = Service
         exclude = ()
-    
-    def validate_specialization_pk(value):
-        try:
-            Specialization.objects.get(pk=value)
-        except Specialization.DoesNotExist:
-            raise serializers.ValidationError(_('The record not found'))
-        return value
 
 
 class ServiceUpdateSerializer(ServiceCreateSerializer):
