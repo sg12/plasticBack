@@ -18,7 +18,6 @@ from .workplace import (
     ProfileWorkplaceView,
     ProfileWorkplaceDetailView
 )
-from .service import DoctorServiceView
 from .degree import DegreeView
 from .category import CategoryView
 from .speciality import SpecialityView

@@ -24,7 +24,6 @@ urlpatterns = [
     
     path(DOCTOR_URL, DoctorView.as_view()),
     path(DOCTOR_PK_URL, DoctorDetailView.as_view()),
-    path(DOCTOR_PK_URL + '/services', DoctorServiceView.as_view()),
     path(DOCTOR_PK_URL + '/educations', EducationView.as_view()),
     path(DOCTOR_PK_URL + '/qualifications', QualificationView.as_view()),
     path(DOCTOR_PK_URL + '/workplaces', WorkplaceView.as_view()),
