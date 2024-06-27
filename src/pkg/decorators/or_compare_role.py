@@ -11,8 +11,8 @@ def or_compare_role(role_name: str, other: str):
     
     Для корректной работы декоратора, в `url` должна быть переменная `pk`.
     """
-    
-    def wrap(func): 
+
+    def wrap(func):
         @wraps(func)
         def inner_wrap(*args, **kwargs):
             user = get_object_or_404(User, pk=kwargs.get('pk'))
