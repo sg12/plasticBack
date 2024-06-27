@@ -1,5 +1,6 @@
 from rest_framework.generics import GenericAPIView
+from pkg.mixins import BaseModelMixin
 
 
-class BaseAPIView(GenericAPIView):
-    result_class = None
+class BaseAPIView(BaseModelMixin, GenericAPIView):
+    pass

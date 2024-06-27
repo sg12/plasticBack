@@ -17,7 +17,8 @@ class EntityFromURL:
         self.model = model
 
     def __call__(self, serializer_field):
-        kwargs = serializer_field.context['kwargs']
+        view = serializer_field.context['view']
+        kwargs = view.kwargs
         pk = kwargs[self.name]
         
         queryset = self.model.objects.filter(pk=pk)
