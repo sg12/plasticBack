@@ -1,7 +1,7 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 from apps.article.serializers import *
 from apps.clinic.serializers import *
-from apps.common.schemas.tags import clinic_tag, profile_clinic_tag
+from pkg.schemas.tags import clinic_tag, profile_clinic_tag
 
 
 doc_clinic = extend_schema_view(

@@ -1,6 +1,6 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from apps.support.serializers import *
-from apps.common.schemas.tags import support_tag
+from pkg.schemas.tags import support_tag
 
 
 doc_message = extend_schema_view(

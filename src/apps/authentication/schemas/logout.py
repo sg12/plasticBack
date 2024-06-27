@@ -2,7 +2,7 @@ from drf_spectacular.utils import (
     extend_schema_view,
     extend_schema,
 )
-from apps.common.schemas.tags import auth_tag
+from pkg.schemas.tags import auth_tag
 
 
 doc_logout = extend_schema_view(

@@ -1,6 +1,6 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from apps.service.serializers import *
-from apps.common.schemas.tags import service_tag
+from pkg.schemas.tags import service_tag
 
 
 doc_dspecialization= extend_schema_view(

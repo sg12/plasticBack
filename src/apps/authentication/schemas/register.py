@@ -7,7 +7,7 @@ from apps.authentication.serializers import (
     TokenSerializer,
     RegisterSerializer,
 )
-from apps.common.schemas.tags import auth_tag
+from pkg.schemas.tags import auth_tag
 from pkg.serializers import ErrorSerializer
 
 

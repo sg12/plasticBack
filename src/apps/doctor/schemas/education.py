@@ -4,8 +4,8 @@ from drf_spectacular.utils import (
 )
 from apps.doctor.serializers import EducationSerializer
 from .tags import doctor_tag
-from apps.common.schemas.tags import profile_doctor_tag
-from apps.common.schemas.description import doctor_alert
+from pkg.schemas.tags import profile_doctor_tag
+from pkg.schemas.description import doctor_alert
 
 
 

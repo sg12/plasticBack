@@ -1,11 +1,11 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from apps.service.serializers import *
-from apps.common.schemas.tags import (
+from pkg.schemas.tags import (
     doctor_tag,
     clinic_tag,
     profile_service_tag
 )
-from apps.common.schemas.description import doctor_or_clinic_alert
+from pkg.schemas.description import doctor_or_clinic_alert
 
 
 doc_doctor_service = extend_schema_view(

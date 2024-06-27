@@ -8,7 +8,7 @@ from apps.doctor.serializers import (
     DoctorUpdateSerializer,
 )
 from .tags import doctor_tag
-from apps.common.schemas.tags import profile_doctor_tag
+from pkg.schemas.tags import profile_doctor_tag
 
 
 doc_doctor = extend_schema_view(

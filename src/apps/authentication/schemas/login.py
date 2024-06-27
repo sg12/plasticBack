@@ -6,7 +6,7 @@ from apps.authentication.serializers import (
     TokenSerializer,
     LoginSerializer,
 )
-from apps.common.schemas.tags import auth_tag
+from pkg.schemas.tags import auth_tag
 
 
 doc_login = extend_schema_view(

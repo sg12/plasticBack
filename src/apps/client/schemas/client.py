@@ -1,7 +1,7 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from apps.reception.serializers import *
 from apps.client.serializers import *
-from apps.common.schemas.tags import client_tag, profile_client_tag
+from pkg.schemas.tags import client_tag, profile_client_tag
 
 
 doc_client = extend_schema_view(

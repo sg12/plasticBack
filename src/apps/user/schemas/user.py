@@ -1,6 +1,6 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from apps.user.serializers import UserSerializer
-from apps.common.schemas.tags import profile_tag
+from pkg.schemas.tags import profile_tag
 
 
 doc_user = extend_schema_view(

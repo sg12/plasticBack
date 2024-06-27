@@ -1,8 +1,8 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from apps.article.serializers import *
 from apps.clinic.serializers import *
-from apps.common.schemas.tags import doctor_tag, clinic_tag
-from apps.common.schemas.tags import profile_doctor_and_clinic_tag
+from pkg.schemas.tags import doctor_tag, clinic_tag
+from pkg.schemas.tags import profile_doctor_and_clinic_tag
 
 
 doc_license_doctor = extend_schema_view(

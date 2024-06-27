@@ -1,8 +1,8 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from apps.review.serializers import *
 from apps.clinic.serializers import *
-from apps.common.schemas.tags import review_tag
-from apps.common.schemas.description import doctor_or_clinic_alert
+from pkg.schemas.tags import review_tag
+from pkg.schemas.description import doctor_or_clinic_alert
 
 
 doc_reply = extend_schema_view(

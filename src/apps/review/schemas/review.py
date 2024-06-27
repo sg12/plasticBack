@@ -1,7 +1,7 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from apps.review.serializers import *
 from apps.clinic.serializers import *
-from apps.common.schemas.tags import *
+from pkg.schemas.tags import *
 
 
 doc_review_doctor = extend_schema_view(

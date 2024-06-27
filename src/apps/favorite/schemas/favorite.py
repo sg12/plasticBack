@@ -1,7 +1,7 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from apps.favorite.serializers import *
-from apps.common.schemas.tags import favorite_tag
-from apps.common.schemas.description import client_alert
+from pkg.schemas.tags import favorite_tag
+from pkg.schemas.description import client_alert
 
 
 doc_favorite_doctor = extend_schema_view(

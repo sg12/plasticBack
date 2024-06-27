@@ -1,6 +1,6 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from apps.schedule.serializers import DoctorScheduleSerializer
-from apps.common.schemas.tags import review_tag
+from pkg.schemas.tags import review_tag
 
 
 doc_doctor_schedule = extend_schema_view(

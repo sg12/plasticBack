@@ -3,7 +3,7 @@ from drf_spectacular.utils import (
     extend_schema,
 )
 from apps.service.serializers import ServiceSerializer
-from apps.common.schemas.tags import doctor_tag
+from pkg.schemas.tags import doctor_tag
 
 
 doc_doctor_service = extend_schema_view(

@@ -4,7 +4,7 @@ from apps.schedule.serializers import (
     ClinicScheduleCreateSerializer,
     ClinicScheduleUpdateSerializer
 )
-from apps.common.schemas.tags import clinic_tag
+from pkg.schemas.tags import clinic_tag
 
 
 doc_clinic_schedule = extend_schema_view(
