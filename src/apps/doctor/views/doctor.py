@@ -17,7 +17,7 @@ from apps.doctor.schemas import *
 
 @doc_doctor
 class DoctorView(ListAPIView):
-    queryset = Doctor.objects.order_by('-user__created_at')
+    queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
     filterset_class = DoctorFilter
     pagination_class = PagePagination
