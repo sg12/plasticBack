@@ -6,7 +6,7 @@ from apps.client.serializers import *
 from apps.user.models import User
 from pkg.decorators import is_client
 from apps.client.schemas import *
-from django.http import Http404
+from apps.client.models import Client
 
 
 @doc_client
@@ -17,7 +17,7 @@ class ClientView(RetrieveAPIView):
 
     def get_object(self):
         user = super().get_object()
-        return user.client
+        return Client(user=user)
 
 
 @doc_profile_client
@@ -27,4 +27,4 @@ class ProfileClientView(RetrieveUpdateAPIView):
     result_class = ClientSerializer
 
     def get_object(self):
-        return self.request.user.client
+        return Client(user=self.request.user)
