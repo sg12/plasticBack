@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from apps.review.models import Review
-from apps.user.serializers import UserPkFromUrl
 from apps.user.models import User
 from pkg.serializers.entity import EntityFromURL
 from .author import ReviewAuthorSerializer
