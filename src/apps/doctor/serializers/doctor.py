@@ -22,10 +22,15 @@ class DoctorUpdateSerializer(BaseUserFields):
         model = Doctor
         fields = (
             'fio',
+            'site',
+            'address',
             'clinic',
             'description',
             'category',
             'degree',
             'specialty',
             'experience',
+            'phone',
+            'private_reception',
+            'clinic_reception',
         )
