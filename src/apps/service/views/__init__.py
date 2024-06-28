@@ -1,8 +1,9 @@
 from .service import (
     DoctorServiceView,
     ClinicServiceView,
-    ProfileServiceView,
-    ProfileServiceDetailView
+    ProfileDoctorServiceView,
+    ProfileDoctorServiceDetailView,
+    ProfileClinicServiceView
 )
 from .search import (
     SearchDoctorsByServiceView,

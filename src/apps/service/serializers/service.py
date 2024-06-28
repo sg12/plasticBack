@@ -21,5 +21,13 @@ class ServiceCreateSerializer(serializers.ModelSerializer):
         exclude = ()
 
 
-class ServiceUpdateSerializer(ServiceCreateSerializer):
-    pass
+class ServiceUpdateSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    
+    class Meta:
+        model = Service
+        fields = (
+            'user',
+            'price',
+            'status'
+        )

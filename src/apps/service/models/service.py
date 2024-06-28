@@ -11,4 +11,4 @@ class Service(models.Model):
         db_table = 'services'
 
     def __str__(self) -> str:
-        return f'{self.specialization.name} ({self.price})'
+        return f'{self.user.email} - {self.specialization.name} ({self.price})'
