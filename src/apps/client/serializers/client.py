@@ -15,7 +15,7 @@ class ClientSerializer(BaseClientFields):
 
 
 class ClientUpdateSerializer(BaseUserFields):
-    gender = serializers.PrimaryKeyRelatedField
+    gender = serializers.CharField(source='user.gender')
     
     class Meta:
         model = Client
