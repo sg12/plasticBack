@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from apps.user.models import User
+from apps.user.models import User, Role
 from apps.authentication.serializers import RegisterSerializer, TokenSerializer
 from rest_framework.authtoken.models import Token
 from apps.authentication.schemas import doc_register
@@ -9,8 +9,10 @@ from apps.authentication.schemas import doc_register
 @doc_register
 class RegisterView(APIView):
     def post(self, request, role):
-        if not role:
-            return Response(status=404)
+        try:
+            Role.objects.get(name=role)
+        except Role.DoesNotExist:
+            return Response(status=400, data={'detail': 'Вы указали неправильную роль'})
         
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
