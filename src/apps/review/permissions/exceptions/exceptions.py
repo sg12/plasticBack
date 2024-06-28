@@ -28,6 +28,6 @@ class IsNotAuthorReply(exceptions.APIException):
 
 
 class YouHaveReview(exceptions.APIException):
-    status_code = status.HTTP_403_FORBIDDEN
+    status_code = status.HTTP_400_BAD_REQUEST
     default_detail = _('Вы не можете создать больше одного отзыва на этот аккаунт')
     default_code = 'permission_denied'
