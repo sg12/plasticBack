@@ -16,8 +16,9 @@ class Clinic(models.Model):
     city = models.ForeignKey('location.City', on_delete=models.PROTECT, related_name='clinics', null=True, blank=True)
 
     objects = ClinicManager()
-
-    # employes
+    
+    employes = models.ManyToManyField('doctor.Doctor', through='Employe', related_name='clinics')
+    
     # worktimes
     # ratings
     # reviews
