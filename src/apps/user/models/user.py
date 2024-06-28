@@ -12,6 +12,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     role = models.ForeignKey('Role', on_delete=models.PROTECT)
     avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    gender = models.CharField(choices={
+        'male': 'male',
+        'female': 'female'
+    }, max_length=6, blank=True, null=True)
     
     confidentiality_consent = models.BooleanField(default=False)
     personal_data_consent = models.BooleanField(default=False)

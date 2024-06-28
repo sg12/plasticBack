@@ -1,7 +1,5 @@
 from django_filters import rest_framework as filters
-from apps.user.models import Gender
 from apps.doctor.models import Doctor
-from apps.reception.models import ReceptionType
 
 
 class DoctorFilter(filters.FilterSet):
@@ -11,10 +9,10 @@ class DoctorFilter(filters.FilterSet):
     degree = filters.NumberFilter()
     reception = filters.CharFilter(method='get_reception')
     ordering = filters.CharFilter(method='get_ordering')
-    gender = filters.ModelChoiceFilter(
-        queryset=Gender.objects.all(),
-        to_field_name='name'
-    )
+    gender = filters.ChoiceFilter(field_name='user__gender', choices=(
+        ('male', 'male'),
+        ('female', 'female')
+    ))
     
     def get_reception(self, queryset, name, value):
         private = False

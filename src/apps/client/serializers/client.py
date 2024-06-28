@@ -15,11 +15,12 @@ class ClientSerializer(BaseClientFields):
 
 
 class ClientUpdateSerializer(BaseUserFields):
+    gender = serializers.PrimaryKeyRelatedField
+    
     class Meta:
         model = Client
         fields = (
             'fio', 
-            'avatar',
             'phone',
             'gender', 
             'date_born'

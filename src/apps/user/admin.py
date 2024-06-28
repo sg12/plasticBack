@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import User, Role, Gender
+from .models import User, Role
 
 admin.site.register([
     User, 
-    Role, 
-    Gender
+    Role
 ])

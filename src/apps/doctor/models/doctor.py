@@ -7,7 +7,6 @@ class Doctor(models.Model):
     site = models.URLField(null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
-    gender = models.ForeignKey('user.Gender', on_delete=models.PROTECT, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     experience = models.PositiveSmallIntegerField(default=0) # стаж
     

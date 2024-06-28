@@ -8,14 +8,13 @@ class DoctorSerializer(BaseUserFields):
     specialty = serializers.CharField(source='specialty.name', default=None)
     category = serializers.CharField(source='category.name', default=None)
     degree = serializers.CharField(source='degree.name', default=None)
+    gender = serializers.CharField(source='user.gender')
     rating = serializers.FloatField()
     reviews_count = serializers.IntegerField()
     
     class Meta:
         model = Doctor
-        exclude = (
-            'user',
-        )
+        exclude = ('user',)
 
 
 class DoctorUpdateSerializer(BaseUserFields):
@@ -23,7 +22,6 @@ class DoctorUpdateSerializer(BaseUserFields):
         model = Doctor
         fields = (
             'fio',
-            'avatar',
             'clinic',
             'description',
             'category',
