@@ -1,20 +1,21 @@
 from rest_framework.generics import ListAPIView
 from apps.service.models import Service
+from apps.user.models import User
 from apps.service.serializers import *
 from rest_framework.permissions import IsAuthenticated
 from apps.doctor.permissions import IsDoctor
-from apps.clinic.permissions import IsClinic
 from rest_framework.generics import ListAPIView
 from pkg.generics import (
     ListCreateAPIView,
     UpdateDestroyAPIView
 )
 from apps.service.schemas import *
-from pkg.decorators import is_doctor_or_clinic
+from pkg.decorators import is_doctor, is_clinic
 
 
-@is_doctor_or_clinic
-class BaseServiceView(ListAPIView):
+@doc_doctor_service
+@is_doctor
+class DoctorServiceView(ListAPIView):
     queryset = Service.objects.order_by('-id')
     serializer_class = ServiceSerializer
 
@@ -24,14 +25,20 @@ class BaseServiceView(ListAPIView):
         return queryset.filter(user_id=pk)
 
 
-@doc_doctor_service
-class DoctorServiceView(BaseServiceView):
-    pass    
-
-
 @doc_clinic_service
-class ClinicServiceView(BaseServiceView):
-    pass
+@is_clinic
+class ClinicServiceView(ListAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        
+        pk = self.kwargs.get('pk')
+        user = User.objects.get(pk=pk)
+        employes = user.clinic.employes.all()
+        
+        return queryset.filter(user__doctor__in=employes).distinct()
     
 
 @doc_profile_doctor_service
