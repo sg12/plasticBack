@@ -5,3 +5,4 @@ from .user import (
     UserUpdateSerializer
 )
 from .author import GeneralAuthorSerializer
+from .avatar import AvatarSerializer
