@@ -39,8 +39,6 @@ class ClinicUpdateSerializer(BaseClinicFields):
     class Meta:
         model = Clinic
         fields = (
-            'director',
-            'avatar',
             'name',
             'official_name',
             'phone',

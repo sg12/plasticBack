@@ -19,9 +19,7 @@ class UserPkFromUrl:
 
 class BaseUserFields(serializers.ModelSerializer):
     id = serializers.IntegerField(source='user.id')
-    email = serializers.EmailField(source='user.email')
     fio = serializers.CharField(source='user.username')
-    avatar = serializers.ImageField(source='user.avatar')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -30,11 +28,14 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            'id',
+            'email',
+            'avatar',
             'role',
             'confidentiality_consent',
             'personal_data_consent',
             'review_consent',
-            'news_consent',
+            'news_consent'
         )
 
 
@@ -42,9 +43,8 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            'email',
             'avatar',
-            'confidentiality_consent',
-            'personal_data_consent',
             'review_consent',
-            'news_consent',
+            'news_consent'
         )
