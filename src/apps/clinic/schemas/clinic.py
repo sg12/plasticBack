@@ -13,14 +13,44 @@ doc_clinic = extend_schema_view(
                 name='search',
                 type=str,
                 location=OpenApiParameter.QUERY,
-                description='Поиск по названию статьи и имени ее автора'
+                description='Поиск по названию клиники или по ФИО ее директора'
             ),
             OpenApiParameter(
                 name='ordering',
                 type=str,
                 location=OpenApiParameter.QUERY,
-                description='Сортировка по рейтингу и кол-ву отзывов',
-                enum=['rating', 'reviews_count']
+                description='''Сортировка по рейтингу `rating`, кол-ву отзывов `reviews`.
+                Можно использовать их вместе `rating,reviews`'''
+            ),
+            OpenApiParameter(
+                name='metro',
+                type=str,
+                location=OpenApiParameter.QUERY,
+                description='Ближайщее метро (по slug)',
+            ),
+            OpenApiParameter(
+                name='district',
+                type=str,
+                location=OpenApiParameter.QUERY,
+                description='Регион (по slug)',
+            ),
+            OpenApiParameter(
+                name='city',
+                type=str,
+                location=OpenApiParameter.QUERY,
+                description='Город (по slug)',
+            ),
+            OpenApiParameter(
+                name='price_min',
+                type=int,
+                location=OpenApiParameter.QUERY,
+                description='Минимальная цена услиги',
+            ),
+            OpenApiParameter(
+                name='price_max',
+                type=int,
+                location=OpenApiParameter.QUERY,
+                description='Максимальная цена услуги',
             ),
         ]
     )

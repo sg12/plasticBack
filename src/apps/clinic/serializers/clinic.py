@@ -17,6 +17,7 @@ class ClinicSerializer(BaseClinicFields):
     class Meta:
         model = Clinic
         fields = (
+            'id',
             'name',
             'phone',
             'description',
@@ -32,7 +33,7 @@ class ClinicSerializer(BaseClinicFields):
 class ClinicRetrieveSerializer(BaseClinicFields):
     class Meta:
         model = Clinic
-        exclude = ('user',)
+        exclude = ('user', 'employes')
 
 
 class ClinicUpdateSerializer(BaseClinicFields):
