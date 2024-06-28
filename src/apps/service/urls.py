@@ -9,6 +9,8 @@ urlpatterns = [
     path(DOCTOR_PK_URL + '/services', DoctorServiceView.as_view()),
     path(CLINIC_PK_URL + '/services', ClinicServiceView.as_view()),
     
-    path(PROFILE_URL + '/services', ProfileServiceView.as_view()),
-    path(PROFILE_URL + '/services/<int:pk>', ProfileServiceDetailView.as_view())
+    path(PROFILE_URL + '/doctor/services', ProfileDoctorServiceView.as_view()),
+    path(PROFILE_URL + '/doctor/services/<int:pk>', ProfileDoctorServiceDetailView.as_view()),
+    
+    path(PROFILE_URL + '/clinic/services', ProfileClinicServiceView.as_view()),
 ]

@@ -7,11 +7,17 @@ doc_profile_reception_doctor = extend_schema_view(
     get=extend_schema(
         tags=profile_doctor_tag,
         summary='Список приемов',
-        responses=ReceptionSerializer
+        responses=ReceptionDoctorSerializer
     )
 )
 
 doc_profile_reception_doctor_detail = extend_schema_view(
+    patch=extend_schema(
+        tags=profile_doctor_tag,
+        summary='Обновить данные приема',
+        request=ReceptionDoctorUpdateSerializer,
+        responses=ReceptionDoctorSerializer
+    ),
     delete=extend_schema(
         tags=profile_doctor_tag,
         summary='Удалить запись на прием',

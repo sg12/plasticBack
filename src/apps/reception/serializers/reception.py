@@ -8,15 +8,15 @@ from apps.client.serializers.utils import CurrentClientDefault
         
 class ReceptionSerializer(serializers.ModelSerializer):
     service = ServiceSerializer()
-    client = ClientSerializer()
-    doctor = DoctorSerializer()
+    client = ClientSerializer(source='user')
+    doctor = DoctorSerializer(source='service.user')
 
     class Meta:
         model = Reception
         exclude = ()
 
 class ReceptionCreateSerializer(serializers.ModelSerializer):
-    client = serializers.HiddenField(default=CurrentClientDefault())
+    client = serializers.HiddenField(source='user', default=CurrentClientDefault())
     
     class Meta:
         model = Reception
@@ -30,8 +30,8 @@ class ReceptionUpdateSerializer(serializers.ModelSerializer):
 
 
 class ReceptionClientSerializer(serializers.ModelSerializer):
-    clinic_name = serializers.CharField(source='user.doctor.clinic.name')
-    doctor_fio = serializers.CharField(source='user.username')
+    clinic = serializers.CharField(source='user.doctor.clinic.name')
+    doctor = serializers.CharField(source='service.user.username')
     
     class Meta:
         model = Reception
@@ -42,21 +42,30 @@ class ReceptionClientSerializer(serializers.ModelSerializer):
         )
 
 class ReceptionDoctorSerializer(serializers.ModelSerializer):
-    specialization_name = serializers.CharField(source='service.specialization.name')
-    client_fio = serializers.CharField(source='client.fio')
+    specialization = serializers.CharField(source='service.specialization.name')
+    client = serializers.CharField(source='user.username')
     
     class Meta:
         model = Reception
         exclude = (
-            'client',
             'user',
             'service'
         )
 
+
+class ReceptionDoctorUpdateSerializer(serializers.ModelSerializer):    
+    class Meta:
+        model = Reception
+        fields = (
+            'datetime',
+            'status'
+        )
+
+
 class ReceptionClinicSerializer(serializers.ModelSerializer):
     specialization_name = serializers.CharField(source='service.specialization.name')
-    client_fio = serializers.CharField(source='client.fio')
-    doctor_fio = serializers.CharField(source='doctor.fio')
+    client = serializers.CharField(source='user.username')
+    doctor = serializers.CharField(source='service.user.username')
     
     class Meta:
         model = Reception

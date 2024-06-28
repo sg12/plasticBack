@@ -3,5 +3,6 @@ from .reception import (
     ReceptionCreateSerializer,
     ReceptionUpdateSerializer,
     ReceptionClientSerializer,
-    ReceptionDoctorSerializer
+    ReceptionDoctorSerializer,
+    ReceptionDoctorUpdateSerializer
 )
