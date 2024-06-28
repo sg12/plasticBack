@@ -4,11 +4,11 @@ from apps.user.serializers import BaseUserFields
 
 
 class BaseClientFields(BaseUserFields):
-    gender = serializers.CharField(source='gender.name')
-    qrcode = serializers.CharField(source='qrcode.image')
+    gender = serializers.CharField(source='user.gender')
+    qrcode = serializers.CharField(source='qrcode.image', default=None)
 
 
-class ClientSerializer(BaseClientFields):    
+class ClientSerializer(BaseClientFields):
     class Meta:
         model = Client
         exclude = ('user',)
