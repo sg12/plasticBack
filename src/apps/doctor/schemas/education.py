@@ -36,12 +36,10 @@ doc_profile_education_detail = extend_schema_view(
     patch=extend_schema(
         tags=profile_doctor_tag,
         summary='Обновить данные об образовании',
-        description=doctor_alert,
         responses=EducationSerializer,
     ),
     delete=extend_schema(
         tags=profile_doctor_tag,
-        description=doctor_alert,
         summary='Удалить данные об образовании',
     )
 )

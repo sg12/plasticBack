@@ -98,13 +98,11 @@ doc_profile_doctor = extend_schema_view(
     get=extend_schema(
         tags=profile_doctor_tag,
         summary='Данные доктора',
-        description='Если у даннго профиля нет роли доктора, то сервер вернет ответ 403',
         responses=DoctorSerializer
     ),
     patch=extend_schema(
         tags=profile_doctor_tag,
         summary='Обновить данные доктора',
-        description='Если у даннго профиля нет роли доктора, то сервер вернет ответ 403',
         responses=DoctorUpdateSerializer,
     )
 )
