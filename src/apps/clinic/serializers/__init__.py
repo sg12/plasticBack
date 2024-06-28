@@ -3,3 +3,4 @@ from .clinic import (
     ClinicRetrieveSerializer,
     ClinicUpdateSerializer
 )
+from .employe import EmployeDoctorSerializer
