@@ -1,6 +1,5 @@
 from .base_detail import BaseDetailAPIView
-from rest_framework.mixins import RetrieveModelMixin
-from pkg.mixins import UpdateModelMixin
+from pkg.mixins import RetrieveModelMixin, UpdateModelMixin
 
 
 class RetrieveUpdateAPIView(RetrieveModelMixin, UpdateModelMixin, BaseDetailAPIView):
