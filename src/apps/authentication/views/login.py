@@ -8,9 +8,7 @@ from apps.authentication.schemas import doc_login
 
 
 FAIL_AUTH = {
-    'detail': {
-        'errors': ['Неверные данные для входа']
-    }
+    'detail': 'Неверные данные для входа'
 }
 
 
