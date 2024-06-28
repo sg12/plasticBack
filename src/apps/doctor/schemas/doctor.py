@@ -35,8 +35,7 @@ doc_doctor = extend_schema_view(
                 type=str,
                 location=OpenApiParameter.QUERY,
                 description='''Сортировка, по рейтингу `rating`, по кол-ву отзывов `reviews`, 
-                можно использовать их вместе `rating+reviews`
-                - последовательность не имеет значение'''
+                можно использовать их вместе `rating,reviews`'''
             ),
             OpenApiParameter(
                 name='search',
@@ -79,8 +78,7 @@ doc_doctor = extend_schema_view(
                 name='gender',
                 type=str,
                 location=OpenApiParameter.QUERY,
-                description='Пол доктора',
-                enum=['male', 'female']
+                description='Пол доктора (`male`, `female`)'
             )
         ]
     )

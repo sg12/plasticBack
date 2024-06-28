@@ -1,10 +1,11 @@
 from rest_framework import serializers
 from apps.doctor.models import Doctor
 from apps.user.serializers import BaseUserFields
+from .clinic import ClinicInfoSerilaizer
 
 
 class DoctorSerializer(BaseUserFields):
-    clinic = serializers.CharField(source='clinic.name', default=None)
+    clinics = ClinicInfoSerilaizer(many=True)
     specialty = serializers.CharField(source='specialty.name', default=None)
     category = serializers.CharField(source='category.name', default=None)
     degree = serializers.CharField(source='degree.name', default=None)
@@ -24,7 +25,6 @@ class DoctorUpdateSerializer(BaseUserFields):
             'fio',
             'site',
             'address',
-            'clinic',
             'description',
             'category',
             'degree',

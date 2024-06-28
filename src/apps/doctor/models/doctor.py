@@ -13,13 +13,13 @@ class Doctor(models.Model):
     private_reception = models.BooleanField(default=False, blank=True)
     clinic_reception = models.BooleanField(default=False, blank=True)
     
-    clinic = models.ForeignKey('clinic.Clinic', on_delete=models.SET_NULL, related_name='employes', null=True, blank=True)
     specialty = models.ForeignKey('Specialty', on_delete=models.SET_NULL, null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)
     degree = models.ForeignKey('Degree', on_delete=models.SET_NULL, null=True, blank=True) # ученая степень
 
     objects = DoctorManager()
 
+    # clinics
     # licenses
     # educations
     # qualifications
