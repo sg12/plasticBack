@@ -15,53 +15,43 @@ class DoctorFilter(filters.FilterSet):
     ))
     
     def get_reception(self, queryset, name, value):
-        private = False
-        clinic = False
+        params = {}
+        add_private = lambda: params.update({'private_reception': True})
+        add_clinic = lambda: params.update({'clinic_reception': True})
         
-        if '+' in value:
-            values = value.split('+')
+        if ',' in value:
+            values = value.split(',')
             if 'private' in values:
-                private = True
+                add_private()
             if 'clinic' in values:
-                clinic = True
+                add_clinic()
         else:
             match value:
                 case 'private':
-                    private = True
+                    add_private()
                 case 'clinic':
-                    clinic = True
+                    add_clinic()
         
-        if private:
-            queryset = queryset.filter(private_reception=True)
-        if clinic:
-            queryset = queryset.filter(clinic_reception=True)
+        queryset = queryset.filter(**params)
 
         return queryset
 
     def get_ordering(self, queryset, name, value):
-        rating = False
-        reviews = False
+        params = []
+        add_rating = lambda: params.append('-rating')
+        add_reviews = lambda: params.append('-reviews_count')
         
-        if '+' in value:
-            values = value.split('+')
+        if ',' in value:
+            values = value.split(',')
             if 'rating' in values:
-                rating = True
+                add_rating()
             if 'reviews' in values:
-                reviews = True
+                add_reviews()
         else:
             match value:
                 case 'rating':
-                    rating = True
+                    add_rating()
                 case 'reviews':
-                    reviews = True
+                    add_reviews()
         
-        if rating:
-            queryset = queryset.order_by('-rating')
-        if reviews:
-            queryset = queryset.order_by('-reviews_count')
-
-        return queryset
-    
-    class Meta:
-        model = Doctor
-        fields = ()
+        return queryset.order_by(*params)
