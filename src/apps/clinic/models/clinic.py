@@ -17,8 +17,7 @@ class Clinic(models.Model):
 
     objects = ClinicManager()
     
-    employes = models.ManyToManyField('doctor.Doctor', through='Employe', related_name='clinics')
-    
+    # employes
     # worktimes
     # ratings
     # reviews

@@ -16,7 +16,7 @@ class EmployeView(ListAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         pk = self.kwargs.get('pk')
-        return queryset.filter(clinics__user__pk=pk)
+        return queryset.filter(clinic__user_id=pk)
     
 
 @doc_profile_employe
@@ -27,4 +27,4 @@ class ProfileEmployeView(ListAPIView):
     
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(clinics__user=self.request.user)
+        return queryset.filter(clinic__user=self.request.user)
