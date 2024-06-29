@@ -11,5 +11,4 @@ urlpatterns = [
     path(PROFILE_URL + '/doctor/receptions/<int:pk>', ProfileReceptionDoctorDetailView.as_view()),
     
     path(PROFILE_URL + '/clinic/receptions', ProfileReceptionClinicView.as_view()),
-    path(PROFILE_URL + '/clinic/receptions/<int:pk>', ProfileReceptionClientDetailView.as_view())
 ]
