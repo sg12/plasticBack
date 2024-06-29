@@ -6,14 +6,15 @@ from apps.user.serializers import BaseUserFields
 class BaseClinicFields(BaseUserFields):
     fio = None
     director = serializers.CharField(source='user.username')
-    metro = serializers.CharField(source='metro.name', default=None)
-    district = serializers.CharField(source='district.name', default=None)
-    city = serializers.CharField(source='city.name', default=None)
     rating = serializers.FloatField()
     reviews_count = serializers.IntegerField()
 
 
 class ClinicSerializer(BaseClinicFields):
+    metro = serializers.CharField(source='metro.name', default=None)
+    district = serializers.CharField(source='district.name', default=None)
+    city = serializers.CharField(source='city.name', default=None)
+    
     class Meta:
         model = Clinic
         fields = (
@@ -30,10 +31,10 @@ class ClinicSerializer(BaseClinicFields):
         )
 
 
-class ClinicRetrieveSerializer(BaseClinicFields):
+class ClinicRetrieveSerializer(ClinicSerializer):
     class Meta:
         model = Clinic
-        exclude = ('user', 'employes')
+        exclude = ('user',)
 
 
 class ClinicUpdateSerializer(BaseClinicFields):
