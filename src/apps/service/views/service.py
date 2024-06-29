@@ -4,6 +4,7 @@ from apps.user.models import User
 from apps.service.serializers import *
 from rest_framework.permissions import IsAuthenticated
 from apps.doctor.permissions import IsDoctor
+from apps.clinic.permissions import IsClinic
 from rest_framework.generics import ListAPIView
 from pkg.generics import (
     ListCreateAPIView,
@@ -66,5 +67,13 @@ class ProfileDoctorServiceDetailView(UpdateDestroyAPIView):
 
 
 @doc_profile_clinic_service
-class ProfileClinicServiceView(ProfileDoctorServiceView):
-    http_method_names = ['get']
+class ProfileClinicServiceView(ListAPIView):
+    queryset = Service.objects.all()
+    permission_classes = (IsAuthenticated, IsClinic)
+    serializer_class = ServiceSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        employes = self.request.user.clinic.employes.all()
+        
+        return queryset.filter(user__doctor__in=employes).distinct()
