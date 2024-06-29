@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from apps.support.models import Message
+from apps.support.models import Message, Ticket
 from .author import AuthorSerializer
+from pkg.serializers import EntityFromURL
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -8,11 +9,12 @@ class MessageSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Message
-        exclude = ()
+        exclude = ('ticket',)
 
 
 class MessageCreateSerializer(serializers.ModelSerializer):
     author = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    ticket = serializers.HiddenField(default=EntityFromURL('pk', Ticket))
     
     class Meta:
         model = Message
