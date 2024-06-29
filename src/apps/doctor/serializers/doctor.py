@@ -5,7 +5,8 @@ from .clinic import ClinicInfoSerilaizer
 
 
 class DoctorSerializer(BaseUserFields):
-    clinics = ClinicInfoSerilaizer(many=True)
+    clinic = ClinicInfoSerilaizer()
+    reception_types = serializers.ListSerializer(child=serializers.CharField())
     specialty = serializers.CharField(source='specialty.name', default=None)
     category = serializers.CharField(source='category.name', default=None)
     degree = serializers.CharField(source='degree.name', default=None)
@@ -31,6 +32,5 @@ class DoctorUpdateSerializer(BaseUserFields):
             'specialty',
             'experience',
             'phone',
-            'private_reception',
-            'clinic_reception',
+            'reception_types',
         )

@@ -66,7 +66,7 @@ doc_doctor = extend_schema_view(
                 type=str,
                 location=OpenApiParameter.QUERY,
                 description='''Тип приема, частная практика `private`, в клинике `clinic`, 
-                можно использовать их вместе `private+clinic`'''
+                можно использовать их вместе `private,clinic`'''
             ),
             OpenApiParameter(
                 name='specialtie',
