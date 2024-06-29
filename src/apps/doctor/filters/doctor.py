@@ -1,5 +1,5 @@
 from django_filters import rest_framework as filters
-from apps.doctor.models import Doctor
+from django.db.models import Count, Q
 
 
 class DoctorFilter(filters.FilterSet):
@@ -15,9 +15,9 @@ class DoctorFilter(filters.FilterSet):
     ))
     
     def get_reception(self, queryset, name, value):
-        params = {}
-        add_private = lambda: params.update({'private_reception': True})
-        add_clinic = lambda: params.update({'clinic_reception': True})
+        params = []
+        add_private = lambda: params.append('private')
+        add_clinic = lambda: params.append('clinic')
         
         if ',' in value:
             values = value.split(',')
@@ -32,7 +32,13 @@ class DoctorFilter(filters.FilterSet):
                 case 'clinic':
                     add_clinic()
         
-        queryset = queryset.filter(**params)
+        queryset = queryset.filter(
+            reception_types__name__in=params
+        ).annotate(
+            matching_types=Count('reception_types', filter=Q(reception_types__name__in=params), distinct=True)
+        ).filter(
+            matching_types=len(params)
+        )
 
         return queryset
 
