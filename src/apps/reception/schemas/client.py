@@ -8,13 +8,13 @@ doc_profile_reception_client = extend_schema_view(
     get=extend_schema(
         tags=profile_client_tag,
         summary='Список приемов',
-        responses=ReceptionSerializer
+        responses=ReceptionClientSerializer
     ),
     post=extend_schema(
         tags=profile_client_tag,
         summary='Добавить прием к врачу',
-        request=ReceptionCreateSerializer,
-        responses=ReceptionSerializer
+        request=ReceptionClientCreateSerializer,
+        responses=ReceptionClientSerializer
     )
 )
 
@@ -22,8 +22,8 @@ doc_profile_reception_client_detail = extend_schema_view(
     patch=extend_schema(
         tags=profile_client_tag,
         summary='Обновить данные о приеме',
-        request=ReceptionUpdateSerializer,
-        responses=ReceptionSerializer
+        request=ReceptionClientUpdateSerializer,
+        responses=ReceptionClientSerializer
     ),
     delete=extend_schema(
         tags=profile_client_tag,

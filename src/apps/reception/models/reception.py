@@ -5,6 +5,7 @@ class Reception(models.Model):
     service = models.ForeignKey('service.Service', on_delete=models.CASCADE)
     user = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='receptions')
     datetime = models.DateTimeField()
+    type = models.ForeignKey('ReceptionType', on_delete=models.SET_NULL, null=True)
     status = models.BooleanField(default=False)
     
     class Meta:

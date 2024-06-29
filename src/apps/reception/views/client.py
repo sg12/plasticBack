@@ -10,24 +10,25 @@ from apps.reception.schemas import *
 class ProfileReceptionClientView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, IsClient)
     queryset = Reception.objects.all()
-    serializer_class = ReceptionCreateSerializer
+    serializer_class = ReceptionClientCreateSerializer
     result_class = ReceptionClientSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(client=self.request.user.client)
+        return queryset.filter(user=self.request.user)
 
 
 @doc_profile_reception_client_detail
 class ProfileReceptionClientDetailView(UpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, IsClient)
     queryset = Reception.objects.all()
-    serializer_class = ReceptionUpdateSerializer
+    serializer_class = ReceptionClientUpdateSerializer
+    result_class = ReceptionClientSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
         pk = self.kwargs.get('pk')
         return queryset.filter(
-            client=self.request.user.client,
+            user=self.request.user,
             pk=pk
         )

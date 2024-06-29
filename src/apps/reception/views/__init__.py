@@ -6,7 +6,4 @@ from .doctor import (
     ProfileReceptionDoctorView,
     ProfileReceptionDoctorDetailView
 )
-from .clinic import (
-    ProfileReceptionClinicView,
-    ProfileReceptionClinicDetailView
-)
+from .clinic import ProfileReceptionClinicView
