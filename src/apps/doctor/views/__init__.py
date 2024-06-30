@@ -20,4 +20,4 @@ from .workplace import (
 )
 from .degree import DegreeView
 from .category import CategoryView
-from .speciality import SpecialityView
+from .specialization import SpecializationView

@@ -20,7 +20,7 @@ urlpatterns = [
     # Guest
     path(DOCTOR_URL + '/categories', CategoryView.as_view()),
     path(DOCTOR_URL + '/degree', DegreeView.as_view()),
-    path(DOCTOR_URL + '/specialities', SpecialityView.as_view()),
+    path(DOCTOR_URL + '/specializations', SpecializationView.as_view()),
     
     path(DOCTOR_URL, DoctorView.as_view()),
     path(DOCTOR_PK_URL, DoctorDetailView.as_view()),

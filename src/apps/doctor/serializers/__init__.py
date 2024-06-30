@@ -4,7 +4,7 @@ from .doctor import (
 )
 from .degree import DegreeSerializer
 from .category import CategorySerializer
-from .speciality import SpecialitySerializer
+from .specialization import SpecializationSerializer
 from .education import (
     EducationSerializer,
     EducationCreateSerializer,

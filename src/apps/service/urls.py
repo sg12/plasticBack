@@ -13,4 +13,6 @@ urlpatterns = [
     path(PROFILE_URL + '/doctor/services/<int:pk>', ProfileDoctorServiceDetailView.as_view()),
     
     path(PROFILE_URL + '/clinic/services', ProfileClinicServiceView.as_view()),
+    
+    path(PROFILE_URL + '/services/specialities', SpecialityView.as_view()),
 ]

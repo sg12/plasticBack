@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.doctor.models import Specialty
+from apps.service.models import Specialty
 
 
 class SpecialitySerializer(serializers.ModelSerializer):

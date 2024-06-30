@@ -1,9 +1,10 @@
 from rest_framework.generics import ListAPIView
-from apps.service.models import Specialization
+from apps.doctor.models import Specialization
 from apps.service.serializers import *
-from apps.service.schemas import *
+from apps.doctor.schemas import *
 
 
+@doc_dspecialization
 class SpecializationView(ListAPIView):
     queryset = Specialization.objects.all()
     serializer_class = ServiceSerializer

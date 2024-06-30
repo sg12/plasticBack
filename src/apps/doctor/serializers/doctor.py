@@ -7,7 +7,7 @@ from .clinic import ClinicInfoSerilaizer
 class DoctorSerializer(BaseUserFields):
     clinic = ClinicInfoSerilaizer()
     reception_types = serializers.ListSerializer(child=serializers.CharField())
-    specialty = serializers.CharField(source='specialty.name', default=None)
+    specialization = serializers.CharField(source='specialization.name', default=None)
     category = serializers.CharField(source='category.name', default=None)
     degree = serializers.CharField(source='degree.name', default=None)
     gender = serializers.CharField(source='user.gender')
@@ -29,7 +29,7 @@ class DoctorUpdateSerializer(BaseUserFields):
             'description',
             'category',
             'degree',
-            'specialty',
+            'specialization',
             'experience',
             'phone',
             'reception_types',

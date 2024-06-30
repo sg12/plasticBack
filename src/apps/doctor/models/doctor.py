@@ -12,7 +12,7 @@ class Doctor(models.Model):
     
     clinic = models.ForeignKey('clinic.Clinic', on_delete=models.CASCADE, related_name='employes', blank=True, null=True)
     reception_types = models.ManyToManyField('reception.ReceptionType', blank=True)
-    specialty = models.ForeignKey('Specialty', on_delete=models.SET_NULL, null=True, blank=True)
+    specialization = models.ForeignKey('Specialization', on_delete=models.SET_NULL, null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)
     degree = models.ForeignKey('Degree', on_delete=models.SET_NULL, null=True, blank=True) # ученая степень
 

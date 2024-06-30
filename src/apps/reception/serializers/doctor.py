@@ -4,7 +4,7 @@ from .user import ReceptionUserSerializer
 
 
 class ReceptionDoctorSerializer(serializers.ModelSerializer):
-    specialization = serializers.CharField(source='service.specialization.name')
+    speciality = serializers.CharField(source='service.speciality.name')
     price = serializers.FloatField(source='service.price')
     client = ReceptionUserSerializer(source='user')
     type = serializers.SlugRelatedField(slug_field='name', queryset=ReceptionType.objects.all())

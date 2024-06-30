@@ -1,4 +1,4 @@
-from .specialization import SpecializationSerializer
+from .speciality import SpecialitySerializer
 from .operation_type import OperationTypeSerializer
 from .service import (
     ServiceSerializer,

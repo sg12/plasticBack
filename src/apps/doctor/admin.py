@@ -6,7 +6,7 @@ admin.site.register((
     Education,
     Workplace,
     Doctor,
-    Specialty,
+    Specialization,
     Category,
     Degree,
     Qualification

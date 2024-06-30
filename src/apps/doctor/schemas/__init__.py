@@ -21,4 +21,4 @@ from .workplace import (
     doc_profile_workplace,
     doc_profile_workplace_detail
 )
-from .speciality import doc_speciality
+from .specialization import doc_dspecialization

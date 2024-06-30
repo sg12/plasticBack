@@ -2,13 +2,14 @@ from drf_spectacular.utils import (
     extend_schema_view,
     extend_schema,
 )
-from apps.doctor.serializers import SpecialitySerializer
-from .tags import doctor_tag
+from apps.service.serializers import SpecialitySerializer
+from pkg.schemas.tags import service_tag
+
 
 
 doc_speciality = extend_schema_view(
     get=extend_schema(
-        tags=doctor_tag,
+        tags=service_tag,
         summary='Список специальностей',
         responses=SpecialitySerializer(many=True),
     )

@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from apps.service.models import Service, Specialization
-from .specialization import SpecializationSerializer
+from apps.doctor.models import Specialization
+from apps.doctor.serializers import SpecializationSerializer
+from apps.service.models import Service
 from django.utils.translation import gettext as _
 
 

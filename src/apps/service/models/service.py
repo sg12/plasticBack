@@ -3,7 +3,7 @@ from django.db import models
 
 class Service(models.Model):
     user = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='services')
-    specialization = models.ForeignKey('Specialization', on_delete=models.PROTECT)
+    specialization = models.ForeignKey('doctor.Specialization', on_delete=models.PROTECT)
     price = models.FloatField()
     status = models.BooleanField(default=False)
 

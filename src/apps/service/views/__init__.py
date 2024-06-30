@@ -9,3 +9,4 @@ from .search import (
     SearchDoctorsByServiceView,
     SearchClinicsByServiceView
 )
+from .speciality import SpecialityView
