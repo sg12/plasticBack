@@ -8,5 +8,5 @@ services:
       dockerfile: ./docker/app/Dockerfile
     ports:
       - "8000:8000"
-    environment:
-      - DJANGO_KEY=django-insecure-4^u1wl9z8eqn1*2n1mc%8)bf&nb&3mmfa9+fcaz%1u9@yhy&^-
+    env_file:
+      - ".env"
