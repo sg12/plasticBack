@@ -20,7 +20,7 @@ class ClinicView(ListAPIView):
     filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
     filterset_class = ClinicFilter
     pagination_class = PagePagination
-    search_fields = ('name', 'official_name', 'user__username')
+    search_fields = ('official_name', 'user__username')
     ordering_fields = ('rating', 'reviews_count')
     
 

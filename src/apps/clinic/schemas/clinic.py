@@ -13,7 +13,7 @@ doc_clinic = extend_schema_view(
                 name='search',
                 type=str,
                 location=OpenApiParameter.QUERY,
-                description='Поиск по названию клиники или по ФИО ее директора'
+                description='Поиск по названию клиники'
             ),
             OpenApiParameter(
                 name='ordering',
