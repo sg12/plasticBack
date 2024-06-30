@@ -5,7 +5,7 @@ from apps.user.serializers import BaseUserFields
 
 class BaseClinicFields(BaseUserFields):
     fio = None
-    director = serializers.CharField(source='user.username')
+    name = serializers.CharField(source='user.username')
     rating = serializers.FloatField()
     reviews_count = serializers.IntegerField()
 
@@ -21,6 +21,7 @@ class ClinicSerializer(BaseClinicFields):
             'id',
             'name',
             'phone',
+            'director',
             'description',
             'address',
             'metro',
@@ -44,6 +45,7 @@ class ClinicUpdateSerializer(BaseClinicFields):
             'name',
             'official_name',
             'phone',
+            'director',
             'description',
             'site',
             'address',

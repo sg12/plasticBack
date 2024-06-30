@@ -9,4 +9,4 @@ class Employe(models.Model):
         db_table = 'clinic_employes'
     
     def __str__(self) -> str:
-        return f'{self.doctor.user.username} ({self.clinic.name})'
+        return f'{self.doctor.user.username} ({self.clinic.user.username})'
