@@ -8,8 +8,6 @@ class Role(models.Model):
     CLINIC = 'clinic'
     ADMIN = 'admin'
     
-    ALL_ROLES = [CLIENT, DOCTOR, CLINIC, ADMIN]
-    
     DEFAULT_ROLES = (
         (CLIENT, _(CLIENT)),
         (DOCTOR, _(DOCTOR)),
@@ -20,3 +18,7 @@ class Role(models.Model):
     
     def __str__(self) -> str:
         return self.name
+
+    @classmethod
+    def get_list_roles(cls) -> list[str]:
+        return [cls.CLIENT, cls.DOCTOR, cls.CLINIC, cls.ADMIN]
