@@ -26,4 +26,4 @@ class Clinic(models.Model):
         db_table = 'clinics'
 
     def __str__(self) -> str:
-        return f'{self.name} ({self.user.email})'
+        return f'{self.user.email}'
