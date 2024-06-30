@@ -44,4 +44,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Users'
         
     def __str__(self) -> str:
-        return self.email
+        return self.username if self.username else self.email
