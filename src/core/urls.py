@@ -25,7 +25,7 @@ api = [
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v2/', include(api)),
+    path('api/', include(api)),
 
     # Debug tool
     # path("__debug__/", include("debug_toolbar.urls")),
