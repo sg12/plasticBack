@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from apps.doctor.models import Specialization
-from apps.doctor.serializers import SpecializationSerializer
+from apps.service.models import Specialty
+from .specialty import SpecialtySerializer
 from apps.service.models import Service
 from django.utils.translation import gettext as _
 
 
 class ServiceSerializer(serializers.ModelSerializer):
-    specialization = SpecializationSerializer()
+    speciality = SpecialtySerializer()
 
     class Meta:
         model = Service
@@ -15,7 +15,7 @@ class ServiceSerializer(serializers.ModelSerializer):
 
 class ServiceCreateSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    specialization = serializers.PrimaryKeyRelatedField(queryset=Specialization.objects.all())
+    speciality = serializers.PrimaryKeyRelatedField(queryset=Specialty.objects.all())
 
     class Meta:
         model = Service

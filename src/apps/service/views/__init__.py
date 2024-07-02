@@ -1,12 +1,14 @@
-from .service import (
-    DoctorServiceView,
+from .clinic import (
     ClinicServiceView,
-    ProfileDoctorServiceView,
-    ProfileDoctorServiceDetailView,
     ProfileClinicServiceView
 )
-from .search import (
-    SearchDoctorsByServiceView,
-    SearchClinicsByServiceView
+from .doctor import (
+    DoctorServiceView,
+    ProfileDoctorServiceView,
+    ProfileDoctorServiceDetailView
 )
-from .speciality import SpecialityView
+from .search import (
+    SearchDoctorsBySpecialtyView,
+    SearchClinicsBySpecialtyView
+)
+from .specialty import SpecialityView
