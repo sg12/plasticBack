@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from apps.client.models import Client
 from apps.user.serializers import BaseUserFields
+from pkg.serializers import UserUpdate
 
 
 class BaseClientFields(BaseUserFields):
@@ -14,7 +15,7 @@ class ClientSerializer(BaseClientFields):
         exclude = ('user',)
 
 
-class ClientUpdateSerializer(BaseUserFields):
+class ClientUpdateSerializer(UserUpdate, BaseUserFields):
     gender = serializers.CharField(source='user.gender')
     
     class Meta:

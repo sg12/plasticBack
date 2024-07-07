@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from apps.clinic.models import Clinic
 from apps.user.serializers import BaseUserFields
+from pkg.serializers import UserUpdate
 
 
 class BaseClinicFields(BaseUserFields):
@@ -38,7 +39,7 @@ class ClinicRetrieveSerializer(ClinicSerializer):
         exclude = ('user',)
 
 
-class ClinicUpdateSerializer(BaseClinicFields):
+class ClinicUpdateSerializer(UserUpdate, BaseClinicFields):
     class Meta:
         model = Clinic
         fields = (

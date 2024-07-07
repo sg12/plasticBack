@@ -2,7 +2,7 @@ from django.db import models
 from apps.clinic.managers import ClinicManager
 
 
-class Clinic(models.Model):    
+class Clinic(models.Model):
     user = models.OneToOneField('user.User', on_delete=models.CASCADE, related_name='clinic')
     official_name = models.CharField(max_length=50, null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
