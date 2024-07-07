@@ -7,13 +7,13 @@ doc_message = extend_schema_view(
     get=extend_schema(
         summary='Список сообщений',
         tags=support_tag,
-        responses=TicketCreateSerializer(True)
+        responses=MessageSerializer(True)
     ),
     post=extend_schema(
         summary='Создать сообщение',
         tags=support_tag,
-        request=TicketCreateSerializer,
-        responses=TicketCreateSerializer
+        request=MessageCreateSerializer,
+        responses=MessageSerializer
     )
 )
 
@@ -21,8 +21,8 @@ doc_message_detail = extend_schema_view(
     patch=extend_schema(
         summary='Обновить данные сообщения',
         tags=support_tag,
-        request=TicketUpdateSerializer,
-        responses=TicketCreateSerializer
+        request=MessageUpdateSerializer,
+        responses=MessageSerializer
     ),
     delete=extend_schema(
         summary='Удалить сообщение',

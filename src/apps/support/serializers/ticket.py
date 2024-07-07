@@ -5,6 +5,8 @@ from apps.user.serializers import GeneralAuthorSerializer
 
 class TicketSerializer(serializers.ModelSerializer):
     author = GeneralAuthorSerializer()
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
+    updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
     
     class Meta:
         model = Ticket
@@ -30,3 +32,9 @@ class TicketUpdateSerializer(serializers.ModelSerializer):
             'title',
             'text'
         )
+
+
+class TicketAdminUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ('closed',)

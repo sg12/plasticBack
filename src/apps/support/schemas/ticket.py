@@ -1,4 +1,4 @@
-from drf_spectacular.utils import extend_schema_view, extend_schema
+from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 from apps.support.serializers import *
 from pkg.schemas.tags import support_tag
 
@@ -28,5 +28,29 @@ doc_ticket_detail = extend_schema_view(
         summary='Удалить тикет',
         tags=support_tag,
         responses=None
+    )
+)
+
+doc_ticket_admin = extend_schema_view(
+    get=extend_schema(
+        summary='Список тикетов',
+        tags=support_tag,
+        responses=TicketSerializer(True),
+        parameters=[
+            OpenApiParameter(
+                name='closed',
+                type=bool,
+                location=OpenApiParameter.QUERY
+            )
+        ]
+    )
+)
+
+doc_ticket_admin_detail = extend_schema_view(
+    patch=extend_schema(
+        summary='Обновить данные тикета',
+        tags=support_tag,
+        request=TicketAdminUpdateSerializer,
+        responses=TicketSerializer
     )
 )

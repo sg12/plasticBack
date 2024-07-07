@@ -7,6 +7,7 @@ class Ticket(models.Model):
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    closed = models.BooleanField(default=False)
     
     class Meta:
         db_table = 'tickets'

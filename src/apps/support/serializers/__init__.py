@@ -6,5 +6,6 @@ from .message import (
 from .ticket import (
     TicketSerializer,
     TicketCreateSerializer,
-    TicketUpdateSerializer
+    TicketUpdateSerializer,
+    TicketAdminUpdateSerializer
 )

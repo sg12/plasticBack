@@ -6,6 +6,8 @@ from pkg.serializers import EntityFromURL
 
 class MessageSerializer(serializers.ModelSerializer):
     author = AuthorSerializer()
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
+    updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
     
     class Meta:
         model = Message
@@ -26,4 +28,4 @@ class MessageUpdateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Message
-        exclude = ()
+        fields = ('author', 'text')
