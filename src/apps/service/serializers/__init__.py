@@ -5,3 +5,5 @@ from .service import (
     ServiceCreateSerializer,
     ServiceUpdateSerializer,
 )
+from .doctor import DoctorServiceSerializer
+from .clinic import ClinicServiceSerializer

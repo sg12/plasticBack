@@ -8,7 +8,7 @@ from .doctor import (
     ProfileDoctorServiceDetailView
 )
 from .search import (
-    SearchDoctorsBySpecialtyView,
-    SearchClinicsBySpecialtyView
+    SearchDoctorServiceView,
+    SearchClinicServiceView
 )
 from .specialty import SpecialityView
