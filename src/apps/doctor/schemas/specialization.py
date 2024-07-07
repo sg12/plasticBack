@@ -3,7 +3,7 @@ from apps.doctor.serializers import *
 from pkg.schemas.tags import service_tag
 
 
-doc_dspecialization= extend_schema_view(
+doc_specialization= extend_schema_view(
     get=extend_schema(
         summary='Список специализаций',
         tags=service_tag,
