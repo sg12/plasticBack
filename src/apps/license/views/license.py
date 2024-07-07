@@ -30,21 +30,19 @@ class LicenseClinicView(BaseLicenseView):
     pass
 
 
-@doc_profile_license
-class ProfileLicenseView(ListCreateAPIView):
+class BaseProfileLicenseView(ListCreateAPIView):
     queryset = License.objects.all()
     permission_classes = (IsAuthenticated, IsDoctorOrClinic)
+    parser_classes = (MultiPartParser,)
     serializer_class = LicenseCreateSerializer
     result_class = LicenseSerializer
-    parser_classes = (MultiPartParser,)
     
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(user=self.request.user)
     
 
-@doc_profile_license_detail
-class ProfileLicenseDetailView(DestroyAPIView):
+class ProfileDoctorLicenseDetailView(DestroyAPIView):
     queryset = License.objects.all()
     permission_classes = (IsAuthenticated, IsDoctorOrClinic)
     serializer_class = None
@@ -52,3 +50,33 @@ class ProfileLicenseDetailView(DestroyAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(user=self.request.user)
+
+
+@doc_profile_doctor_license
+class ProfileDoctorLicenseView(BaseProfileLicenseView):
+    pass
+
+
+@doc_profile_clinic_license
+class ProfileClinicLicenseView(BaseProfileLicenseView):
+    pass
+    
+
+class ProfileDoctorLicenseDetailView(DestroyAPIView):
+    queryset = License.objects.all()
+    permission_classes = (IsAuthenticated, IsDoctorOrClinic)
+    serializer_class = None
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
+
+
+@doc_profile_doctor_license_detail
+class ProfileDoctorLicenseDetailView(ProfileDoctorLicenseDetailView):
+    pass
+
+
+@doc_profile_clinic_license_detail
+class ProfileClinicLicenseDetailView(ProfileDoctorLicenseDetailView):
+    pass
