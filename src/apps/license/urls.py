@@ -11,6 +11,9 @@ urlpatterns = [
     path(CLINIC_PK_URL + '/licenses', LicenseClinicView.as_view()),
     
     # Profile
-    path(PROFILE_URL + '/licenses', ProfileLicenseView.as_view()),
-    path(PROFILE_URL + '/licenses/<int:pk>', ProfileLicenseDetailView.as_view()),
+    path(PROFILE_URL + '/doctor/licenses', ProfileDoctorLicenseView.as_view()),
+    path(PROFILE_URL + '/doctor/licenses/<int:pk>', ProfileDoctorLicenseDetailView.as_view()),
+    
+    path(PROFILE_URL + '/clinic/licenses', ProfileClinicLicenseView.as_view()),
+    path(PROFILE_URL + '/clinic/licenses/<int:pk>', ProfileClinicLicenseDetailView.as_view()),
 ]
