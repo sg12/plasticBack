@@ -3,6 +3,8 @@ from apps.schedule.models import DoctorSchedule
 
 
 class DoctorScheduleSerializer(serializers.ModelSerializer):
+    date = serializers.DateField(format="%Y-%m-%d")
+    
     class Meta:
         model = DoctorSchedule
         exclude = ()

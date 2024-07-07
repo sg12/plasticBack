@@ -4,6 +4,8 @@ from apps.doctor.serializers.utils import CurrentDoctorDefault
 
 
 class EducationSerializer(serializers.ModelSerializer):
+    date = serializers.DateField(format="%Y-%m-%d")
+    
     class Meta:
         model = Education
         exclude = ('doctor',)

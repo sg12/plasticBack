@@ -9,6 +9,8 @@ from .reply import ReplySerializer
 class ReviewSerializer(serializers.ModelSerializer):
     author = ReviewAuthorSerializer()
     reply = ReplySerializer()
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
+    updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
 
     class Meta:
         model = Review

@@ -4,6 +4,9 @@ from apps.doctor.serializers.utils import CurrentDoctorDefault
 
 
 class WorkplaceSerializer(serializers.ModelSerializer):
+    start_date = serializers.DateField(format="%Y-%m-%d")
+    end_date = serializers.DateField(format="%Y-%m-%d")
+    
     class Meta:
         model = Workplace
         exclude = ('doctor',)

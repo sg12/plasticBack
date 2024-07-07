@@ -17,6 +17,7 @@ class ClientSerializer(BaseClientFields):
 
 class ClientUpdateSerializer(UserUpdate, BaseUserFields):
     gender = serializers.CharField(source='user.gender')
+    date_born = serializers.DateField(format="%Y-%m-%d")
     
     class Meta:
         model = Client

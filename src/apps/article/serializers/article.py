@@ -6,6 +6,8 @@ from .author import ArticleAuthorSerializer
 class ArticleSerializer(serializers.ModelSerializer):
     author = ArticleAuthorSerializer()
     rubric = serializers.CharField(source='rubric.name')
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
+    updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
 
     class Meta:
         model = Article

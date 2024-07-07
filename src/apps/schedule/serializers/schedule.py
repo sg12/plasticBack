@@ -3,6 +3,8 @@ from apps.schedule.models import Schedule
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
+    time = serializers.DateField(format="%H:%M")
+    
     class Meta:
         model = Schedule
         exclude = ()

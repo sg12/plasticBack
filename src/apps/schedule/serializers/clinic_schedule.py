@@ -4,6 +4,9 @@ from apps.schedule.models import ClinicSchedule
 
 class ClinicScheduleSerializer(serializers.ModelSerializer):
     weekday = serializers.CharField(source='weekday.name')
+    date = serializers.DateField(format="%Y-%m-%d")
+    time_start = serializers.DateField(format="%H:%M")
+    time_end = serializers.DateField(format="%H:%M")
     
     class Meta:
         model = ClinicSchedule
