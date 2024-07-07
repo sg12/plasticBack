@@ -44,7 +44,6 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             'email',
-            'avatar',
             'review_consent',
             'news_consent'
         )
