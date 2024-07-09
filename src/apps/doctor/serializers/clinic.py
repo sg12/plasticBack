@@ -15,6 +15,7 @@ class ClinicInfoSerilaizer(serializers.ModelSerializer):
             'name',
             'official_name',
             'address',
+            'director',
             'metro',
             'district',
             'city',
