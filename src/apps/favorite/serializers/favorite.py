@@ -5,7 +5,8 @@ from apps.favorite.models import Favorite
 
 class FavoriteDoctorSerializer(serializers.ModelSerializer):
     fio = serializers.CharField(source='username')
-    specialty = serializers.CharField(source='specialty.name', default=None)
+    specialization = serializers.CharField(source='doctor.specialization', default=None)
+    role = serializers.CharField(source='role.name')
     
     class Meta:
         model = User
@@ -14,12 +15,14 @@ class FavoriteDoctorSerializer(serializers.ModelSerializer):
             'email',
             'fio',
             'avatar',
-            'specialty'
+            'specialization',
+            'role'
         )
         
 
 class FavoriteClinicSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='username')
+    role = serializers.CharField(source='role.name')
     
     class Meta:
         model = User
@@ -27,6 +30,7 @@ class FavoriteClinicSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'avatar',
+            'role'
         )
 
 
