@@ -21,7 +21,7 @@ class DoctorServiceView(ListAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         pk = self.kwargs.get('pk')
-        return queryset.filter(user_id=pk)
+        return queryset.filter(doctor__user__id=pk)
 
 
 @doc_profile_doctor_service
