@@ -33,7 +33,7 @@ class ProfileDoctorServiceView(ListCreateAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
+        return queryset.filter(doctor=self.request.user.doctor)
 
 
 @doc_profile_doctor_service_detail
@@ -45,4 +45,4 @@ class ProfileDoctorServiceDetailView(UpdateDestroyAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
+        return queryset.filter(doctor=self.request.user.doctor)

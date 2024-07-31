@@ -22,7 +22,7 @@ class ClinicServiceView(ListAPIView):
         user = User.objects.get(pk=pk)
         employes = user.clinic.employes.all()
         
-        return queryset.filter(user__doctor__in=employes).distinct()
+        return queryset.filter(doctor__in=employes).distinct()
 
 
 @doc_profile_clinic_service
@@ -35,4 +35,4 @@ class ProfileClinicServiceView(ListAPIView):
         queryset = super().get_queryset()
         employes = self.request.user.clinic.employes.all()
         
-        return queryset.filter(user__doctor__in=employes).distinct()
+        return queryset.filter(doctor__in=employes).distinct()

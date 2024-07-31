@@ -1,6 +1,6 @@
 from .doctor import (
     DoctorSerializer,
-    DoctorUpdateSerializer,
+    DoctorUpdateSerializer
 )
 from .degree import DegreeSerializer
 from .category import CategorySerializer

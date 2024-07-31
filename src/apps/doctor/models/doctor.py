@@ -8,17 +8,16 @@ class Doctor(models.Model):
     address = models.CharField(max_length=255, null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    experience = models.PositiveSmallIntegerField(default=0, blank=True) # стаж
+    experience = models.PositiveSmallIntegerField(default=0, blank=True)
     
-    clinic = models.ForeignKey('clinic.Clinic', on_delete=models.CASCADE, related_name='employes', blank=True, null=True)
+    clinic_user = models.ForeignKey('user.User', on_delete=models.SET_NULL, related_name='employes', blank=True, null=True)
     reception_types = models.ManyToManyField('reception.ReceptionType', blank=True)
     specialization = models.ForeignKey('Specialization', on_delete=models.SET_NULL, null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)
-    degree = models.ForeignKey('Degree', on_delete=models.SET_NULL, null=True, blank=True) # ученая степень
+    degree = models.ForeignKey('Degree', on_delete=models.SET_NULL, null=True, blank=True)
 
     objects = DoctorManager()
 
-    # clinics
     # licenses
     # educations
     # qualifications

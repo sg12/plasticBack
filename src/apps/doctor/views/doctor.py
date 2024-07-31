@@ -3,7 +3,7 @@ from apps.doctor.models import Doctor
 from apps.doctor.serializers import *
 from apps.doctor.filters import DoctorFilter
 from pkg.pagination import PagePagination
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, DestroyAPIView
 from pkg.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from apps.doctor.permissions import IsDoctor
@@ -12,7 +12,6 @@ from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from pkg.decorators import is_doctor
 from apps.doctor.schemas import *
-
 
 
 @doc_doctor
@@ -38,9 +37,21 @@ class DoctorDetailView(RetrieveAPIView):
 
 @doc_profile_doctor
 class ProfileDoctorView(RetrieveUpdateAPIView):
+    queryset = Doctor.objects.all()
     permission_classes = (IsAuthenticated, IsDoctor)
     serializer_class = DoctorUpdateSerializer
     result_class = DoctorSerializer
 
     def get_object(self):
-        return Doctor.objects.get(user=self.request.user)
+        queryset = self.get_queryset()
+        return queryset.get(user=self.request.user)
+
+
+class ProfileDoctorRemoveClinicView(DestroyAPIView):
+    queryset = Doctor.objects.all()
+    permission_classes = (IsAuthenticated, IsDoctor)
+    
+    def delete(self, request):
+        doctor = request.user.doctor
+        doctor.clinic_user = None
+        

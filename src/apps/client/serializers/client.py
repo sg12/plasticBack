@@ -16,6 +16,7 @@ class ClientSerializer(BaseClientFields):
 
 
 class ClientUpdateSerializer(UserUpdate, BaseUserFields):
+    fio = serializers.CharField(source='user.username')
     gender = serializers.CharField(source='user.gender')
     date_born = serializers.DateField(format="%Y-%m-%d")
     
