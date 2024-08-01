@@ -10,3 +10,4 @@ from .search import (
     doc_search_doctor_service,
     doc_search_clinic_service
 )
+from .specialization import doc_specialization

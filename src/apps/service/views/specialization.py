@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView
-from apps.doctor.models import Specialization
-from apps.doctor.serializers import SpecializationSerializer
-from apps.doctor.schemas import *
+from apps.service.models import Specialization
+from apps.service.serializers import SpecializationSerializer
+from apps.service.schemas import *
 
 
 @doc_specialization

@@ -14,7 +14,8 @@ urlpatterns = [
     
     path(PROFILE_URL + '/clinic/services', ProfileClinicServiceView.as_view()),
     
-    path(PROFILE_URL + '/services/specialties', SpecialityView.as_view()),
+    path('services/specialties', SpecialityView.as_view()),
+    path('services/specializations', SpecializationView.as_view()),
     
     path('services/<int:pk>/doctors', SearchDoctorServiceView.as_view()),
     path('services/<int:pk>/clinics', SearchClinicServiceView.as_view())

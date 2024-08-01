@@ -5,5 +5,6 @@ from apps.service.models import *
 admin.site.register([
     Service, 
     Specialty, 
+    Specialization,
     OperationType
 ])

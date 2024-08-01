@@ -9,3 +9,4 @@ from .search import (
     DoctorServiceSerializer,
     ClinicServiceSerializer
 )
+from .specialization import SpecializationSerializer

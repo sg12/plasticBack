@@ -14,4 +14,4 @@ class ProfileReceptionClinicView(ListAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(service__user__doctor__clinic=self.request.user.clinic)
+        return queryset.filter(service__doctor__clinic_user=self.request.user)

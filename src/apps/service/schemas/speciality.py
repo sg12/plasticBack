@@ -12,5 +12,6 @@ doc_speciality = extend_schema_view(
         tags=service_tag,
         summary='Список специальностей',
         responses=SpecialtySerializer(many=True),
+        description='Специальность - вид услуг, которые доктор может предоставить пользователям'
     )
 )

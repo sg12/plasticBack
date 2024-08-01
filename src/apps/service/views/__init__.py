@@ -12,3 +12,4 @@ from .search import (
     SearchClinicServiceView
 )
 from .specialty import SpecialityView
+from .specialization import SpecializationView

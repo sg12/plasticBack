@@ -3,10 +3,11 @@ from apps.service.serializers import *
 from pkg.schemas.tags import service_tag
 
 
-doc_dspecialization= extend_schema_view(
+doc_specialization= extend_schema_view(
     get=extend_schema(
         summary='Список специализаций',
         tags=service_tag,
-        responses=SpecializationSerializer(True)
+        responses=SpecializationSerializer(True),
+        description='Специализации - то на чем специализируется доктор'
     )
 )

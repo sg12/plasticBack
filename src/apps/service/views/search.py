@@ -49,9 +49,9 @@ class SearchClinicServiceView(ListAPIView):
                 queryset=Doctor.objects.all(),
             ),
             Prefetch(
-                'doctor__clinic',
+                'doctor__clinic_user',
                 queryset=Clinic.objects.all(),
             )
         )
         
-        return queryset.filter(specialty=specialty).exclude(doctor__clinic=None)
+        return queryset.filter(specialty=specialty).exclude(doctor__clinic_user=None)

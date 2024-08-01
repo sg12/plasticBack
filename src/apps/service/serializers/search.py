@@ -33,7 +33,7 @@ class DoctorServiceShortSerializer(serializers.ModelSerializer):
 
 
 class ClinicServiceSerializer(serializers.ModelSerializer):
-    clinic = ClinicSerializer(source='doctor.clinic')
+    clinic = ClinicSerializer(source='doctor.clinic_user')
     doctor = DoctorServiceShortSerializer()
     
     class Meta:

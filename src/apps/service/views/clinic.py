@@ -20,7 +20,7 @@ class ClinicServiceView(ListAPIView):
         
         pk = self.kwargs.get('pk')
         user = User.objects.get(pk=pk)
-        employes = user.clinic.employes.all()
+        employes = user.clinic_employes.all()
         
         return queryset.filter(doctor__in=employes).distinct()
 
@@ -33,6 +33,6 @@ class ProfileClinicServiceView(ListAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        employes = self.request.user.clinic.employes.all()
+        employes = self.request.user.clinic_employes.all()
         
         return queryset.filter(doctor__in=employes).distinct()
