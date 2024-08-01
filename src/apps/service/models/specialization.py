@@ -6,7 +6,7 @@ class Specialization(models.Model):
     operation_type = models.ForeignKey('service.OperationType', on_delete=models.SET_NULL, null=True, blank=True)
     
     class Meta:
-        db_table = 'service_specialications'
+        db_table = 'service_specializations'
         
     def __str__(self) -> str:
         return self.name
