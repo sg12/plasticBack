@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.review.models import Reply
-from .author import ReviewAuthorSerializer
+from .user import ReviewUserSerializer
 
 
 class CurrentReply:
@@ -12,7 +12,7 @@ class CurrentReply:
 
 
 class ReplySerializer(serializers.ModelSerializer):
-    author = ReviewAuthorSerializer()
+    author = ReviewUserSerializer()
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
 

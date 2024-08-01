@@ -2,7 +2,7 @@ from rest_framework import serializers
 from apps.user.models import User
 
 
-class ReviewAuthorSerializer(serializers.ModelSerializer):
+class ReviewUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (

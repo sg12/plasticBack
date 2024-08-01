@@ -2,12 +2,13 @@ from rest_framework import serializers
 from apps.review.models import Review
 from apps.user.models import User
 from pkg.serializers.entity import EntityFromURL
-from .author import ReviewAuthorSerializer
+from .user import ReviewUserSerializer
 from .reply import ReplySerializer
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    author = ReviewAuthorSerializer()
+    author = ReviewUserSerializer()
+    user = ReviewUserSerializer()
     reply = ReplySerializer()
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
@@ -17,6 +18,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'author',
+            'user',
             'text',
             'rating',
             'created_at',
