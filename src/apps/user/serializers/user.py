@@ -45,5 +45,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         fields = (
             'email',
             'review_consent',
-            'news_consent'
+            'news_consent',
+            'confidentiality_consent',
+            'personal_data_consent'
         )
