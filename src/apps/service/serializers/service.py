@@ -3,6 +3,7 @@ from apps.service.models import Specialty
 from .specialty import SpecialtySerializer
 from apps.service.models import Service
 from django.utils.translation import gettext as _
+from pkg import serializers as pkg_serializers
 
 
 class ServiceSerializer(serializers.ModelSerializer):
@@ -22,8 +23,8 @@ class ServiceNoDoctorSerializer(serializers.ModelSerializer):
 
 
 class ServiceCreateSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    speciality = serializers.PrimaryKeyRelatedField(queryset=Specialty.objects.all())
+    doctor = serializers.HiddenField(default=pkg_serializers.CurrentUserDefault(user_field='doctor'))
+    specialty = serializers.PrimaryKeyRelatedField(queryset=Specialty.objects.all())
 
     class Meta:
         model = Service
@@ -31,12 +32,12 @@ class ServiceCreateSerializer(serializers.ModelSerializer):
 
 
 class ServiceUpdateSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    doctor = serializers.HiddenField(default=pkg_serializers.CurrentUserDefault(user_field='doctor'))
     
     class Meta:
         model = Service
         fields = (
-            'user',
+            'doctor',
             'price',
             'status'
         )
