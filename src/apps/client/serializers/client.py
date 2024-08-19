@@ -16,6 +16,7 @@ class ClientSerializer(BaseClientFields):
 
 
 class ClientUpdateSerializer(UserUpdate, BaseUserFields):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     fio = serializers.CharField(source='user.username')
     gender = serializers.CharField(source='user.gender')
     date_born = serializers.DateField(format="%Y-%m-%d")
@@ -23,6 +24,7 @@ class ClientUpdateSerializer(UserUpdate, BaseUserFields):
     class Meta:
         model = Client
         fields = (
+            'user',
             'fio', 
             'phone',
             'gender', 

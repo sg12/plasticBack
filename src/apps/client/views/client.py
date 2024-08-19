@@ -17,7 +17,7 @@ class ClientView(RetrieveAPIView):
 
     def get_object(self):
         user = super().get_object()
-        return Client(user=user)
+        return Client.objects.get(user=user)
 
 
 @doc_profile_client
@@ -27,4 +27,4 @@ class ProfileClientView(RetrieveUpdateAPIView):
     result_class = ClientSerializer
 
     def get_object(self):
-        return Client(user=self.request.user)
+        return Client.objects.get(user=self.request.user)
