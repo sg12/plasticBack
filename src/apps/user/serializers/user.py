@@ -43,7 +43,6 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'email',
             'review_consent',
             'news_consent',
             'confidentiality_consent',
